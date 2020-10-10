@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FD7253162D700C221DE /* AppDelegate.swift */; };
 		96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FD9253162D700C221DE /* SceneDelegate.swift */; };
-		96CA7FDC253162D700C221DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FDB253162D700C221DE /* ViewController.swift */; };
+		96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FDB253162D700C221DE /* StartViewController.swift */; };
 		96CA7FDF253162D700C221DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96CA7FDD253162D700C221DE /* Main.storyboard */; };
 		96CA7FE1253162D900C221DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96CA7FE0253162D900C221DE /* Assets.xcassets */; };
 		96CA7FE4253162D900C221DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96CA7FE2253162D900C221DE /* LaunchScreen.storyboard */; };
 		96CA7FEF253162D900C221DE /* test_gladeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FEE253162D900C221DE /* test_gladeTests.swift */; };
 		96CA7FFA253162D900C221DE /* test_gladeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FF9253162D900C221DE /* test_gladeUITests.swift */; };
+		96CA800B2531635C00C221DE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA800A2531635C00C221DE /* LoginViewController.swift */; };
+		96CA80132531636E00C221DE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80122531636E00C221DE /* SignupViewController.swift */; };
+		96CA8018253163B000C221DE /* testScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA8017253163B000C221DE /* testScrollViewController.swift */; };
+		96CA8072253192FF00C221DE /* SchoolScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA8071253192FF00C221DE /* SchoolScrollViewController.swift */; };
+		96CA80872532404800C221DE /* SchoolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CA80862532404800C221DE /* SchoolView.xib */; };
+		96CA808C2532410800C221DE /* SchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA808B2532410800C221DE /* SchoolView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,7 @@
 		96CA7FD4253162D700C221DE /* test-glade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-glade.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA7FD7253162D700C221DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96CA7FD9253162D700C221DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		96CA7FDB253162D700C221DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		96CA7FDB253162D700C221DE /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		96CA7FDE253162D700C221DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96CA7FE0253162D900C221DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96CA7FE3253162D900C221DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +55,12 @@
 		96CA7FF5253162D900C221DE /* test-gladeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "test-gladeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA7FF9253162D900C221DE /* test_gladeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_gladeUITests.swift; sourceTree = "<group>"; };
 		96CA7FFB253162D900C221DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96CA800A2531635C00C221DE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		96CA80122531636E00C221DE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		96CA8017253163B000C221DE /* testScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testScrollViewController.swift; sourceTree = "<group>"; };
+		96CA8071253192FF00C221DE /* SchoolScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScrollViewController.swift; sourceTree = "<group>"; };
+		96CA80862532404800C221DE /* SchoolView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolView.xib; sourceTree = "<group>"; };
+		96CA808B2532410800C221DE /* SchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +113,17 @@
 			children = (
 				96CA7FD7253162D700C221DE /* AppDelegate.swift */,
 				96CA7FD9253162D700C221DE /* SceneDelegate.swift */,
-				96CA7FDB253162D700C221DE /* ViewController.swift */,
+				96CA7FDB253162D700C221DE /* StartViewController.swift */,
 				96CA7FDD253162D700C221DE /* Main.storyboard */,
+				96CA80862532404800C221DE /* SchoolView.xib */,
+				96CA808B2532410800C221DE /* SchoolView.swift */,
 				96CA7FE0253162D900C221DE /* Assets.xcassets */,
 				96CA7FE2253162D900C221DE /* LaunchScreen.storyboard */,
 				96CA7FE5253162D900C221DE /* Info.plist */,
+				96CA800A2531635C00C221DE /* LoginViewController.swift */,
+				96CA80122531636E00C221DE /* SignupViewController.swift */,
+				96CA8071253192FF00C221DE /* SchoolScrollViewController.swift */,
+				96CA8017253163B000C221DE /* testScrollViewController.swift */,
 			);
 			path = "test-glade";
 			sourceTree = "<group>";
@@ -233,6 +251,7 @@
 			files = (
 				96CA7FE4253162D900C221DE /* LaunchScreen.storyboard in Resources */,
 				96CA7FE1253162D900C221DE /* Assets.xcassets in Resources */,
+				96CA80872532404800C221DE /* SchoolView.xib in Resources */,
 				96CA7FDF253162D700C221DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,8 +277,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96CA7FDC253162D700C221DE /* ViewController.swift in Sources */,
+				96CA800B2531635C00C221DE /* LoginViewController.swift in Sources */,
+				96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */,
+				96CA8018253163B000C221DE /* testScrollViewController.swift in Sources */,
+				96CA80132531636E00C221DE /* SignupViewController.swift in Sources */,
+				96CA8072253192FF00C221DE /* SchoolScrollViewController.swift in Sources */,
 				96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */,
+				96CA808C2532410800C221DE /* SchoolView.swift in Sources */,
 				96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

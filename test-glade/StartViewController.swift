@@ -15,6 +15,8 @@ class StartViewController: UIViewController {
     }
 
     @IBAction func nextButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toSignup", sender: self)
     }
+    
 }
 

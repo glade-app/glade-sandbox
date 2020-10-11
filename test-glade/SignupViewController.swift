@@ -38,6 +38,9 @@ class SignupViewController: UIViewController {
             }
         }
     }
+    @IBAction func backToSchoolsTapped(_ sender: Any) {
+        performSegue(withIdentifier: "backToSchools", sender: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPassword" {

@@ -18,10 +18,4 @@ struct EmailValidationModel {
     func isValidEmail() -> Bool {
         return validEmail
     }
-    func validEmailFeedback() -> String {
-        if validEmail {
-            return "Invalid email"
-        }
-        return "Valid email"
-    }
 }

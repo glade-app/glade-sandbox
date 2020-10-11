@@ -21,10 +21,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5a7-jY-atK">
-                    <rect key="frame" x="0.0" y="0.0" width="337" height="430"/>
+                    <rect key="frame" x="10" y="10" width="317" height="410"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="School Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uZ-pl-F1W">
-                    <rect key="frame" x="72" y="328" width="193" height="39"/>
+                    <rect key="frame" x="72" y="318" width="193" height="39"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -33,12 +33,12 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0uZ-pl-F1W" secondAttribute="bottom" constant="63" id="BN7-Ku-F2N"/>
+                <constraint firstItem="5a7-jY-atK" firstAttribute="bottom" secondItem="0uZ-pl-F1W" secondAttribute="bottom" constant="63" id="BN7-Ku-F2N"/>
                 <constraint firstItem="0uZ-pl-F1W" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="FQJ-YN-blc"/>
-                <constraint firstItem="5a7-jY-atK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V1q-Ft-gfQ"/>
-                <constraint firstItem="5a7-jY-atK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="gvr-dv-qEK"/>
-                <constraint firstItem="5a7-jY-atK" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="vXj-Zb-OIA"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5a7-jY-atK" secondAttribute="bottom" id="xpx-W4-V5D"/>
+                <constraint firstItem="5a7-jY-atK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="V1q-Ft-gfQ"/>
+                <constraint firstItem="5a7-jY-atK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="gvr-dv-qEK"/>
+                <constraint firstItem="5a7-jY-atK" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-10" id="vXj-Zb-OIA"/>
+                <constraint firstAttribute="bottom" secondItem="5a7-jY-atK" secondAttribute="bottom" constant="10" id="xpx-W4-V5D"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="78.985507246376812" y="-41.517857142857139"/>

@@ -40,6 +40,6 @@ class SchoolView: UIView {
         addSubview(contentView)
         
         label.textColor = UIColor.white
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = 20
     }
 }

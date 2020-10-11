@@ -11,8 +11,8 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var schoolScrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
-    let imagePadding: CGFloat = 10
-    var contentWidth: CGFloat = 10
+   
+    var contentWidth: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,9 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
         
         schoolScrollView.delegate = self
         var imageView: SchoolView!
+        let subviewWidth = view.frame.width * 0.75
+        contentWidth = (view.frame.width - subviewWidth) / 2
+        
         for i in 0...(images.count - 1) {
             imageView = SchoolView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: schoolScrollView.frame.height))
             let imageToDisplay = UIImage(named: "\(images[i])")
@@ -36,23 +39,15 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
             imageView.schoolName = imageNames[i]
             
             schoolScrollView.addSubview(imageView)
-            contentWidth += view.frame.width
-            let xCoordinate = contentWidth - view.frame.width
-            imageView.frame = CGRect(x: xCoordinate, y: imagePadding, width: view.frame.width - 2 * imagePadding, height: schoolScrollView.frame.height - 2 * imagePadding)
+            
+
+            let xCoordinate = contentWidth
+            contentWidth += subviewWidth
+            imageView.frame = CGRect(x: xCoordinate, y: 0, width: subviewWidth, height: schoolScrollView.frame.height)
         }
-        
+        contentWidth += (view.frame.width - subviewWidth) / 2
+
         schoolScrollView.contentSize = CGSize(width: contentWidth, height: schoolScrollView.frame.height)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

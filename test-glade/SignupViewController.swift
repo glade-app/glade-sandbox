@@ -10,9 +10,11 @@ import UIKit
 class SignupViewController: UIViewController {
 
     @IBOutlet weak var validationFeedbackLabel: UILabel!
-    @IBOutlet weak var emailFormInput: UITextField!
+    @IBOutlet weak var emailField: UITextField!
     
+    var userData = ["email": "", "password": "", "spotifyID": "", "school": ""]
     var schoolName = "UC Berkeley"
+
     var emailValidation = EmailValidationModel()
     
     override func viewDidLoad() {
@@ -20,12 +22,12 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func toPasswordTapped(_ sender: Any) {
-        if emailFormInput.text == "" {
+        if emailField.text == "" {
             validationFeedbackLabel.text = "Email is required"
             validationFeedbackLabel.textColor = UIColor.darkGray
         }
         else {
-            let inputEmail: String = (emailFormInput.text ?? "").lowercased()
+            let inputEmail: String = (emailField.text ?? "").lowercased()
             emailValidation.validateEmail(school: schoolName, email: inputEmail)
             let isValid = emailValidation.isValidEmail()
             if !isValid {
@@ -45,7 +47,9 @@ class SignupViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPassword" {
             let passVC: PasswordViewController = segue.destination as! PasswordViewController
-            passVC.email = emailFormInput.text!.lowercased()
+            userData["email"] = emailField.text!.lowercased()
+            userData["school"] = schoolName
+            passVC.userData = userData
         }
     }
 }

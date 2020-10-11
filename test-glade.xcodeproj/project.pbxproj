@@ -21,6 +21,8 @@
 		96CA8072253192FF00C221DE /* SchoolScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA8071253192FF00C221DE /* SchoolScrollViewController.swift */; };
 		96CA80872532404800C221DE /* SchoolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CA80862532404800C221DE /* SchoolView.xib */; };
 		96CA808C2532410800C221DE /* SchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA808B2532410800C221DE /* SchoolView.swift */; };
+		96CA809A2532AD4B00C221DE /* EmailValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80992532AD4B00C221DE /* EmailValidationModel.swift */; };
+		96CA80B82532D2EB00C221DE /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80B72532D2EB00C221DE /* PasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		96CA8071253192FF00C221DE /* SchoolScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScrollViewController.swift; sourceTree = "<group>"; };
 		96CA80862532404800C221DE /* SchoolView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolView.xib; sourceTree = "<group>"; };
 		96CA808B2532410800C221DE /* SchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolView.swift; sourceTree = "<group>"; };
+		96CA80992532AD4B00C221DE /* EmailValidationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationModel.swift; sourceTree = "<group>"; };
+		96CA80B72532D2EB00C221DE /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,10 +115,12 @@
 		96CA7FD6253162D700C221DE /* test-glade */ = {
 			isa = PBXGroup;
 			children = (
+				96CA80982532ACE200C221DE /* Models */,
 				96CA7FD7253162D700C221DE /* AppDelegate.swift */,
 				96CA7FD9253162D700C221DE /* SceneDelegate.swift */,
 				96CA7FDB253162D700C221DE /* StartViewController.swift */,
 				96CA7FDD253162D700C221DE /* Main.storyboard */,
+				96CA80B72532D2EB00C221DE /* PasswordViewController.swift */,
 				96CA80862532404800C221DE /* SchoolView.xib */,
 				96CA808B2532410800C221DE /* SchoolView.swift */,
 				96CA7FE0253162D900C221DE /* Assets.xcassets */,
@@ -144,6 +150,14 @@
 				96CA7FFB253162D900C221DE /* Info.plist */,
 			);
 			path = "test-gladeUITests";
+			sourceTree = "<group>";
+		};
+		96CA80982532ACE200C221DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				96CA80992532AD4B00C221DE /* EmailValidationModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,10 +292,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				96CA800B2531635C00C221DE /* LoginViewController.swift in Sources */,
+				96CA80B82532D2EB00C221DE /* PasswordViewController.swift in Sources */,
 				96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */,
 				96CA8018253163B000C221DE /* testScrollViewController.swift in Sources */,
 				96CA80132531636E00C221DE /* SignupViewController.swift in Sources */,
 				96CA8072253192FF00C221DE /* SchoolScrollViewController.swift in Sources */,
+				96CA809A2532AD4B00C221DE /* EmailValidationModel.swift in Sources */,
 				96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */,
 				96CA808C2532410800C221DE /* SchoolView.swift in Sources */,
 				96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */,

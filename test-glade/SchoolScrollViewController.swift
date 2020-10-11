@@ -39,15 +39,19 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
             imageView.schoolName = imageNames[i]
             
             schoolScrollView.addSubview(imageView)
-            
 
             let xCoordinate = contentWidth
             contentWidth += subviewWidth
             imageView.frame = CGRect(x: xCoordinate, y: 0, width: subviewWidth, height: schoolScrollView.frame.height)
+            
+           
         }
         contentWidth += (view.frame.width - subviewWidth) / 2
 
         schoolScrollView.contentSize = CGSize(width: contentWidth, height: schoolScrollView.frame.height)
     }
 
+    @IBAction func toAccountTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toAccountCreation", sender: self)
+    }
 }

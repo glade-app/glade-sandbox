@@ -20,9 +20,9 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
         let images = ["berkeley.jpg", "stanford.jpg", "harvard.jpg", "princeton.jpg"]
         let imageNames = ["UC Berkeley", "Stanford", "Harvard", "Princeton"]
         
-//        let image = UIImage(named: "minimalist_landscape4.png")
-//        imageView.label.text = "UC Berkeley"
-//        imageView.imageView.image = image
+//        let images = ["berkeley.jpg"]
+//        let imageNames = ["UC Berkeley"]
+        
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -33,13 +33,13 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
         contentWidth = (view.frame.width - subviewWidth) / 2
         
         for i in 0...(images.count - 1) {
-            imageView = SchoolView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: schoolScrollView.frame.height))
+            imageView = SchoolView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: schoolScrollView.frame.height))
+            schoolScrollView.addSubview(imageView)
+            
             let imageToDisplay = UIImage(named: "\(images[i])")
             imageView.image = imageToDisplay
             imageView.schoolName = imageNames[i]
             
-            schoolScrollView.addSubview(imageView)
-
             let xCoordinate = contentWidth
             contentWidth += subviewWidth
             imageView.frame = CGRect(x: xCoordinate, y: 0, width: subviewWidth, height: schoolScrollView.frame.height)
@@ -47,7 +47,6 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
            
         }
         contentWidth += (view.frame.width - subviewWidth) / 2
-
         schoolScrollView.contentSize = CGSize(width: contentWidth, height: schoolScrollView.frame.height)
     }
 

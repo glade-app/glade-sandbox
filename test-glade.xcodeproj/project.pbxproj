@@ -25,6 +25,9 @@
 		96CA80BD2532D90F00C221DE /* PasswordValidationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80BC2532D90F00C221DE /* PasswordValidationModel.swift */; };
 		96CA80C22532DD5600C221DE /* SpotifyConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80C12532DD5600C221DE /* SpotifyConnectViewController.swift */; };
 		96CA80CD2532E4F600C221DE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80CC2532E4F600C221DE /* SignupViewController.swift */; };
+		96CA80D2253385AE00C221DE /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80D1253385AE00C221DE /* ScrollViewController.swift */; };
+		96CA80E32533881500C221DE /* SchoolCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80E12533881500C221DE /* SchoolCollectionViewCell.swift */; };
+		96CA80E42533881500C221DE /* SchoolCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		96CA80BC2532D90F00C221DE /* PasswordValidationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationModel.swift; sourceTree = "<group>"; };
 		96CA80C12532DD5600C221DE /* SpotifyConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConnectViewController.swift; sourceTree = "<group>"; };
 		96CA80CC2532E4F600C221DE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		96CA80D1253385AE00C221DE /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		96CA80E12533881500C221DE /* SchoolCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchoolCollectionViewCell.swift; path = "Custom Views/SchoolCollectionViewCell.swift"; sourceTree = "<group>"; };
+		96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SchoolCollectionViewCell.xib; path = "Custom Views/SchoolCollectionViewCell.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,9 @@
 				96CA7FD9253162D700C221DE /* SceneDelegate.swift */,
 				96CA7FDB253162D700C221DE /* StartViewController.swift */,
 				96CA7FDD253162D700C221DE /* Main.storyboard */,
+				96CA80D1253385AE00C221DE /* ScrollViewController.swift */,
+				96CA80E12533881500C221DE /* SchoolCollectionViewCell.swift */,
+				96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */,
 				96CA80B72532D2EB00C221DE /* PasswordViewController.swift */,
 				96CA80CC2532E4F600C221DE /* SignupViewController.swift */,
 				96CA80C12532DD5600C221DE /* SpotifyConnectViewController.swift */,
@@ -271,6 +280,7 @@
 			files = (
 				96CA7FE4253162D900C221DE /* LaunchScreen.storyboard in Resources */,
 				96CA7FE1253162D900C221DE /* Assets.xcassets in Resources */,
+				96CA80E42533881500C221DE /* SchoolCollectionViewCell.xib in Resources */,
 				96CA80872532404800C221DE /* SchoolView.xib in Resources */,
 				96CA7FDF253162D700C221DE /* Main.storyboard in Resources */,
 			);
@@ -303,7 +313,9 @@
 				96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */,
 				96CA8018253163B000C221DE /* testScrollViewController.swift in Sources */,
 				96CA8072253192FF00C221DE /* SchoolScrollViewController.swift in Sources */,
+				96CA80E32533881500C221DE /* SchoolCollectionViewCell.swift in Sources */,
 				96CA80CD2532E4F600C221DE /* SignupViewController.swift in Sources */,
+				96CA80D2253385AE00C221DE /* ScrollViewController.swift in Sources */,
 				96CA809A2532AD4B00C221DE /* EmailValidationModel.swift in Sources */,
 				96CA80C22532DD5600C221DE /* SpotifyConnectViewController.swift in Sources */,
 				96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */,

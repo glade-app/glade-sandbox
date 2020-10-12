@@ -86,7 +86,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="toPasswordTapped:" destination="YWU-wu-RHa" eventType="touchUpInside" id="v7b-so-w9a"/>
+                                    <action selector="nextButtonTapped:" destination="YWU-wu-RHa" eventType="touchUpInside" id="lu4-pR-97E"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzq-pv-MAd">
@@ -103,7 +103,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <action selector="backToSchoolsTapped:" destination="YWU-wu-RHa" eventType="touchUpInside" id="sFD-M7-LHe"/>
+                                    <action selector="backButtonTapped:" destination="YWU-wu-RHa" eventType="touchUpInside" id="YWG-i7-Uh0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -132,7 +132,7 @@
                         <outlet property="emailField" destination="hax-qI-kzH" id="TgC-9a-XA9"/>
                         <outlet property="validationFeedbackLabel" destination="Gzq-pv-MAd" id="rJ0-Ww-Qzr"/>
                         <segue destination="uSr-mf-6IR" kind="show" identifier="toPassword" id="OcO-PF-XJX"/>
-                        <segue destination="Psm-Q9-raS" kind="show" identifier="backToSchools" id="X4w-9W-1ys"/>
+                        <segue destination="fOy-iq-FRF" kind="show" identifier="backToSchools" id="fLS-3K-oFg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvo-BK-xo6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -152,7 +152,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="toSpotifyConnectTapped:" destination="uSr-mf-6IR" eventType="touchUpInside" id="US1-V5-AK5"/>
+                                    <action selector="nextButtonTapped:" destination="uSr-mf-6IR" eventType="touchUpInside" id="YcA-eY-bgc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cy9-e1-c3i">
@@ -160,7 +160,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <action selector="backToSignupTapped:" destination="uSr-mf-6IR" eventType="touchUpInside" id="T1G-ys-2te"/>
+                                    <action selector="backButtonTapped:" destination="uSr-mf-6IR" eventType="touchUpInside" id="2Tj-Rf-wSM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-DV-bfM">
@@ -255,7 +255,7 @@
             <objects>
                 <viewController id="Psm-Q9-raS" customClass="SchoolScrollViewController" customModule="test_glade" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Fh-ZL-cad">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uz-Y8-z2y">
@@ -264,13 +264,13 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="wRR-na-c4J"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your school:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEY-Bb-uEK">
-                                <rect key="frame" x="45" y="60" width="229" height="76.5"/>
+                                <rect key="frame" x="45" y="104" width="229" height="76.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhU-j9-ntj">
-                                <rect key="frame" x="336" y="743" width="49" height="41"/>
+                                <rect key="frame" x="336" y="797" width="49" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
@@ -303,12 +303,77 @@
                     <navigationItem key="navigationItem" id="gtJ-bH-qvH"/>
                     <connections>
                         <outlet property="schoolScrollView" destination="6uz-Y8-z2y" id="dR5-WA-SmG"/>
-                        <segue destination="YWU-wu-RHa" kind="show" identifier="toAccountCreation" id="B2p-Jw-A6e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNZ-0Z-xru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="798.55072463768124" y="75.669642857142847"/>
+            <point key="canvasLocation" x="799" y="-614"/>
+        </scene>
+        <!--Scroll View Controller-->
+        <scene sceneID="QkQ-uC-Hu3">
+            <objects>
+                <viewController id="fOy-iq-FRF" customClass="ScrollViewController" customModule="test_glade" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Zs-7j-BnY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B0P-gk-JaU">
+                                <rect key="frame" x="0.0" y="210" width="414" height="501"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vbh-ML-Iso">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="fOy-iq-FRF" id="fcf-jj-GKs"/>
+                                    <outlet property="delegate" destination="fOy-iq-FRF" id="5dB-Ap-hfT"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHG-BF-liT">
+                                <rect key="frame" x="318" y="740" width="49" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="D0V-JK-A2F"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="fOy-iq-FRF" eventType="touchUpInside" id="2Vi-cS-Jpc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your school:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDY-E1-ww7">
+                                <rect key="frame" x="39" y="97" width="245" height="76.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wiy-kI-yW8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Wiy-kI-yW8" firstAttribute="bottom" secondItem="NHG-BF-liT" secondAttribute="bottom" constant="27" id="2Tx-ep-bYs"/>
+                            <constraint firstItem="Wiy-kI-yW8" firstAttribute="trailing" secondItem="NHG-BF-liT" secondAttribute="trailing" constant="47" id="3Dz-Hd-Kk2"/>
+                            <constraint firstItem="NHG-BF-liT" firstAttribute="top" secondItem="B0P-gk-JaU" secondAttribute="bottom" constant="29" id="4te-ij-JgY"/>
+                            <constraint firstItem="B0P-gk-JaU" firstAttribute="trailing" secondItem="Wiy-kI-yW8" secondAttribute="trailing" id="AzX-1c-rm8"/>
+                            <constraint firstItem="nDY-E1-ww7" firstAttribute="top" secondItem="Wiy-kI-yW8" secondAttribute="top" constant="97" id="Nce-nb-m7N"/>
+                            <constraint firstItem="Wiy-kI-yW8" firstAttribute="trailing" secondItem="nDY-E1-ww7" secondAttribute="trailing" constant="130" id="WAa-oR-bav"/>
+                            <constraint firstItem="nDY-E1-ww7" firstAttribute="leading" secondItem="Wiy-kI-yW8" secondAttribute="leading" constant="39" id="YlP-vN-Z5A"/>
+                            <constraint firstItem="B0P-gk-JaU" firstAttribute="top" secondItem="nDY-E1-ww7" secondAttribute="bottom" constant="36.5" id="enC-dF-h1O"/>
+                            <constraint firstItem="B0P-gk-JaU" firstAttribute="leading" secondItem="Wiy-kI-yW8" secondAttribute="leading" id="rf0-Af-D09"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ma2-gI-7qT"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="schoolCollectionView" destination="B0P-gk-JaU" id="uN9-PT-ew5"/>
+                        <segue destination="YWU-wu-RHa" kind="show" identifier="toAccountCreation" id="eW4-4d-HeN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AbM-5m-ucc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="799" y="76"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -346,7 +411,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="Psm-Q9-raS" kind="show" identifier="toSignup" id="CVl-Yz-NHt"/>
+                        <segue destination="fOy-iq-FRF" kind="show" identifier="toSignup" id="ZFF-ep-Mzw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -355,8 +420,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CVl-Yz-NHt"/>
-        <segue reference="ViN-Ty-WxT"/>
+        <segue reference="ZFF-ep-Mzw"/>
+        <segue reference="eW4-4d-HeN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="minimalist_landscape4" width="512" height="512"/>

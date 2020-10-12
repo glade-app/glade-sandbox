@@ -21,7 +21,7 @@ class PasswordViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func toSpotifyConnectTapped(_ sender: Any) {
+    @IBAction func nextButtonTapped(_ sender: Any) {
         let password: String = passwordField.text ?? ""
         let confirmPassword: String = confirmPasswordField.text ?? ""
         passwordValidation.validatePassword(firstPass: password, confirmedPass: confirmPassword)
@@ -34,7 +34,8 @@ class PasswordViewController: UIViewController {
             passwordFeedbackLabel.textColor = UIColor.darkGray
         }
     }
-    @IBAction func backToSignupTapped(_ sender: Any) {
+
+    @IBAction func backButtonTapped (_ sender: Any) {
         performSegue(withIdentifier: "backToSignup", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

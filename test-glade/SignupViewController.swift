@@ -21,26 +21,24 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func toPasswordTapped(_ sender: Any) {
-        if emailField.text == "" {
-            validationFeedbackLabel.text = "Email is required"
-            validationFeedbackLabel.textColor = UIColor.darkGray
+    @IBAction func nextButtonTapped (_ sender: Any) {
+        let email: String = emailField.text ?? ""
+        
+        let inputEmail: String = (emailField.text ?? "").lowercased()
+        emailValidation.validateEmail(school: schoolName, email: inputEmail)
+        let isValid = emailValidation.isValidEmail()
+        
+        if !isValid {
+            validationFeedbackLabel.text = emailValidation.emailValidationFeedback()
+            validationFeedbackLabel.textColor = UIColor.red
         }
         else {
-            let inputEmail: String = (emailField.text ?? "").lowercased()
-            emailValidation.validateEmail(school: schoolName, email: inputEmail)
-            let isValid = emailValidation.isValidEmail()
-            if !isValid {
-                validationFeedbackLabel.text = "Invalid " + schoolName + " email"
-                validationFeedbackLabel.textColor = UIColor.red
-            }
-            else {
-                validationFeedbackLabel.text = ""
-                performSegue(withIdentifier: "toPassword", sender: self)
-            }
+            validationFeedbackLabel.text = ""
+            performSegue(withIdentifier: "toPassword", sender: self)
         }
     }
-    @IBAction func backToSchoolsTapped(_ sender: Any) {
+
+    @IBAction func backButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "backToSchools", sender: self)
     }
     

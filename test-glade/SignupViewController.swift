@@ -21,6 +21,7 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    // On tapping the next button, validate the email in the field: If valid, go to next view, else display feedback
     @IBAction func nextButtonTapped (_ sender: Any) {
         let inputEmail: String = (emailField.text ?? "").lowercased()
         emailValidation.validateEmail(school: schoolName, email: inputEmail)

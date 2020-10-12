@@ -8,54 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test Scroll View Controller-->
-        <scene sceneID="2sR-n9-m0K">
-            <objects>
-                <viewController id="8dF-77-she" customClass="testScrollViewController" customModule="test_glade" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="NPI-t1-ncU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minimalist_landscape4" translatesAutoresizingMaskIntoConstraints="NO" id="4Az-Sd-i3e">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                            </imageView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="2pq-cQ-Zj1">
-                                <rect key="frame" x="145" y="775" width="123" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="8e8-8i-8Xv"/>
-                                    <constraint firstAttribute="height" constant="37" id="FAB-y1-k85"/>
-                                </constraints>
-                            </pageControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-cQ-n2u">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="guH-Xg-f6j"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="Vr3-e0-MZq"/>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="cV0-eM-BGt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="cV0-eM-BGt" firstAttribute="bottom" secondItem="2pq-cQ-Zj1" secondAttribute="bottom" constant="50" id="3Gc-BD-aq6"/>
-                            <constraint firstItem="0rt-cQ-n2u" firstAttribute="leading" secondItem="cV0-eM-BGt" secondAttribute="leading" id="9Hh-3S-7N1"/>
-                            <constraint firstItem="cV0-eM-BGt" firstAttribute="trailing" secondItem="4Az-Sd-i3e" secondAttribute="trailing" id="DO5-z2-AYI"/>
-                            <constraint firstItem="4Az-Sd-i3e" firstAttribute="leading" secondItem="cV0-eM-BGt" secondAttribute="leading" id="Dbu-ry-sC7"/>
-                            <constraint firstItem="0rt-cQ-n2u" firstAttribute="top" secondItem="cV0-eM-BGt" secondAttribute="top" id="DiV-f3-uwe"/>
-                            <constraint firstItem="4Az-Sd-i3e" firstAttribute="top" secondItem="cV0-eM-BGt" secondAttribute="top" id="Mek-zU-Qfw"/>
-                            <constraint firstItem="cV0-eM-BGt" firstAttribute="bottom" secondItem="0rt-cQ-n2u" secondAttribute="bottom" id="cwB-ug-VCG"/>
-                            <constraint firstItem="cV0-eM-BGt" firstAttribute="bottom" secondItem="4Az-Sd-i3e" secondAttribute="bottom" id="dsf-4j-9FE"/>
-                            <constraint firstItem="cV0-eM-BGt" firstAttribute="trailing" secondItem="0rt-cQ-n2u" secondAttribute="trailing" id="spc-vE-10A"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="ho8-mq-2Ha"/>
-                    <connections>
-                        <outlet property="pageControl" destination="2pq-cQ-Zj1" id="uvW-Vy-Fm3"/>
-                        <outlet property="schoolScrollView" destination="0rt-cQ-n2u" id="45s-m6-oEj"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nvt-iv-hbT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="19" y="-614"/>
-        </scene>
         <!--Signup View Controller-->
         <scene sceneID="82y-Qb-wkp">
             <objects>
@@ -178,7 +130,7 @@
                                     <constraint firstAttribute="height" constant="34" id="4l3-G1-YwK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NKA-K1-cJs">
                                 <rect key="frame" x="51" y="461" width="309" height="34"/>
@@ -186,7 +138,7 @@
                                     <constraint firstAttribute="height" constant="34" id="xn9-9z-Uo7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4X-0s-k15">
                                 <rect key="frame" x="61" y="515" width="299" height="60"/>
@@ -420,11 +372,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZFF-ep-Mzw"/>
-        <segue reference="eW4-4d-HeN"/>
+        <segue reference="fLS-3K-oFg"/>
+        <segue reference="ViN-Ty-WxT"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="minimalist_landscape4" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

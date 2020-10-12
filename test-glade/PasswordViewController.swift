@@ -17,10 +17,9 @@ class PasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
+    // On next button tap, validates email: If valid, sends user to next view, else displays feedback
     @IBAction func nextButtonTapped(_ sender: Any) {
         let password: String = passwordField.text ?? ""
         let confirmPassword: String = confirmPasswordField.text ?? ""
@@ -38,6 +37,7 @@ class PasswordViewController: UIViewController {
     @IBAction func backButtonTapped (_ sender: Any) {
         performSegue(withIdentifier: "backToSignup", sender: self)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSpotifyConnect" {
             let spotifyVC: SpotifyConnectViewController = segue.destination as! SpotifyConnectViewController

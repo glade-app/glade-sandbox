@@ -20,10 +20,6 @@ class SchoolScrollViewController: UIViewController, UIScrollViewDelegate {
         let images = ["berkeley.jpg", "stanford.jpg", "harvard.jpg", "princeton.jpg"]
         let imageNames = ["UC Berkeley", "Stanford", "Harvard", "Princeton"]
         
-//        let images = ["berkeley.jpg"]
-//        let imageNames = ["UC Berkeley"]
-        
-        
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
         

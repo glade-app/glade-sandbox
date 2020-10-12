@@ -12,6 +12,7 @@ struct EmailValidationModel {
     var schoolEmailEndings = ["UC Berkeley": "@berkeley.edu"]
     var caseFailed: String = ""
     
+    // Validates an email and alters the validEmail boolean variable based on a regex filter. The regex filter checks if the email ends in the school's domain address and contains valid letters in the local part
     mutating func validateEmail(school: String, email: String) {
         if email.count == 0 {
             caseFailed = "Email is required"

@@ -22,8 +22,6 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped (_ sender: Any) {
-        let email: String = emailField.text ?? ""
-        
         let inputEmail: String = (emailField.text ?? "").lowercased()
         emailValidation.validateEmail(school: schoolName, email: inputEmail)
         let isValid = emailValidation.isValidEmail()

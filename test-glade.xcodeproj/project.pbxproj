@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		963DCAFB2535560500224983 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DCAFA2535560500224983 /* Constants.swift */; };
+		968347D525354CF900B2B2E7 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968347D425354CF900B2B2E7 /* SpotifyiOS.framework */; };
 		96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FD7253162D700C221DE /* AppDelegate.swift */; };
 		96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FD9253162D700C221DE /* SceneDelegate.swift */; };
 		96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FDB253162D700C221DE /* StartViewController.swift */; };
@@ -47,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		963DCAFA2535560500224983 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		968347AC2535493400B2B2E7 /* test-glade-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test-glade-Bridging-Header.h"; sourceTree = "<group>"; };
+		968347D425354CF900B2B2E7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = "test-glade/SpotifyiOS.framework"; sourceTree = "<group>"; };
 		96CA7FD4253162D700C221DE /* test-glade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-glade.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA7FD7253162D700C221DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96CA7FD9253162D700C221DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				968347D525354CF900B2B2E7 /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		968347B32535498B00B2B2E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				968347D425354CF900B2B2E7 /* SpotifyiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		96CA7FCB253162D700C221DE = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +121,7 @@
 				96CA7FED253162D900C221DE /* test-gladeTests */,
 				96CA7FF8253162D900C221DE /* test-gladeUITests */,
 				96CA7FD5253162D700C221DE /* Products */,
+				968347B32535498B00B2B2E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +156,8 @@
 				96CA7FE5253162D900C221DE /* Info.plist */,
 				96CA800A2531635C00C221DE /* LoginViewController.swift */,
 				96CA8071253192FF00C221DE /* SchoolScrollViewController.swift */,
+				968347AC2535493400B2B2E7 /* test-glade-Bridging-Header.h */,
+				963DCAFA2535560500224983 /* Constants.swift */,
 			);
 			path = "test-glade";
 			sourceTree = "<group>";
@@ -315,6 +332,7 @@
 				96CA809A2532AD4B00C221DE /* EmailValidationModel.swift in Sources */,
 				96CA80C22532DD5600C221DE /* SpotifyConnectViewController.swift in Sources */,
 				96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */,
+				963DCAFB2535560500224983 /* Constants.swift in Sources */,
 				96CA808C2532410800C221DE /* SchoolView.swift in Sources */,
 				96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */,
 			);
@@ -426,8 +444,10 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "test-glade/test-glade-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -480,8 +500,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "test-glade/test-glade-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -494,13 +516,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VF3QBS95D4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/test-glade",
+				);
 				INFOPLIST_FILE = "test-glade/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "Allen-Gu.test-glade";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "test-glade/test-glade-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -513,13 +541,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VF3QBS95D4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/test-glade",
+				);
 				INFOPLIST_FILE = "test-glade/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "Allen-Gu.test-glade";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "test-glade/test-glade-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

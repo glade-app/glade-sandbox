@@ -37,6 +37,10 @@ class SignupViewController: UIViewController {
         }
     }
 
+    @IBAction func emailInputDone(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
+    }
+
     @IBAction func backButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "backToSchools", sender: self)
     }

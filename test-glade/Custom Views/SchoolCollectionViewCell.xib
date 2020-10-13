@@ -16,13 +16,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="541" height="457"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eVE-Na-4QO">
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eVE-Na-4QO">
                         <rect key="frame" x="0.0" y="0.0" width="541" height="457"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="School Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NT-LV-WCv">
-                        <rect key="frame" x="24" y="393" width="493" height="29"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="School Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NT-LV-WCv">
+                        <rect key="frame" x="24" y="377" width="493" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="29" id="gZQ-Ae-Pdw"/>
+                            <constraint firstAttribute="height" constant="40" id="gZQ-Ae-Pdw"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -37,7 +37,7 @@
                 <constraint firstAttribute="bottom" secondItem="eVE-Na-4QO" secondAttribute="bottom" id="SqL-ZF-vaQ"/>
                 <constraint firstAttribute="trailing" secondItem="eVE-Na-4QO" secondAttribute="trailing" id="Sun-om-EWE"/>
                 <constraint firstItem="eVE-Na-4QO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="T79-44-Bfm"/>
-                <constraint firstItem="1NT-LV-WCv" firstAttribute="top" secondItem="eVE-Na-4QO" secondAttribute="bottom" constant="-64" id="h9c-Wp-ru6"/>
+                <constraint firstItem="1NT-LV-WCv" firstAttribute="top" secondItem="eVE-Na-4QO" secondAttribute="bottom" constant="-80" id="h9c-Wp-ru6"/>
                 <constraint firstItem="1NT-LV-WCv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="wEe-5l-kSS"/>
             </constraints>
             <size key="customSize" width="541" height="457"/>

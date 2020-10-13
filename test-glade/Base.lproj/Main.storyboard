@@ -22,7 +22,10 @@
                                     <constraint firstAttribute="height" constant="34" id="YUe-dx-qir"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="email"/>
+                                <connections>
+                                    <action selector="emailInputDone:" destination="YWU-wu-RHa" eventType="primaryActionTriggered" id="TG0-Bg-BGP"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join with your school email:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K13-Up-RCu">
                                 <rect key="frame" x="40" y="251" width="256" height="107"/>
@@ -130,15 +133,21 @@
                                     <constraint firstAttribute="height" constant="34" id="4l3-G1-YwK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <action selector="passwordInputDone:" destination="uSr-mf-6IR" eventType="primaryActionTriggered" id="Uwk-IJ-4A6"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NKA-K1-cJs">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NKA-K1-cJs">
                                 <rect key="frame" x="51" y="461" width="309" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="xn9-9z-Uo7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <action selector="confirmPasswordInputDone:" destination="uSr-mf-6IR" eventType="primaryActionTriggered" id="JCU-nW-UXH"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4X-0s-k15">
                                 <rect key="frame" x="61" y="515" width="299" height="60"/>
@@ -193,10 +202,31 @@
                     <view key="view" contentMode="scaleToFill" id="lIl-iA-DPa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coC-NH-wkU">
+                                <rect key="frame" x="107" y="379" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="zV3-V0-CgD"/>
+                                    <constraint firstAttribute="height" constant="50" id="zVL-1W-XoK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="Connect"/>
+                                <connections>
+                                    <action selector="connectButtonTapped:" destination="NU1-42-LJ3" eventType="touchUpInside" id="NRZ-ZJ-HXh"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="MZ7-4W-HWV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="coC-NH-wkU" firstAttribute="centerY" secondItem="MZ7-4W-HWV" secondAttribute="centerY" id="ieh-pk-egM"/>
+                            <constraint firstItem="coC-NH-wkU" firstAttribute="centerX" secondItem="MZ7-4W-HWV" secondAttribute="centerX" id="zyi-Gz-Qtx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bcy-Hc-p2O"/>
+                    <connections>
+                        <outlet property="connectButton" destination="coC-NH-wkU" id="g3d-hS-cLF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZe-z8-hVw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -34,6 +34,15 @@ class PasswordViewController: UIViewController {
         }
     }
 
+    @IBAction func passwordInputDone(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
+    }
+    
+    
+    @IBAction func confirmPasswordInputDone(_ sender: Any) {
+        (sender as AnyObject).resignFirstResponder()
+    }
+    
     @IBAction func backButtonTapped (_ sender: Any) {
         performSegue(withIdentifier: "backToSignup", sender: self)
     }

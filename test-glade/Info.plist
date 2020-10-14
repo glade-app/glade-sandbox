@@ -32,7 +32,7 @@
 			<string>Allen-Gu.test-glade</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>test-glade</string>
+				<string>test-glade-login</string>
 			</array>
 		</dict>
 	</array>

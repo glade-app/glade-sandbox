@@ -9,19 +9,19 @@ import UIKit
 
 class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
 
-    lazy var configuration: SPTConfiguration = {
+    // This configuration code probably shouldn't be here? Not sure
+    private lazy var configuration: SPTConfiguration = {
         let configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
-        //plays most recent song
-        //configuration.playURI = ""
         
+        // No clue why these lines are important, but the code breaks without them so... They're used for swapping/refreshing access tokens but idk why it's doing this on a localhost?
         configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
         configuration.tokenRefreshURL = URL(string: "http://localhost:1234/refresh")
         return configuration
     }()
 
     lazy var sessionManager: SPTSessionManager = {
-        let manager = SPTSessionManager(configuration: configuration, delegate: self)
-        return manager
+        let sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
+        return sessionManager
     }()
 
     lazy var appRemote: SPTAppRemote = {
@@ -29,9 +29,6 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         appRemote.delegate = self
         return appRemote
     }()
-
-    private var lastPlayerState: SPTAppRemotePlayerState?
-    
     
     var userData: [String: String] = [:]
     @IBOutlet var connectButton: UIButton!
@@ -45,12 +42,10 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         connectButton?.layer.cornerRadius = (connectButton?.frame.size.height ?? 0)/2.0
         connectButton?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         connectButton.backgroundColor = UIColor(red: 47/255, green: 156/255, blue: 90/255, alpha: 0.8)
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func connectButtonTapped(_ sender: Any) {
-        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate]
+        let scope: SPTScope = [.appRemoteControl]
 
         if #available(iOS 11, *) {
             // Use this on iOS 11 and above to take advantage of SFAuthenticationSession

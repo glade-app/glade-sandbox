@@ -9,11 +9,12 @@ import UIKit
 
 class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
 
+    var userData: [String: String] = [:]
+    
     // This configuration code probably shouldn't be here? Not sure
     private lazy var configuration: SPTConfiguration = {
         let configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
         
-        // No clue why these lines are important, but the code breaks without them so... They're used for swapping/refreshing access tokens but idk why it's doing this on a localhost?
         configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
         configuration.tokenRefreshURL = URL(string: "http://localhost:1234/refresh")
         return configuration
@@ -30,13 +31,15 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         return appRemote
     }()
     
-    var userData: [String: String] = [:]
     @IBOutlet var connectButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Customized button move to custom view later
+        self.setupItems()
+    }
+    
+    func setupItems() {
+        // Customized button, move to custom view later?
         connectButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
         connectButton.setTitleColor(UIColor.white, for: .normal)
         connectButton?.layer.cornerRadius = (connectButton?.frame.size.height ?? 0)/2.0
@@ -56,9 +59,19 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         }
     }
     
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toDescription", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDescription" {
+            let descriptionVC: DescriptionViewController = segue.destination as! DescriptionViewController
+            descriptionVC.userData = userData
+        }
+    }
+    
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("Connected")
-        appRemote.connect()
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {

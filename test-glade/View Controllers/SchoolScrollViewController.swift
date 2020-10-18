@@ -7,16 +7,34 @@
 
 import UIKit
 
-class ScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     let images = ["berkeley.jpg", "stanford.jpg", "harvard.jpg", "princeton.jpg"]
     let imageNames = ["UC Berkeley", "Stanford", "Harvard", "Princeton"]
     
+    @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var schoolCollectionView: UICollectionView!
-    
+    @IBOutlet weak var nextButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerNib()
+        self.setupItems()
+    }
+    
+    func setupItems() {
+        // Choose your school prompt
+        chooseLabel.text = "Choose your school:"
+        //chooseLabel.textColor
+        chooseLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        chooseLabel.textAlignment = .left
+        chooseLabel.numberOfLines = 0
+        
+        // Next Button
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.setTitleColor(UIColor.systemGreen, for: .normal)
+        nextButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        nextButton.titleLabel!.textAlignment = .center
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
@@ -53,13 +71,6 @@ class ScrollViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     // Sets cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let cell: SchoolCollectionViewCell = Bundle.main.loadNibNamed(SchoolCollectionViewCell.nibName, owner: self, options: nil)?.first as? SchoolCollectionViewCell else {
-            return CGSize.zero
-        }
-        let imageToDisplay = UIImage(named: images[indexPath.item])
-        cell.configureCell(schoolName: imageNames[indexPath.item], image: imageToDisplay!)
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
         let collectionCellWidth: CGFloat = collectionView.bounds.size.width * 3/4
         let collectionCellHeight: CGFloat = collectionView.bounds.size.height
         return CGSize(width: collectionCellWidth, height: collectionCellHeight)

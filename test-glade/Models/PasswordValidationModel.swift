@@ -17,27 +17,18 @@ struct PasswordValidationModel {
         if firstPass != confirmedPass {
             failedCase = "Passwords don't match"
         }
-        // Check if password is at least 8 characters
-        else if firstPass.count < 8 {
-            failedCase = "Password must be at least 8 characters"
-        }
-        // Check for specific characters
+        // Check for valid password
         else {
             let range = NSRange(location: 0, length: firstPass.utf16.count)
+            // Check for letter
             let regexAlphabet = try! NSRegularExpression(pattern: "[A-Za-z]")
+            // Check for number
             let regexNumber = try! NSRegularExpression(pattern: "[0-9]")
+            // Check for special character
             let regexSpecial = try! NSRegularExpression(pattern: "[!@#$%^&*_+=]")
             // Check for a letter
-            if regexAlphabet.firstMatch(in: firstPass, options: [], range: range) == nil {
-                failedCase = "Must contain a letter"
-            }
-            // Check for a number
-            else if regexNumber.firstMatch(in: firstPass, options: [], range: range) == nil {
-                failedCase = "Must contain a number"
-            }
-            // Check for a special character (!@#$%^&*_-+=)
-            else if regexSpecial.firstMatch(in: firstPass, options: [], range: range) == nil {
-                failedCase = "Must contain one of these characters:\n!@#$%^&*_-+="
+            if firstPass.count < 8 || regexAlphabet.firstMatch(in: firstPass, options: [], range: range) == nil || regexNumber.firstMatch(in: firstPass, options: [], range: range) == nil || regexSpecial.firstMatch(in: firstPass, options: [], range: range) == nil{
+                failedCase = "Password must be at least 8 characters and contain a letter, number, and special character"
             }
             else {
                 validPassword = true
@@ -51,6 +42,6 @@ struct PasswordValidationModel {
         if !validPassword {
             return failedCase
         }
-        return "Valid email"
+        return "Valid Password"
     }
 }

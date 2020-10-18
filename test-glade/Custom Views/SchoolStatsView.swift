@@ -53,7 +53,6 @@ class SchoolStatsView: UIView {
         let nib = UINib(nibName: "SchoolStatsView", bundle: nil)
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
-        contentView.backgroundColor = UIColor.clear
         addSubview(contentView)
     }
 }

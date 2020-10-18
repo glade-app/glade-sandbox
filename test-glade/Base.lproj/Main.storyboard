@@ -495,9 +495,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="LFh-NH-1QU" firstAttribute="trailing" secondItem="YUw-sg-fxC" secondAttribute="trailing" id="6MJ-wg-IF9"/>
-                            <constraint firstItem="YUw-sg-fxC" firstAttribute="top" secondItem="LFh-NH-1QU" secondAttribute="top" id="7o9-nw-7Ua"/>
                             <constraint firstItem="LFh-NH-1QU" firstAttribute="bottom" secondItem="YUw-sg-fxC" secondAttribute="bottom" id="lZn-Jy-eAr"/>
                             <constraint firstItem="YUw-sg-fxC" firstAttribute="leading" secondItem="LFh-NH-1QU" secondAttribute="leading" id="t4O-2R-sqQ"/>
+                            <constraint firstItem="YUw-sg-fxC" firstAttribute="top" secondItem="LFh-NH-1QU" secondAttribute="top" id="zXV-oJ-8eW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WEo-64-wZg">
@@ -777,7 +777,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IJx-Ff-zhp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="history" id="EwT-HX-Neb"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EfE-vJ-x3k">
+                    <navigationBar key="navigationBar" alpha="0.69999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EfE-vJ-x3k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -796,7 +796,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a1x-dK-Pe5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="topRated" id="eUy-qd-tTt"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8oj-Qs-yRe">
+                    <navigationBar key="navigationBar" alpha="0.69999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8oj-Qs-yRe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -815,7 +815,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yX3-G7-qP7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="mostViewed" id="lmn-fQ-GRm"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G2j-iB-mZX">
+                    <navigationBar key="navigationBar" alpha="0.69999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G2j-iB-mZX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -18,6 +18,9 @@
 		969BD3A5253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969BD3A3253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib */; };
 		969BD3C4253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969BD3C2253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift */; };
 		969BD3C5253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969BD3C3253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib */; };
+		969BD3F7253C3AF800205CC4 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969BD3F5253C3AF700205CC4 /* ContainerCollectionViewCell.swift */; };
+		969BD3F8253C3AF800205CC4 /* ContainerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969BD3F6253C3AF700205CC4 /* ContainerCollectionViewCell.xib */; };
+		969BD400253CB96E00205CC4 /* HorizontalCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969BD3FF253CB96E00205CC4 /* HorizontalCollectionView.xib */; };
 		96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FD7253162D700C221DE /* AppDelegate.swift */; };
 		96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FD9253162D700C221DE /* SceneDelegate.swift */; };
 		96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA7FDB253162D700C221DE /* StartViewController.swift */; };
@@ -67,6 +70,9 @@
 		969BD3A3253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolHomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		969BD3C2253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
 		969BD3C3253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
+		969BD3F5253C3AF700205CC4 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
+		969BD3F6253C3AF700205CC4 /* ContainerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContainerCollectionViewCell.xib; sourceTree = "<group>"; };
+		969BD3FF253CB96E00205CC4 /* HorizontalCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionView.xib; sourceTree = "<group>"; };
 		96CA7FD4253162D700C221DE /* test-glade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "test-glade.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA7FD7253162D700C221DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96CA7FD9253162D700C221DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +156,9 @@
 				969BD380253BDDAF00205CC4 /* SchoolStatsView.xib */,
 				969BD385253BDF7900205CC4 /* SchoolStatsView.swift */,
 				969BD3A2253C147C00205CC4 /* SchoolHomeCollectionViewCell.swift */,
+				969BD3F5253C3AF700205CC4 /* ContainerCollectionViewCell.swift */,
+				969BD3F6253C3AF700205CC4 /* ContainerCollectionViewCell.xib */,
+				969BD3FF253CB96E00205CC4 /* HorizontalCollectionView.xib */,
 				969BD3A3253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib */,
 				969BD3C2253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift */,
 				969BD3C3253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib */,
@@ -329,9 +338,11 @@
 				969BD3A5253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib in Resources */,
 				96CA7FE4253162D900C221DE /* LaunchScreen.storyboard in Resources */,
 				969BD381253BDDAF00205CC4 /* SchoolStatsView.xib in Resources */,
+				969BD3F8253C3AF800205CC4 /* ContainerCollectionViewCell.xib in Resources */,
 				969BD3C5253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib in Resources */,
 				96CA7FE1253162D900C221DE /* Assets.xcassets in Resources */,
 				96CA80E42533881500C221DE /* SchoolCollectionViewCell.xib in Resources */,
+				969BD400253CB96E00205CC4 /* HorizontalCollectionView.xib in Resources */,
 				96CA7FDF253162D700C221DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +374,7 @@
 				969BD357253B91BE00205CC4 /* DescriptionViewController.swift in Sources */,
 				96CA80B82532D2EB00C221DE /* PasswordViewController.swift in Sources */,
 				96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */,
+				969BD3F7253C3AF800205CC4 /* ContainerCollectionViewCell.swift in Sources */,
 				969BD376253BD69C00205CC4 /* HomeViewController.swift in Sources */,
 				96CA80E32533881500C221DE /* SchoolCollectionViewCell.swift in Sources */,
 				96CA80CD2532E4F600C221DE /* SignupViewController.swift in Sources */,

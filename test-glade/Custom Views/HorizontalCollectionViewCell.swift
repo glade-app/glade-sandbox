@@ -11,6 +11,7 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     class var reuseIdentifier: String {
         return "HorizontalCollectionViewCellReuseIdentifier"
     }
@@ -19,16 +20,25 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
         return "HorizontalCollectionViewCell"
     }
     
-    func configureHorizontal(subjectName: String, image: UIImage) {
+    func configure(name: String, description: String, image: UIImage) {
         imageView.image = image
-        nameLabel.text = subjectName
+        nameLabel.text = name
+        descriptionLabel.text = description
         
         imageView.contentMode = .scaleAspectFill
-        nameLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        imageView.layer.cornerRadius = 5
+        
+        nameLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         nameLabel.textColor = UIColor.white
+        nameLabel.numberOfLines = 0
+        
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        descriptionLabel.textColor = UIColor.white
+        descriptionLabel.numberOfLines = 0
     }
     
     override func awakeFromNib() {
+        print("here in hviewcell")
         super.awakeFromNib()
         // Initialization code
     }

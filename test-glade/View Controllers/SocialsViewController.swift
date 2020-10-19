@@ -30,9 +30,11 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setupItems() {
-        facebookImage.image = UIImage(named: "berkeley.png")
-        instagramImage.image = UIImage(named: "berkeley.png")
-        snapchatImage.image = UIImage(named: "berkeley.png")
+        facebookImage.image = UIImage(named: "facebook")
+        instagramImage.image = UIImage(named: "instagram")
+        snapchatImage.image = UIImage(named: "snapchat")
+        snapchatImage.backgroundColor = UIColor(red: 255/255, green: 252/255, blue: 0/255, alpha: 1)
+        snapchatImage.layer.cornerRadius = 10
 
         // Vertical stack
         verticalStack.spacing = 20

@@ -38,7 +38,7 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toAccountCreation", sender: self)
+        performSegue(withIdentifier: "toSpotify", sender: self)
     }
     
     func registerNib() {

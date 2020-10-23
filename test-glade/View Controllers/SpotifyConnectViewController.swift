@@ -6,30 +6,32 @@
 //
 
 import UIKit
+import Alamofire
 
-class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
+class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate {
 
     var userData: [String: String] = [:]
     
     // This configuration code probably shouldn't be here? Not sure
-    private lazy var configuration: SPTConfiguration = {
-        let configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
-        
-        configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
-        configuration.tokenRefreshURL = URL(string: "http://localhost:1234/refresh")
-        return configuration
-    }()
+    var configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
 
     lazy var sessionManager: SPTSessionManager = {
-        let sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
-        return sessionManager
+        if let tokenSwapURL = URL(string: "https://test-glade-token-swap.herokuapp.com/api/token"),
+           let tokenRefreshURL = URL(string: "https://test-glade-token-swap.herokuapp.com/api/refresh_token") {
+          self.configuration.tokenSwapURL = tokenSwapURL
+          self.configuration.tokenRefreshURL = tokenRefreshURL
+          self.configuration.playURI = ""
+        }
+        let manager = SPTSessionManager(configuration: self.configuration, delegate: self)
+        self.configuration.playURI = ""
+        return manager
     }()
 
-    lazy var appRemote: SPTAppRemote = {
-        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
-        appRemote.delegate = self
-        return appRemote
-    }()
+//    lazy var appRemote: SPTAppRemote = {
+//        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+//        appRemote.delegate = self
+//        return appRemote
+//    }()
     
     @IBOutlet var connectButton: UIButton!
     
@@ -48,20 +50,18 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
     }
     
     @IBAction func connectButtonTapped(_ sender: Any) {
-        let scope: SPTScope = [.appRemoteControl]
+        let scopes: SPTScope = [.appRemoteControl, .userReadEmail]
 
         if #available(iOS 11, *) {
             // Use this on iOS 11 and above to take advantage of SFAuthenticationSession
-            sessionManager.initiateSession(with: scope, options: .clientOnly)
+            sessionManager.initiateSession(with: scopes, options: .default)
         } else {
             // Use this on iOS versions < 11 to use SFSafariViewController
-            sessionManager.initiateSession(with: scope, options: .clientOnly, presenting: self)
+            sessionManager.initiateSession(with: scopes, options: .clientOnly, presenting: self)
         }
     }
     
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toDescription", sender: self)
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDescription" {
@@ -71,27 +71,42 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
     }
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-        print("Connected")
+        print("Success:", session)
+        print("Here is the access token:", sessionManager.session?.accessToken)
+        let spotifyAccessToken = sessionManager.session?.accessToken ?? ""
+        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: spotifyAccessToken)]
+        print("\nAccount Info Request...")
+        AF.request("https://api.spotify.com/v1/me", headers: headers).responseJSON { response in
+            print(response)
+        }
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-        print("Authorization failed")
+        print("Failed with Error:", error)
     }
     
-    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-        print("Established connection")
+    func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
+        print("Renewed", session)
     }
     
-    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-        print("Failed connection attempt")
-    }
+//    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+//        print("Established connection")
+//    }
+//
+//    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
+//        print("Failed connection attempt")
+//    }
+//
+//    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
+//        print("Disconnected with error")
+//    }
+//
+//    func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
+//        print("Player state changed")
+//    }
+//
     
-    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        print("Disconnected with error")
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toDescription", sender: self)
     }
-    
-    func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-        print("Player state changed")
-    }
-    
 }

@@ -94,7 +94,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1568" y="76"/>
+            <point key="canvasLocation" x="1541" y="-342"/>
         </scene>
         <!--Password View Controller-->
         <scene sceneID="OX7-Uh-57M">
@@ -188,7 +188,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2315.9420289855075" y="75.669642857142847"/>
+            <point key="canvasLocation" x="2314" y="-342"/>
         </scene>
         <!--Spotify Connect View Controller-->
         <scene sceneID="mA8-Mh-eOd">
@@ -630,6 +630,7 @@
                         <outlet property="nextButton" destination="NHG-BF-liT" id="Ew9-gT-twO"/>
                         <outlet property="schoolCollectionView" destination="B0P-gk-JaU" id="uN9-PT-ew5"/>
                         <segue destination="YWU-wu-RHa" kind="show" identifier="toAccountCreation" id="eW4-4d-HeN"/>
+                        <segue destination="NU1-42-LJ3" kind="show" identifier="toSpotify" id="PFk-VU-vel"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AbM-5m-ucc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -830,11 +831,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZFF-ep-Mzw"/>
+        <segue reference="fLS-3K-oFg"/>
         <segue reference="Bdd-5Y-urg"/>
         <segue reference="Lnj-lv-JYr"/>
-        <segue reference="lmD-aB-A1O"/>
-        <segue reference="eW4-4d-HeN"/>
+        <segue reference="PFk-VU-vel"/>
+        <segue reference="ViN-Ty-WxT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">

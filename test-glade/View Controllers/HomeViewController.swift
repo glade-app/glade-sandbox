@@ -76,11 +76,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
             let collectionCellWidth: CGFloat = view.frame.width
-            let collectionCellHeight: CGFloat = 300
+            let collectionCellHeight: CGFloat = 360
             return CGSize(width: collectionCellWidth, height: collectionCellHeight)
         }
         else if indexPath.item == 1 || indexPath.item == 2 {
-            return CGSize(width: view.frame.width, height: 200)
+            return CGSize(width: view.frame.width, height: 280)
         }
         return CGSize(width: 0, height: 0)
     }

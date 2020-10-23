@@ -8,11 +8,39 @@
 import UIKit
 import Alamofire
 
+struct User: Decodable {
+    let displayName: String
+    let email: String
+    let href: String
+    let id: String
+//    let images: [Image]
+    let type: String
+    let uri: String
+
+
+    
+    enum CodingKeys: String, CodingKey {
+        case displayName = "display_name"
+        case email
+        case href
+        case id
+//        case images
+        case type
+        case uri
+    }
+}
+//
+//struct Image: Decodable {
+//    let height: String
+//    let url: String
+//    let width: String
+//}
+
 class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate {
 
-    var userData: [String: String] = [:]
+//    var currentUser = User(displayName: "", email: "", href: "", id: "", images: [Image(height: "", url: "", width: "")], type: "", uri: "")
+    var currentUser = User(displayName: "", email: "", href: "", id: "", type: "", uri: "")
     
-    // This configuration code probably shouldn't be here? Not sure
     var configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
 
     lazy var sessionManager: SPTSessionManager = {
@@ -27,13 +55,11 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
         return manager
     }()
 
-//    lazy var appRemote: SPTAppRemote = {
-//        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
-//        appRemote.delegate = self
-//        return appRemote
-//    }()
     
+    @IBOutlet weak var verticalStack: UIStackView!
+    @IBOutlet weak var gladeNameLabel: UILabel!
     @IBOutlet var connectButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +67,25 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     }
     
     func setupItems() {
-        // Customized button, move to custom view later?
+        // Vertical Stack
+        verticalStack.spacing = 20
+        
+        // Glade
+        gladeNameLabel.text = "Glade"
+        //gladeNameLabel.textColor
+        gladeNameLabel.font = UIFont.boldSystemFont(ofSize: 72)
+        gladeNameLabel.textAlignment = .center
+        gladeNameLabel.numberOfLines = 0
+        
+        // Connect Button
         connectButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
-        connectButton.setTitleColor(UIColor.white, for: .normal)
-        connectButton?.layer.cornerRadius = (connectButton?.frame.size.height ?? 0)/2.0
-        connectButton?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        connectButton.backgroundColor = UIColor(red: 47/255, green: 156/255, blue: 90/255, alpha: 0.8)
+        connectButton.setTitleColor(UIColor.systemGreen, for: .normal)
+        
+        // Next Button
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.setTitleColor(UIColor.systemGreen, for: .normal)
+        nextButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        nextButton.titleLabel!.textAlignment = .right
     }
     
     @IBAction func connectButtonTapped(_ sender: Any) {
@@ -60,25 +99,43 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
             sessionManager.initiateSession(with: scopes, options: .clientOnly, presenting: self)
         }
     }
-    
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDescription" {
             let descriptionVC: DescriptionViewController = segue.destination as! DescriptionViewController
-            descriptionVC.userData = userData
+            descriptionVC.currentUser = currentUser
         }
     }
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("Success:", session)
-        print("Here is the access token:", sessionManager.session?.accessToken)
-        let spotifyAccessToken = sessionManager.session?.accessToken ?? ""
-        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: spotifyAccessToken)]
+        
+        // Request account info
         print("\nAccount Info Request...")
-        AF.request("https://api.spotify.com/v1/me", headers: headers).responseJSON { response in
-            print(response)
+        let spotifyAccessToken = session.accessToken
+        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: spotifyAccessToken)]
+        let request = AF.request("https://api.spotify.com/v1/me", headers: headers)
+        request.responseDecodable(of: User.self) { (response) in
+            guard let user = response.value else {
+                print("Failed to decode")
+                return
+            }
+            self.setUser(user: user)
+            print(self.currentUser)
         }
+        // Creates dictionary from JSON response
+//        request.responseJSON { response in
+//            switch response.result {
+//            case let .success(value):
+//                print(value)
+//            case let .failure(error):
+//                print(error)
+//            }
+//        }
+    }
+    
+    func setUser(user: User) {
+        self.currentUser = user
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
@@ -89,24 +146,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
         print("Renewed", session)
     }
     
-//    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-//        print("Established connection")
-//    }
-//
-//    func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-//        print("Failed connection attempt")
-//    }
-//
-//    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-//        print("Disconnected with error")
-//    }
-//
-//    func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-//        print("Player state changed")
-//    }
-//
-    
     @IBAction func nextButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toDescription", sender: self)
+        performSegue(withIdentifier: "toSchools", sender: self)
     }
 }

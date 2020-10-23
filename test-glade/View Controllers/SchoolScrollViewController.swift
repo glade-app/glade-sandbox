@@ -9,12 +9,12 @@ import UIKit
 
 class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    let images = ["berkeley.jpg", "stanford.jpg", "harvard.jpg", "princeton.jpg"]
-    let imageNames = ["UC Berkeley", "Stanford", "Harvard", "Princeton"]
+    let images = ["berkeley.jpg"]
+    let imageNames = ["UC Berkeley"]
+    var schoolSelected = ""
     
     @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var schoolCollectionView: UICollectionView!
-    @IBOutlet weak var nextButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +29,6 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
         chooseLabel.font = UIFont.boldSystemFont(ofSize: 32)
         chooseLabel.textAlignment = .left
         chooseLabel.numberOfLines = 0
-        
-        // Next Button
-        nextButton.setTitle("Next", for: .normal)
-        nextButton.setTitleColor(UIColor.systemGreen, for: .normal)
-        nextButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        nextButton.titleLabel!.textAlignment = .center
-    }
-    
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toSpotify", sender: self)
     }
     
     func registerNib() {
@@ -67,6 +57,9 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
     // Action on tap (currently prints the school name corresponding to the image)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(imageNames[indexPath.item])
+        schoolSelected = imageNames[indexPath.item]
+        performSegue(withIdentifier: "toDescription", sender: self)
+        
     }
     
     // Sets cell size

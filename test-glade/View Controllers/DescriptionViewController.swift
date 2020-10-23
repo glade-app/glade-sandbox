@@ -13,9 +13,10 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var descriptionPromptLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     
-    var userData: [String: String] = [:]
+//    var currentUser = User(displayName: "", email: "", href: "", id: "", images: [Image(height: "", url: "", width: "")], type: "", uri: "")
+    var currentUser = User(displayName: "", email: "", href: "", id: "", type: "", uri: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupItems()
@@ -42,16 +43,6 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
         nextButton.setTitleColor(UIColor.systemGreen, for: .normal)
         nextButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         nextButton.titleLabel!.textAlignment = .right
-        
-        // Back Button
-        backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.systemGreen, for: .normal)
-        backButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        backButton.titleLabel!.textAlignment = .right
-    }
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "backToConnectSpotify", sender: self)
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
@@ -61,8 +52,6 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toConnectSocials" {
             let socialsVC: SocialsViewController = segue.destination as! SocialsViewController
-            userData["description"] = textView.text ?? ""
-            socialsVC.userData = userData
         }
     }
     

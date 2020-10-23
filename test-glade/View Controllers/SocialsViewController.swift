@@ -20,7 +20,6 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var snapchatImage: UIImageView!
     @IBOutlet weak var snapchatField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     
     var userData: [String: String] = [:]
     override func viewDidLoad() {
@@ -63,12 +62,6 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
         nextButton.setTitleColor(UIColor.systemGreen, for: .normal)
         nextButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         nextButton.titleLabel!.textAlignment = .right
-        
-        // Back Button
-        backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.systemGreen, for: .normal)
-        backButton.titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        backButton.titleLabel!.textAlignment = .right
     }
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -84,9 +77,5 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "signupToMain", sender: self)
-    }
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "backToDescription", sender: self)
     }
 }

@@ -13,6 +13,8 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
     let imageNames = ["UC Berkeley"]
     var schoolSelected = ""
     
+    var currentUser = User()
+    
     @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var schoolCollectionView: UICollectionView!
 
@@ -29,6 +31,10 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
         chooseLabel.font = UIFont.boldSystemFont(ofSize: 32)
         chooseLabel.textAlignment = .left
         chooseLabel.numberOfLines = 0
+    }
+    
+    @IBAction func backSwiped(_ sender: Any) {
+        performSegue(withIdentifier: "backToSpotify", sender: self)
     }
     
     func registerNib() {

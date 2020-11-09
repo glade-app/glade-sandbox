@@ -78,4 +78,8 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
     @IBAction func signupButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "signupToMain", sender: self)
     }
+    
+    @IBAction func backSwiped(_ sender: Any) {
+        performSegue(withIdentifier: "backToDescription", sender: self)
+    }
 }

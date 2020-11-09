@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,16 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="2E5-wZ-Laz">
-                                <rect key="frame" x="40" y="347.5" width="334" height="113.5"/>
+                                <rect key="frame" x="40" y="314.5" width="334" height="179"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLg-wG-Vde">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glade" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLg-wG-Vde">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="86"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="72"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coC-NH-wkU">
-                                        <rect key="frame" x="0.0" y="21.5" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="87" width="334" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="zVL-1W-XoK"/>
                                         </constraints>
@@ -37,12 +37,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suQ-fY-NC5">
-                                        <rect key="frame" x="0.0" y="72.5" width="334" height="41"/>
+                                        <rect key="frame" x="0.0" y="138" width="334" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Next"/>
                                         <connections>
                                             <action selector="nextButtonTapped:" destination="NU1-42-LJ3" eventType="touchUpInside" id="MND-61-AFh"/>
-                                            <action selector="nextButtonTapped:" destination="fOy-iq-FRF" eventType="touchUpInside" id="dNg-mS-9JF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -62,7 +61,7 @@
                         <outlet property="gladeNameLabel" destination="hLg-wG-Vde" id="VgA-Uo-BFQ"/>
                         <outlet property="nextButton" destination="suQ-fY-NC5" id="BvK-Cd-Yyh"/>
                         <outlet property="verticalStack" destination="2E5-wZ-Laz" id="MJf-ci-zYY"/>
-                        <segue destination="fOy-iq-FRF" kind="show" identifier="toSchools" id="4t7-xz-7ag"/>
+                        <segue destination="fOy-iq-FRF" kind="show" identifier="toSchools" id="7yZ-fW-CL0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZe-z8-hVw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -121,6 +120,7 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="7W7-X9-Q4U" appends="YES" id="QB7-en-2Xo"/>
+                            <outletCollection property="gestureRecognizers" destination="0B3-uq-pY4" appends="YES" id="igp-se-BRU"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="ma1-II-FPO"/>
@@ -130,6 +130,7 @@
                         <outlet property="textView" destination="d30-8J-isM" id="nl0-QL-0oq"/>
                         <outlet property="verticalStack" destination="m1j-TL-k8H" id="ovp-2U-zVg"/>
                         <segue destination="R7I-0U-qhv" kind="show" identifier="toConnectSocials" id="Ned-tA-M6t"/>
+                        <segue destination="fOy-iq-FRF" kind="show" identifier="backToSchool" id="ZyL-He-0HM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qub-PU-s8h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -138,6 +139,11 @@
                         <action selector="tapGestureRecognizer:" destination="EIq-dB-eGg" id="1zP-8X-tg5"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="0B3-uq-pY4">
+                    <connections>
+                        <action selector="backSwiped:" destination="EIq-dB-eGg" id="ynK-0g-0DR"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2349" y="390"/>
         </scene>
@@ -234,6 +240,7 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Dng-xe-iQk" appends="YES" id="n7A-rn-Z0l"/>
+                            <outletCollection property="gestureRecognizers" destination="tof-W1-HkY" appends="YES" id="cMe-q2-cS6"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="zma-zL-ayw"/>
@@ -251,6 +258,7 @@
                         <outlet property="socialsPromptLabel" destination="7kU-jT-KoE" id="p6a-7D-yYx"/>
                         <outlet property="verticalStack" destination="TbG-rp-RLE" id="o4b-ts-Lo9"/>
                         <segue destination="Nz4-lY-dDT" kind="show" identifier="signupToMain" id="qCL-ZF-amS"/>
+                        <segue destination="EIq-dB-eGg" kind="show" identifier="backToDescription" id="tLS-vA-biu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLK-ng-9oo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,6 +267,11 @@
                         <action selector="tapGestureRecognizer:" destination="R7I-0U-qhv" id="RHF-eh-zQh"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="tof-W1-HkY">
+                    <connections>
+                        <action selector="backSwiped:" destination="R7I-0U-qhv" id="boC-ap-8tl"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3046" y="390"/>
         </scene>
@@ -409,6 +422,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wiy-kI-yW8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="B0P-gk-JaU" firstAttribute="trailing" secondItem="Wiy-kI-yW8" secondAttribute="trailing" id="AzX-1c-rm8"/>
                             <constraint firstItem="nDY-E1-ww7" firstAttribute="top" secondItem="Wiy-kI-yW8" secondAttribute="top" constant="97" id="Nce-nb-m7N"/>
@@ -418,6 +432,9 @@
                             <constraint firstItem="B0P-gk-JaU" firstAttribute="top" secondItem="nDY-E1-ww7" secondAttribute="bottom" constant="36.5" id="enC-dF-h1O"/>
                             <constraint firstItem="B0P-gk-JaU" firstAttribute="leading" secondItem="Wiy-kI-yW8" secondAttribute="leading" id="rf0-Af-D09"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="OPR-d5-1Pb" appends="YES" id="RyW-jI-wge"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="ma2-gI-7qT"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -425,9 +442,15 @@
                         <outlet property="chooseLabel" destination="nDY-E1-ww7" id="37Y-tg-c8x"/>
                         <outlet property="schoolCollectionView" destination="B0P-gk-JaU" id="uN9-PT-ew5"/>
                         <segue destination="EIq-dB-eGg" kind="show" identifier="toDescription" id="4kR-c7-2fG"/>
+                        <segue destination="NU1-42-LJ3" kind="show" identifier="backToSpotify" id="g5w-nK-xy3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AbM-5m-ucc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="OPR-d5-1Pb">
+                    <connections>
+                        <action selector="backSwiped:" destination="fOy-iq-FRF" id="ScE-Gw-U5G"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1587" y="390"/>
         </scene>
@@ -463,7 +486,7 @@
                     <connections>
                         <outlet property="gladeNameLabel" destination="eTZ-0Q-luQ" id="XkN-DC-Juu"/>
                         <outlet property="verticalStack" destination="pfj-tR-nJe" id="rTa-1A-8Ks"/>
-                        <segue destination="NU1-42-LJ3" kind="show" identifier="toSpotify" id="bYA-rb-eR1"/>
+                        <segue destination="NU1-42-LJ3" kind="show" identifier="toSpotify" id="cMD-HB-xJa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -547,6 +570,11 @@
             <point key="canvasLocation" x="6757" y="712"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZyL-He-0HM"/>
+        <segue reference="tLS-vA-biu"/>
+        <segue reference="cMD-HB-xJa"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

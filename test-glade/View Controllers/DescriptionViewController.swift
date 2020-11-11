@@ -15,7 +15,6 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var nextButton: UIButton!
     
 //    var currentUser = User(displayName: "", email: "", href: "", id: "", images: [Image(height: "", url: "", width: "")], type: "", uri: "")
-    var currentUser = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +52,11 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
         performSegue(withIdentifier: "backToSchool", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toConnectSocials" {
-            let socialsVC: SocialsViewController = segue.destination as! SocialsViewController
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toConnectSocials" {
+//            let socialsVC: SocialsViewController = segue.destination as! SocialsViewController
+//        }
+//    }
     
     @IBAction func tapGestureRecognizer(_ sender: Any) {
         textView.resignFirstResponder()

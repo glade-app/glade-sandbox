@@ -23,114 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "SpotifyConnectViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010 - f0e8fc2d2f166a92"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_glade.SpotifyConnectViewController.currentUser.getter : test_glade.User"
-                  moduleName = "test-glade"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/allengu/Documents/glade-app/test-glade/test-glade/View%20Controllers/SpotifyConnectViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "268">
-               </Location>
-               <Location
-                  uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010 - 9301d4064e389f6e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_glade.SpotifyConnectViewController.currentUser.setter : test_glade.User"
-                  moduleName = "test-glade"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/allengu/Documents/glade-app/test-glade/test-glade/View%20Controllers/SpotifyConnectViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "232">
-               </Location>
-               <Location
-                  uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010 - eb0ff4614d42c09a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_glade.SpotifyConnectViewController.currentUser.modify : test_glade.User"
-                  moduleName = "test-glade"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/allengu/Documents/glade-app/test-glade/test-glade/View%20Controllers/SpotifyConnectViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010 - ba3c8b3e486b3f6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_glade.SpotifyConnectViewController.currentUser.modify : test_glade.User with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "test-glade"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/allengu/Documents/glade-app/test-glade/test-glade/View%20Controllers/SpotifyConnectViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "8">
-               </Location>
-               <Location
-                  uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010 - add9bb0f6b3d95af"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_glade.SpotifyConnectViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; test_glade.SpotifyConnectViewController"
-                  moduleName = "test-glade"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/allengu/Documents/glade-app/test-glade/test-glade/View%20Controllers/SpotifyConnectViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "308">
-               </Location>
-               <Location
-                  uuid = "C16E1BED-8A3E-4571-A947-28ADBE784010 - 1341de5ada08e121"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_glade.SpotifyConnectViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;test_glade.SpotifyConnectViewController&gt;"
-                  moduleName = "test-glade"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/allengu/Documents/glade-app/test-glade/test-glade/View%20Controllers/SpotifyConnectViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "228">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "39CF93B7-306F-4954-B344-AAA14EC93282"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -138,10 +30,10 @@
             filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "SpotifyConnectViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,8 +46,8 @@
             filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "nextButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,26 +158,10 @@
             filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "nextButtonTapped(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5157BC05-4F05-4E24-AAF1-A56ACC5537D1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "sessionManager(manager:didInitiate:)"
-            landmarkType = "7">
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "SpotifyConnectViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -384,6 +260,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9AF1B65-B260-4E8C-93C2-025958EAF869"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "getTopSongs(accessToken:completionHandler:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

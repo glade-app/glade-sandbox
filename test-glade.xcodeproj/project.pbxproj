@@ -34,6 +34,8 @@
 		96CA80D2253385AE00C221DE /* SchoolScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80D1253385AE00C221DE /* SchoolScrollViewController.swift */; };
 		96CA80E32533881500C221DE /* SchoolCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CA80E12533881500C221DE /* SchoolCollectionViewCell.swift */; };
 		96CA80E42533881500C221DE /* SchoolCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */; };
+		96DB9C2A255C867C00542872 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DB9C29255C867C00542872 /* Artist.swift */; };
+		96DB9C2F255C905B00542872 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DB9C2E255C905B00542872 /* Song.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		96CA80D1253385AE00C221DE /* SchoolScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolScrollViewController.swift; sourceTree = "<group>"; };
 		96CA80E12533881500C221DE /* SchoolCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCollectionViewCell.swift; sourceTree = "<group>"; };
 		96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolCollectionViewCell.xib; sourceTree = "<group>"; };
+		96DB9C29255C867C00542872 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		96DB9C2E255C905B00542872 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 				9642E1CE254401D200296387 /* User.swift */,
 				9635EA802558BE47009C3950 /* Token.swift */,
 				96C719372559000F00B30BAE /* Account.swift */,
+				96DB9C29255C867C00542872 /* Artist.swift */,
+				96DB9C2E255C905B00542872 /* Song.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96DB9C2F255C905B00542872 /* Song.swift in Sources */,
 				969BD357253B91BE00205CC4 /* DescriptionViewController.swift in Sources */,
 				96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */,
 				969BD3F7253C3AF800205CC4 /* ContainerCollectionViewCell.swift in Sources */,
@@ -456,6 +463,7 @@
 				96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */,
 				969BD35C253BA20800205CC4 /* SocialsViewController.swift in Sources */,
 				963DCAFB2535560500224983 /* Constants.swift in Sources */,
+				96DB9C2A255C867C00542872 /* Artist.swift in Sources */,
 				96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */,
 				969BD3C4253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift in Sources */,
 			);

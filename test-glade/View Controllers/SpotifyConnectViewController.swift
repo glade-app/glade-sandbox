@@ -14,10 +14,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     @IBOutlet weak var gladeNameLabel: UILabel!
     @IBOutlet var connectButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
-    
-//    var currentUser = User(displayName: "", email: "", href: "", id: "", images: [Image(height: "", url: "", width: "")], type: "", uri: "")
-    var currentUser = User()
-    
+        
     var configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
 
     lazy var sessionManager: SPTSessionManager = {
@@ -72,12 +69,12 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
                 print("Failed to decode")
                 return
             }
-            self.currentUser = user
             print(user)
             
             try? Token.setToken(spotifyAccessToken, "Access Token")
             try? Token.setToken(spotifyRefreshToken, "Refresh Token")
         }
+        
         // Creates dictionary from JSON response
 //        request.responseJSON { response in
 //            switch response.result {
@@ -87,6 +84,28 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
 //                print(error)
 //            }
 //        }
+        
+        getTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
+            if result {
+                print(songs)
+                // Store in firebase here?
+                print("Success - request top songs")
+            }
+            else {
+                print("Failure - request top songs")
+            }
+        }
+        
+        getTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
+            if result {
+                print(artists)
+                // Store in firebase here?
+                print("Success - request top artists")
+            }
+            else {
+                print("Failure - request top artists")
+            }
+        }
     }
 
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
@@ -98,7 +117,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     }
     
     @IBAction func connectButtonTapped(_ sender: Any) {
-        let scopes: SPTScope = [.userReadEmail]
+        let scopes: SPTScope = [.userReadEmail, .userTopRead]
 
         if #available(iOS 11, *) {
             // Use this on iOS 11 and above to take advantage of SFAuthenticationSession
@@ -113,10 +132,53 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
         performSegue(withIdentifier: "toSchools", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toSchools" {
-            let schoolsVC: SchoolScrollViewController = segue.destination as! SchoolScrollViewController
-            schoolsVC.currentUser = currentUser
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toSchools" {
+//            let schoolsVC: SchoolScrollViewController = segue.destination as! SchoolScrollViewController
+//        }
+//    }
+    
+    func getTopArtists(accessToken: String, completionHandler: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
+        var artists: [Artist] = []
+
+        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
+        let parameters: Parameters = ["time_range": "short_term", "limit": 50]
+        let request = AF.request("https://api.spotify.com/v1/me/top/artists", parameters: parameters, headers: headers)
+        
+        request.responseDecodable(of: ArtistResponse.self) { (response) in
+            if let artistResponse = response.value {
+                for artist in artistResponse.items! {
+                    artists.append(artist)
+                }
+                completionHandler(true, artists)
+            }
+            else {
+                print("Failed to decode artists")
+                completionHandler(false, [])
+            }
+
+        }
+    }
+    
+    func getTopSongs(accessToken: String, completionHandler: @escaping (_ result: Bool, _ artists: [Song]) -> ()) {
+        var songs: [Song] = []
+
+        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
+        let parameters: Parameters = ["time_range": "short_term", "limit": 50]
+        let request = AF.request("https://api.spotify.com/v1/me/top/tracks", parameters: parameters, headers: headers)
+        
+        request.responseDecodable(of: SongResponse.self) { (response) in
+            if let songResponse = response.value {
+                for song in songResponse.items! {
+                    songs.append(song)
+                }
+                completionHandler(true, songs)
+            }
+            else {
+                print("Failed to decode songs")
+                completionHandler(false, [])
+            }
+
         }
     }
 }

@@ -13,7 +13,6 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
     let imageNames = ["UC Berkeley"]
     var schoolSelected = ""
     
-    var currentUser = User()
     
     @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var schoolCollectionView: UICollectionView!

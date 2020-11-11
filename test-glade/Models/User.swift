@@ -6,13 +6,13 @@
 //
 
 struct User: Decodable {
-    var displayName: String?
-    var email: String?
-    var href: String?
-    var id: String?
-    var images: [ProfileImage]?
-    var type: String?
-    var uri: String?
+    let displayName: String?
+    let email: String?
+    let href: String?
+    let id: String?
+    let images: [ProfileImage]?
+    let type: String?
+    let uri: String?
 
 
     
@@ -28,9 +28,9 @@ struct User: Decodable {
 }
 
 struct ProfileImage: Decodable {
-    var height: String?
-    var url: String?
-    var width: String?
+    let height: Int?
+    let url: String?
+    let width: Int?
 }
 
 //extension User {

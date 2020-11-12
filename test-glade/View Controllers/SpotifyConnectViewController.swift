@@ -63,12 +63,15 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("Success:", session)
         
-        var username: String?
-        
         // Request account info
         print("\nAccount Info Request...")
         let spotifyAccessToken = session.accessToken
         let spotifyRefreshToken = session.refreshToken
+        
+        // Store tokens to Keychain
+        try? Token.setToken(spotifyAccessToken, "Access Token")
+        try? Token.setToken(spotifyRefreshToken, "Refresh Token")
+        
         let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: spotifyAccessToken)]
         let request = AF.request("https://api.spotify.com/v1/me", headers: headers)
         request.responseDecodable(of: User.self) { (response) in
@@ -77,41 +80,21 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
                 return
             }
             print(user)
-            username = user.id!
-            let data = try! FirebaseEncoder().encode(user)
-            self.ref.child("users/\(username!)").setValue(data)
             
-            // Request user's top songs from Spotify
-            self.getTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
-                if result {
-                    for song in songs {
-                        let data = try! FirebaseEncoder().encode(song)
-                        self.ref.child("songs/\(song.id!)").setValue(data)
-                        self.ref.child("songs/\(song.id!)/users/\(username!)").setValue(true)
-                        self.ref.child("users/\(username!)/songs/\(song.id!)").setValue(data)
-                    }
-                    print("Success - request top songs")
-                }
-                else {
-                    print("Failure - request top songs")
-                }
-            }
+            let username = user.id!
             
-            // Request user's top artists from Spotify
-            self.getTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
-                if result {
-                    for artist in artists {
-                        let data = try! FirebaseEncoder().encode(artist)
-                        self.ref.child("artists/\(artist.id!)").setValue(data)
-                        self.ref.child("artists/\(artist.id!)/users/\(username!)").setValue(true)
-                        self.ref.child("users/\(username!)/artists/\(artist.id!)").setValue(data)
-                    }
-                    print("Success - request top artists")
-                }
-                else {
-                    print("Failure - request top artists")
-                }
-            }
+            // Save username to UserDefaults
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(username, forKey: "username")
+            
+            // Save user data to Firebase
+            self.saveUserData(user: user)
+            
+            // Request user's top artists from Spotify and save to Firebase
+            self.saveTopArtists()
+            
+            // Request user's top songs from Spotify and save to Firebase
+            self.saveTopSongs()
         }
         
 //        // Get user data and store to Firebase
@@ -133,9 +116,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
 //                print(error)
 //            }
 //        }
-        // Store tokens to Keychain
-        try? Token.setToken(spotifyAccessToken, "Access Token")
-        try? Token.setToken(spotifyRefreshToken, "Refresh Token")
+
     }
 
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
@@ -167,6 +148,12 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
 //            let schoolsVC: SchoolScrollViewController = segue.destination as! SchoolScrollViewController
 //        }
 //    }
+    
+    func saveUserData(user: User) {
+        let username = UserDefaults.standard.string(forKey: "username")
+        let data = try! FirebaseEncoder().encode(user)
+        self.ref.child("users/\(username!)").setValue(data)
+    }
     
     func getTopArtists(accessToken: String, completionHandler: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
         var artists: [Artist] = []
@@ -209,6 +196,62 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
                 completionHandler(false, [])
             }
 
+        }
+    }
+    
+    func saveTopArtists() {
+        let accessToken = try! Token.getToken("Access Token")
+        let username = UserDefaults.standard.string(forKey: "username")
+        let ref: DatabaseReference = Database.database().reference()
+        getTopArtists(accessToken: accessToken) { (result, artists) in
+            if result {
+                for artist in artists {
+                    let data = try! FirebaseEncoder().encode(artist)
+                    
+                    // 1) Save artist data to Firebase if artist does not exist in database
+                    ref.child("artists/\(artist.id!)").observeSingleEvent(of: .value, with: { snapshot in
+                        if !snapshot.exists() {
+                            ref.child("artists/\(artist.id!)").setValue(data)
+                        }
+                        // 2) Save the user id under the song
+                        ref.child("artists/\(artist.id!)/users/\(username!)").setValue(true)
+                        // 3) Save the song id under the user
+                        ref.child("users/\(username!)/artists/\(artist.id!)").setValue(true)
+                    })
+
+                }
+                print("Success - request top artists")
+            }
+            else {
+                print("Failure - request top artists")
+            }
+        }
+    }
+    
+    func saveTopSongs() {
+        let accessToken = try! Token.getToken("Access Token")
+        let username = UserDefaults.standard.string(forKey: "username")
+        let ref: DatabaseReference = Database.database().reference()
+        getTopSongs(accessToken: accessToken) { (result, songs) in
+            if result {
+                for song in songs {
+                    ref.child("songs/\(song.id!)").observeSingleEvent(of: .value, with: { snapshot in
+                        if !snapshot.exists() {
+                            // 1) Save song data to Firebase if song does not exist in database
+                            let data = try! FirebaseEncoder().encode(song)
+                            ref.child("songs/\(song.id!)").setValue(data)
+                        }
+                        // 2) Save the user id under the song
+                        ref.child("songs/\(song.id!)/users/\(username!)").setValue(true)
+                        // 3) Save the song id under the user
+                        ref.child("users/\(username!)/songs/\(song.id!)").setValue(true)
+                    })
+                }
+                print("Success - request top songs")
+            }
+            else {
+                print("Failure - request top songs")
+            }
         }
     }
 }

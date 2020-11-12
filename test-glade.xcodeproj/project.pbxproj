@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E2AFE376AF4A25BDCE9C485 /* Pods_test_gladeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */; };
+		96310FD2255CB288007B72E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96310FD1255CB287007B72E8 /* GoogleService-Info.plist */; };
 		9635EA812558BE47009C3950 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9635EA802558BE47009C3950 /* Token.swift */; };
 		963DCAFB2535560500224983 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DCAFA2535560500224983 /* Constants.swift */; };
 		9642E1A12542BF8E00296387 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9642E1982542BF7100296387 /* Alamofire.framework */; };
@@ -36,6 +38,8 @@
 		96CA80E42533881500C221DE /* SchoolCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */; };
 		96DB9C2A255C867C00542872 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DB9C29255C867C00542872 /* Artist.swift */; };
 		96DB9C2F255C905B00542872 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DB9C2E255C905B00542872 /* Song.swift */; };
+		C6D5B76EE38A2B04FF0890C1 /* Pods_test_glade_test_gladeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF482A14B5827EDBBA5FCD6 /* Pods_test_glade_test_gladeUITests.framework */; };
+		FF6F470D83DFAC9D3823EA55 /* Pods_test_glade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E56D76E621200679009201 /* Pods_test_glade.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		103FE5D1DDCDDA232DAD58F6 /* Pods-test-glade-test-gladeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-glade-test-gladeUITests.release.xcconfig"; path = "Target Support Files/Pods-test-glade-test-gladeUITests/Pods-test-glade-test-gladeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		244473DD6554C7EBAC8ABD15 /* Pods-test-glade.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-glade.release.xcconfig"; path = "Target Support Files/Pods-test-glade/Pods-test-glade.release.xcconfig"; sourceTree = "<group>"; };
+		3935A41F7DF4372A4D73A3BF /* Pods-test-glade-test-gladeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-glade-test-gladeUITests.debug.xcconfig"; path = "Target Support Files/Pods-test-glade-test-gladeUITests/Pods-test-glade-test-gladeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F2C0ED7D4AD70857E5C4085 /* Pods-test-gladeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-gladeTests.debug.xcconfig"; path = "Target Support Files/Pods-test-gladeTests/Pods-test-gladeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_gladeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96310FD1255CB287007B72E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9635EA802558BE47009C3950 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		963DCAFA2535560500224983 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9642E1982542BF7100296387 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -92,6 +102,10 @@
 		96CA80E22533881500C221DE /* SchoolCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchoolCollectionViewCell.xib; sourceTree = "<group>"; };
 		96DB9C29255C867C00542872 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		96DB9C2E255C905B00542872 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		AFCBBC239E0EAF768F794ACE /* Pods-test-glade.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-glade.debug.xcconfig"; path = "Target Support Files/Pods-test-glade/Pods-test-glade.debug.xcconfig"; sourceTree = "<group>"; };
+		CEF482A14B5827EDBBA5FCD6 /* Pods_test_glade_test_gladeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_glade_test_gladeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7A4B333943BD832F1272C87 /* Pods-test-gladeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-gladeTests.release.xcconfig"; path = "Target Support Files/Pods-test-gladeTests/Pods-test-gladeTests.release.xcconfig"; sourceTree = "<group>"; };
+		F6E56D76E621200679009201 /* Pods_test_glade.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_glade.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +115,7 @@
 			files = (
 				968347D525354CF900B2B2E7 /* SpotifyiOS.framework in Frameworks */,
 				9642E1A12542BF8E00296387 /* Alamofire.framework in Frameworks */,
+				FF6F470D83DFAC9D3823EA55 /* Pods_test_glade.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2AFE376AF4A25BDCE9C485 /* Pods_test_gladeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,12 +131,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D5B76EE38A2B04FF0890C1 /* Pods_test_glade_test_gladeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		699398BF129D5740B22BF74F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AFCBBC239E0EAF768F794ACE /* Pods-test-glade.debug.xcconfig */,
+				244473DD6554C7EBAC8ABD15 /* Pods-test-glade.release.xcconfig */,
+				3935A41F7DF4372A4D73A3BF /* Pods-test-glade-test-gladeUITests.debug.xcconfig */,
+				103FE5D1DDCDDA232DAD58F6 /* Pods-test-glade-test-gladeUITests.release.xcconfig */,
+				6F2C0ED7D4AD70857E5C4085 /* Pods-test-gladeTests.debug.xcconfig */,
+				E7A4B333943BD832F1272C87 /* Pods-test-gladeTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9642E1C22543FD4400296387 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +168,9 @@
 			children = (
 				9642E1982542BF7100296387 /* Alamofire.framework */,
 				968347D425354CF900B2B2E7 /* SpotifyiOS.framework */,
+				F6E56D76E621200679009201 /* Pods_test_glade.framework */,
+				CEF482A14B5827EDBBA5FCD6 /* Pods_test_glade_test_gladeUITests.framework */,
+				88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,6 +211,7 @@
 				96CA7FF8253162D900C221DE /* test-gladeUITests */,
 				96CA7FD5253162D700C221DE /* Products */,
 				968347B32535498B00B2B2E7 /* Frameworks */,
+				699398BF129D5740B22BF74F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,6 +237,7 @@
 				96CA7FE0253162D900C221DE /* Assets.xcassets */,
 				96CA7FE2253162D900C221DE /* LaunchScreen.storyboard */,
 				96CA7FE5253162D900C221DE /* Info.plist */,
+				96310FD1255CB287007B72E8 /* GoogleService-Info.plist */,
 				968347AC2535493400B2B2E7 /* test-glade-Bridging-Header.h */,
 				963DCAFA2535560500224983 /* Constants.swift */,
 			);
@@ -234,10 +269,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96CA7FFE253162D900C221DE /* Build configuration list for PBXNativeTarget "test-glade" */;
 			buildPhases = (
+				3609356FC4BF36BE8E454CB7 /* [CP] Check Pods Manifest.lock */,
 				96CA7FD0253162D700C221DE /* Sources */,
 				96CA7FD1253162D700C221DE /* Frameworks */,
 				96CA7FD2253162D700C221DE /* Resources */,
 				9642E1A22542BFC500296387 /* Carthage Copy Frameworks */,
+				B2896C5D90B1CA403A2F0779 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -335,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				969BD3A5253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib in Resources */,
+				96310FD2255CB288007B72E8 /* GoogleService-Info.plist in Resources */,
 				96CA7FE4253162D900C221DE /* LaunchScreen.storyboard in Resources */,
 				969BD3F8253C3AF800205CC4 /* ContainerCollectionViewCell.xib in Resources */,
 				969BD3C5253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib in Resources */,
@@ -361,6 +399,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3609356FC4BF36BE8E454CB7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-test-glade-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		719963A815CF75D775E6ED9B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +478,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		B2896C5D90B1CA403A2F0779 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-test-glade/Pods-test-glade-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-test-glade/Pods-test-glade-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-test-glade/Pods-test-glade-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		C983BFFABF531667F5E53DAC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -642,6 +719,7 @@
 		};
 		96CA7FFF253162D900C221DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFCBBC239E0EAF768F794ACE /* Pods-test-glade.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -668,6 +746,7 @@
 		};
 		96CA8000253162D900C221DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244473DD6554C7EBAC8ABD15 /* Pods-test-glade.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -694,6 +773,7 @@
 		};
 		96CA8002253162D900C221DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F2C0ED7D4AD70857E5C4085 /* Pods-test-gladeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -715,6 +795,7 @@
 		};
 		96CA8003253162D900C221DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A4B333943BD832F1272C87 /* Pods-test-gladeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -736,6 +817,7 @@
 		};
 		96CA8005253162D900C221DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3935A41F7DF4372A4D73A3BF /* Pods-test-glade-test-gladeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -755,6 +837,7 @@
 		};
 		96CA8006253162D900C221DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 103FE5D1DDCDDA232DAD58F6 /* Pods-test-glade-test-gladeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

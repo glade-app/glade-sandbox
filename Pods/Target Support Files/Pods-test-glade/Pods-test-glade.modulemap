@@ -1,0 +1,6 @@
+framework module Pods_test_glade {
+  umbrella header "Pods-test-glade-umbrella.h"
+
+  export *
+  module * { export * }
+}

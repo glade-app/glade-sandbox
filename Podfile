@@ -14,6 +14,9 @@ target 'test-glade' do
   # For example, to use Firebase Authentication and Cloud Firestore
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Database'
+
+  pod 'CodableFirebase'
 
   target 'test-gladeTests' do
     inherit! :search_paths

@@ -7,6 +7,9 @@
 
 import UIKit
 import Alamofire
+import Firebase
+import CodableFirebase
+// https://github.com/alickbass/CodableFirebase
 
 class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate {
 
@@ -17,6 +20,8 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
         
     var configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
 
+    var ref: DatabaseReference = Database.database().reference()
+    
     lazy var sessionManager: SPTSessionManager = {
         if let tokenSwapURL = Constants.tokenSwapURL,
            let tokenRefreshURL = Constants.tokenRefreshURL {
@@ -58,6 +63,8 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         print("Success:", session)
         
+        var username: String?
+        
         // Request account info
         print("\nAccount Info Request...")
         let spotifyAccessToken = session.accessToken
@@ -70,42 +77,65 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
                 return
             }
             print(user)
+            username = user.id!
+            let data = try! FirebaseEncoder().encode(user)
+            self.ref.child("users/\(username!)").setValue(data)
             
-            try? Token.setToken(spotifyAccessToken, "Access Token")
-            try? Token.setToken(spotifyRefreshToken, "Refresh Token")
+            // Request user's top songs from Spotify
+            self.getTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
+                if result {
+                    for song in songs {
+                        let data = try! FirebaseEncoder().encode(song)
+                        self.ref.child("songs/\(song.id!)").setValue(data)
+                        self.ref.child("songs/\(song.id!)/users/\(username!)").setValue(true)
+                        self.ref.child("users/\(username!)/songs/\(song.id!)").setValue(data)
+                    }
+                    print("Success - request top songs")
+                }
+                else {
+                    print("Failure - request top songs")
+                }
+            }
+            
+            // Request user's top artists from Spotify
+            self.getTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
+                if result {
+                    for artist in artists {
+                        let data = try! FirebaseEncoder().encode(artist)
+                        self.ref.child("artists/\(artist.id!)").setValue(data)
+                        self.ref.child("artists/\(artist.id!)/users/\(username!)").setValue(true)
+                        self.ref.child("users/\(username!)/artists/\(artist.id!)").setValue(data)
+                    }
+                    print("Success - request top artists")
+                }
+                else {
+                    print("Failure - request top artists")
+                }
+            }
         }
         
-        // Creates dictionary from JSON response
+//        // Get user data and store to Firebase
+//        var username: String?
 //        request.responseJSON { response in
 //            switch response.result {
 //            case let .success(value):
 //                print(value)
+//                let valueDict: NSDictionary = value as! NSDictionary
+//                let storedDict: [String: Any] = ["display_name": valueDict["display_name"] as! String,
+//                                                 "email": valueDict["email"] as! String,
+//                                                 "id": valueDict["id"] as! String,
+//                                                 "href": valueDict["href"] as! String,
+//                                                 "images": valueDict["images"]!,
+//                                                 "uri": valueDict["uri"] as! String]
+//                self.ref.child("users/\(storedDict["id"]!)").setValue(storedDict)
+//                username = storedDict["id"] as? String
 //            case let .failure(error):
 //                print(error)
 //            }
 //        }
-        
-        getTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
-            if result {
-                print(songs)
-                // Store in firebase here?
-                print("Success - request top songs")
-            }
-            else {
-                print("Failure - request top songs")
-            }
-        }
-        
-        getTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
-            if result {
-                print(artists)
-                // Store in firebase here?
-                print("Success - request top artists")
-            }
-            else {
-                print("Failure - request top artists")
-            }
-        }
+        // Store tokens to Keychain
+        try? Token.setToken(spotifyAccessToken, "Access Token")
+        try? Token.setToken(spotifyRefreshToken, "Refresh Token")
     }
 
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {

@@ -5,13 +5,13 @@
 //  Created by Allen Gu on 10/24/20.
 //
 
-struct User: Decodable {
+struct User: Codable {
     let displayName: String?
     let email: String?
     let href: String?
     let id: String?
     let images: [ProfileImage]?
-    let type: String?
+//    let type: String?
     let uri: String?
 
 
@@ -22,12 +22,12 @@ struct User: Decodable {
         case href
         case id
         case images
-        case type
+//        case type
         case uri
     }
 }
 
-struct ProfileImage: Decodable {
+struct ProfileImage: Codable {
     let height: Int?
     let url: String?
     let width: Int?

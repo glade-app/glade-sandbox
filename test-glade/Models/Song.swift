@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Album: Decodable {
+struct Album: Codable {
     let images: [AlbumImage]?
 }
-struct Song: Decodable {
+struct Song: Codable {
     let album: Album?
     let name: String?
     let artists: [Artist]?
@@ -18,12 +18,12 @@ struct Song: Decodable {
 
 }
 
-struct AlbumImage: Decodable {
+struct AlbumImage: Codable {
     let height: Int?
     let url: String?
     let width: Int?
 }
 
-struct SongResponse: Decodable {
+struct SongResponse: Codable {
     let items: [Song]?
 }

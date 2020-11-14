@@ -76,7 +76,7 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signupButtonTapped(_ sender: Any) {
-        DataStorage.saveUserFieldValue(field: "socials", value: [
+        DataStorage.storeUserFieldValue(field: "socials", value: [
                                         "snapchat": snapchatField.text,
                                         "facebook": facebookField.text,
                                         "instagram": instagramField.text])

@@ -74,7 +74,8 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
                 print("Failed to decode")
                 return
             }
-
+            user.songs = []
+            user.artists = []
             print(user)
             
             let username = user.id!
@@ -84,12 +85,12 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
             userDefaults.set(username, forKey: "username")
             
             // Save user data to Firebase
-            DataStorage.saveUserData(user: user) { result in
+            DataStorage.storeUserData(user: user) { result in
                 // Request user's top artists from Spotify and save to Firebase
-                DataStorage.saveTopArtists()
+                DataStorage.storeUserTopArtists()
                 
                 // Request user's top songs from Spotify and save to Firebase
-                DataStorage.saveTopSongs()
+                DataStorage.storeUserTopSongs()
             }
         }
     }

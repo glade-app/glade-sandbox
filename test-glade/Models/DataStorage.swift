@@ -12,7 +12,7 @@ import CodableFirebase
 // https://github.com/alickbass/CodableFirebase
 
 class DataStorage {
-    static func saveUserData(user: User, completion: @escaping (_ result: Bool) -> ()) {
+    static func storeUserData(user: User, completion: @escaping (_ result: Bool) -> ()) {
         let username = UserDefaults.standard.string(forKey: "username")
         let db = Firestore.firestore()
         let userReference = db.collection("users").document(username!)
@@ -46,7 +46,7 @@ class DataStorage {
         }
     }
     
-    static func saveUserSchool(school: String) {
+    static func storeUserSchool(school: String) {
         let username = UserDefaults.standard.string(forKey: "username")
         let db = Firestore.firestore()
         let userReference = db.collection("users").document(username!)
@@ -62,7 +62,7 @@ class DataStorage {
         }
     }
     
-    static func saveUserFieldValue(field: String, value: Any) {
+    static func storeUserFieldValue(field: String, value: Any) {
         let username = UserDefaults.standard.string(forKey: "username")
         let db = Firestore.firestore()
         let userReference = db.collection("users").document(username!)
@@ -110,7 +110,7 @@ class DataStorage {
         }
     }
     
-    static func getTopArtists(accessToken: String, completion: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
+    static func getUserTopArtists(accessToken: String, completion: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
         var artists: [Artist] = []
 
         let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
@@ -128,11 +128,10 @@ class DataStorage {
                 print("Failed to decode artists")
                 completion(false, [])
             }
-
         }
     }
     
-    static func getTopSongs(accessToken: String, completion: @escaping (_ result: Bool, _ artists: [Song]) -> ()) {
+    static func getUserTopSongs(accessToken: String, completion: @escaping (_ result: Bool, _ artists: [Song]) -> ()) {
         var songs: [Song] = []
 
         let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
@@ -154,7 +153,7 @@ class DataStorage {
         }
     }
     
-    static func checkNewArtist(artist: Artist, artistReference: DocumentReference, completion: @escaping (Bool) -> Void) {
+    static func storeArtist(artist: Artist, artistReference: DocumentReference, completion: @escaping (Bool) -> Void) {
         let data = try! FirestoreEncoder().encode(artist)
         // Try requesting the artist's document from Firestore
         artistReference.getDocument { (document, error) in
@@ -164,7 +163,7 @@ class DataStorage {
                     // Then try setting the artist data in the document
                     artistReference.setData(data) { error in
                         if let error = error {
-                            print("Error writing artist data", error)
+                            print("Error writing artist data - \(artist.id!)", error)
                         } else {
                             completion(true)
                             print("Successful writing artist data to Firestore - \(artist.id!)")
@@ -179,7 +178,7 @@ class DataStorage {
         }
     }
     
-    static func checkNewSong(song: Song, songReference: DocumentReference, completion: @escaping (Bool) -> Void) {
+    static func storeSong(song: Song, songReference: DocumentReference, completion: @escaping (Bool) -> Void) {
         let data = try! FirestoreEncoder().encode(song)
         // Try requesting the artist's document from Firestore
         songReference.getDocument { (document, error) in
@@ -189,7 +188,7 @@ class DataStorage {
                     // Then try setting the artist data in the document
                     songReference.setData(data) { error in
                         if let error = error {
-                            print("Error writing song data", error)
+                            print("Error writing song data - \(song.id!)", error)
                         } else {
                             completion(true)
                             print("Successful writing song data to Firestore - \(song.id!)")
@@ -204,18 +203,18 @@ class DataStorage {
         }
     }
     
-    static func saveTopArtists() {
+    static func storeUserTopArtists() {
         let accessToken = try! Token.getToken("Access Token")
         let username = UserDefaults.standard.string(forKey: "username")
         
         let db = Firestore.firestore()
-        getTopArtists(accessToken: accessToken) { (result, artists) in
+        getUserTopArtists(accessToken: accessToken) { (result, artists) in
             if result {
                 for artist in artists {
                     // Firestore
                     let artistReference = db.collection("artists").document(artist.id!)
                     let userReference = db.collection("users").document(username!)
-                    self.checkNewArtist(artist: artist, artistReference: artistReference) { result in
+                    self.storeArtist(artist: artist, artistReference: artistReference) { result in
                         // Completion handler for setting a new artist
                         // If the artist is set, then we update 1) the user document's artists array and 2) the artist document's users array
                         db.runTransaction({ (transaction, errorPointer ) -> Any? in
@@ -241,18 +240,18 @@ class DataStorage {
         }
     }
     
-    static func saveTopSongs() {
+    static func storeUserTopSongs() {
         let accessToken = try! Token.getToken("Access Token")
         let username = UserDefaults.standard.string(forKey: "username")
         
         let db = Firestore.firestore()
-        getTopSongs(accessToken: accessToken) { (result, songs) in
+        getUserTopSongs(accessToken: accessToken) { (result, songs) in
             if result {
                 for song in songs {
                     // Firestore
                     let songReference = db.collection("songs").document(song.id!)
                     let userReference = db.collection("users").document(username!)
-                    self.checkNewSong(song: song, songReference: songReference) { result in
+                    self.storeSong(song: song, songReference: songReference) { result in
                         // Completion handler for setting a new artist
                         // If the artist is set, then we update 1) the user's document with the artist and 2) the artist's document with the user
                         db.runTransaction({ (transaction, errorPointer ) -> Any? in

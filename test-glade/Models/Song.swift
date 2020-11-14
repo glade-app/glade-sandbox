@@ -10,12 +10,12 @@ import Foundation
 struct Album: Codable {
     let images: [AlbumImage]?
 }
+
 struct Song: Codable {
     let album: Album?
     let name: String?
     let artists: [Artist]?
     let id: String?
-
 }
 
 struct AlbumImage: Codable {

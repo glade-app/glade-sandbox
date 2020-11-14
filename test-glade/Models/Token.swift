@@ -43,7 +43,7 @@ struct Token {
         var status = SecItemCopyMatching(query as CFDictionary, nil)
         switch status {
         case errSecSuccess:
-            let tokenToUpdate: [String: Any] = [kSecValueData as String: encodedToken]
+            let tokenToUpdate: [String: Any] = [kSecValueData as String: encodedToken!]
             status = SecItemUpdate(query as CFDictionary, tokenToUpdate as CFDictionary)
             if status != errSecSuccess {
                 throw TokenError.didNotUpdateToken

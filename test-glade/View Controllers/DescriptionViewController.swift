@@ -45,7 +45,7 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        DataStorage.storeUserFieldValue(field: "description", value: textView.text)
+        DataStorage.updateUserFieldValue(field: "description", value: textView.text)
         performSegue(withIdentifier: "toConnectSocials", sender: self)
     }
     

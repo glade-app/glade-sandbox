@@ -62,7 +62,7 @@ class DataStorage {
         }
     }
     
-    static func storeUserFieldValue(field: String, value: Any) {
+    static func updateUserFieldValue(field: String, value: Any) {
         let username = UserDefaults.standard.string(forKey: "username")
         let db = Firestore.firestore()
         let userReference = db.collection("users").document(username!)
@@ -74,38 +74,6 @@ class DataStorage {
                 print("Failed to write description to user's database", error)
             } else {
                 print("Successfully wrote description to user's database")
-            }
-        }
-    }
-    
-    static func updateUserFieldValue(field: String, value: String) {
-        let username = UserDefaults.standard.string(forKey: "username")
-        let db = Firestore.firestore()
-        let userReference = db.collection("users").document(username!)
-        
-        userReference.updateData([
-            field: value
-        ]) { error in
-            if let error = error {
-                print("Failed to write \(field) to user's database", error)
-            } else {
-                print("Successfully wrote \(field) to user's database")
-            }
-        }
-    }
-    
-    static func updateUserFieldValue(field: String, value: Array<Any>) {
-        let username = UserDefaults.standard.string(forKey: "username")
-        let db = Firestore.firestore()
-        let userReference = db.collection("users").document(username!)
-        
-        userReference.updateData([
-            field: FieldValue.arrayUnion(value)
-        ]) { error in
-            if let error = error {
-                print("Failed to write \(field) to user's database", error)
-            } else {
-                print("Successfully wrote \(field) to user's database")
             }
         }
     }

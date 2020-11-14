@@ -65,7 +65,7 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
         print(imageNames[indexPath.item])
         schoolSelected = imageNames[indexPath.item]
         
-        DataStorage.storeUserFieldValue(field: "school", value: schoolSelected)
+        DataStorage.updateUserFieldValue(field: "school", value: schoolSelected)
         
         performSegue(withIdentifier: "toDescription", sender: self)
     }

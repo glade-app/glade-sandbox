@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -63,8 +64,10 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(imageNames[indexPath.item])
         schoolSelected = imageNames[indexPath.item]
-        performSegue(withIdentifier: "toDescription", sender: self)
         
+        DataStorage.saveUserFieldValue(field: "school", value: schoolSelected)
+        
+        performSegue(withIdentifier: "toDescription", sender: self)
     }
     
     // Sets cell size

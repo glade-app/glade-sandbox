@@ -11,8 +11,11 @@ struct User: Codable {
     let href: String?
     let id: String?
     let images: [ProfileImage]?
-//    let type: String?
     let uri: String?
+    var songs: [String]?
+    var artists: [String]?
+    var school: String?
+    var socials: [String]?
 
 
     
@@ -22,8 +25,11 @@ struct User: Codable {
         case href
         case id
         case images
-//        case type
         case uri
+        case songs
+        case artists
+        case school
+        case socials
     }
 }
 
@@ -33,16 +39,3 @@ struct ProfileImage: Codable {
     let width: Int?
 }
 
-//extension User {
-//    static let keychain = Keychain(service: "Allen-Gu.test-glade")
-//    
-//    static func saveToKeychain(user: User) {
-//        if let savingData = data {
-//            keychain["userData"] = User
-//        }
-//    }
-//
-//    static func loadFromKeychain() -> User? {
-//        guard let user = keychain["user"] else { return nil }
-//        return user
-//    }}

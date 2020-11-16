@@ -19,6 +19,7 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupItems()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func setupItems() {
@@ -33,4 +34,3 @@ class StartViewController: UIViewController {
         gladeNameLabel.numberOfLines = 0
     }
 }
-

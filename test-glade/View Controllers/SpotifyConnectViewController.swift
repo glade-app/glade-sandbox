@@ -31,7 +31,9 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupItems()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
+    
     
     func setupItems() {
         // Vertical Stack

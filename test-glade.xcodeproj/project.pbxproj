@@ -10,10 +10,10 @@
 		0E2AFE376AF4A25BDCE9C485 /* Pods_test_gladeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */; };
 		9635EA812558BE47009C3950 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9635EA802558BE47009C3950 /* Token.swift */; };
 		963DCAFB2535560500224983 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DCAFA2535560500224983 /* Constants.swift */; };
+		9642D453256073B90052DA58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9642D452256073B90052DA58 /* GoogleService-Info.plist */; };
 		9642E1A12542BF8E00296387 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9642E1982542BF7100296387 /* Alamofire.framework */; };
 		9642E1CF254401D200296387 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642E1CE254401D200296387 /* User.swift */; };
 		968347D525354CF900B2B2E7 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968347D425354CF900B2B2E7 /* SpotifyiOS.framework */; };
-		969995A8255F49BF00F18474 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 969995A7255F49BF00F18474 /* GoogleService-Info.plist */; };
 		969995B8255F5BA600F18474 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969995B7255F5BA600F18474 /* DataStorage.swift */; };
 		969BD357253B91BE00205CC4 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969BD356253B91BE00205CC4 /* DescriptionViewController.swift */; };
 		969BD35C253BA20800205CC4 /* SocialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969BD35B253BA20800205CC4 /* SocialsViewController.swift */; };
@@ -68,11 +68,11 @@
 		88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_gladeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9635EA802558BE47009C3950 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		963DCAFA2535560500224983 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9642D452256073B90052DA58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9642E1982542BF7100296387 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		9642E1CE254401D200296387 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		968347AC2535493400B2B2E7 /* test-glade-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test-glade-Bridging-Header.h"; sourceTree = "<group>"; };
 		968347D425354CF900B2B2E7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = "test-glade/SpotifyiOS.framework"; sourceTree = "<group>"; };
-		969995A7255F49BF00F18474 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		969995B7255F5BA600F18474 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		969BD356253B91BE00205CC4 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		969BD35B253BA20800205CC4 /* SocialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9642E1C22543FD4400296387 /* Models */ = {
+		9642E1C22543FD4400296387 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				9642E1CE254401D200296387 /* User.swift */,
@@ -163,7 +163,7 @@
 				96DB9C2E255C905B00542872 /* Song.swift */,
 				969995B7255F5BA600F18474 /* DataStorage.swift */,
 			);
-			path = Models;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		968347B32535498B00B2B2E7 /* Frameworks */ = {
@@ -231,7 +231,7 @@
 		96CA7FD6253162D700C221DE /* test-glade */ = {
 			isa = PBXGroup;
 			children = (
-				9642E1C22543FD4400296387 /* Models */,
+				9642E1C22543FD4400296387 /* Classes */,
 				969BD34C253B802F00205CC4 /* Custom Views */,
 				969BD347253B7FAC00205CC4 /* View Controllers */,
 				96CA7FD7253162D700C221DE /* AppDelegate.swift */,
@@ -239,8 +239,8 @@
 				96CA7FDD253162D700C221DE /* Main.storyboard */,
 				96CA7FE0253162D900C221DE /* Assets.xcassets */,
 				96CA7FE2253162D900C221DE /* LaunchScreen.storyboard */,
+				9642D452256073B90052DA58 /* GoogleService-Info.plist */,
 				96CA7FE5253162D900C221DE /* Info.plist */,
-				969995A7255F49BF00F18474 /* GoogleService-Info.plist */,
 				968347AC2535493400B2B2E7 /* test-glade-Bridging-Header.h */,
 				963DCAFA2535560500224983 /* Constants.swift */,
 			);
@@ -375,9 +375,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				969BD3A5253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib in Resources */,
+				9642D453256073B90052DA58 /* GoogleService-Info.plist in Resources */,
 				96CA7FE4253162D900C221DE /* LaunchScreen.storyboard in Resources */,
 				969BD3F8253C3AF800205CC4 /* ContainerCollectionViewCell.xib in Resources */,
-				969995A8255F49BF00F18474 /* GoogleService-Info.plist in Resources */,
 				969BD3C5253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib in Resources */,
 				96CA7FE1253162D900C221DE /* Assets.xcassets in Resources */,
 				96CA80E42533881500C221DE /* SchoolCollectionViewCell.xib in Resources */,

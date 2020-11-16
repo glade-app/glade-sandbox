@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct Artist: Codable {
-    let id: String?
-    let images: [ArtistImage]?
-    let name: String?
-    
-}
-
 struct ArtistImage: Codable {
     let height: Int?
     let url: String?
     let width: Int?
+}
+
+struct Artist: Codable {
+    let id: String?
+    let images: [ArtistImage]?
+    let name: String?
+    let users: [String]?
 }
 
 struct ArtistResponse: Codable {

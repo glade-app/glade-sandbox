@@ -7,9 +7,10 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var homeCollectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +18,12 @@ class HomeViewController: UIViewController {
         self.registerNibs()
         self.homeCollectionView.delegate = self
         self.homeCollectionView.dataSource = self
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.setup()
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
     
     func registerNibs() {
@@ -98,3 +103,5 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return UIEdgeInsets.init(top: 0, left: 0, bottom: 40, right: 0)
     }
 }
+
+

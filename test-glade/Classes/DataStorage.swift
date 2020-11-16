@@ -71,9 +71,9 @@ class DataStorage {
             field: value
         ]) { error in
             if let error = error {
-                print("Failed to write description to user's database", error)
+                print("Failed to write \(field) to user's database", error)
             } else {
-                print("Successfully wrote description to user's database")
+                print("Successfully wrote \(field) to user's database")
             }
         }
     }

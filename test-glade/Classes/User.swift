@@ -5,6 +5,12 @@
 //  Created by Allen Gu on 10/24/20.
 //
 
+struct ProfileImage: Codable {
+    let height: Int?
+    let url: String?
+    let width: Int?
+}
+
 struct User: Codable {
     let displayName: String?
     let email: String?
@@ -32,10 +38,3 @@ struct User: Codable {
         case socials
     }
 }
-
-struct ProfileImage: Codable {
-    let height: Int?
-    let url: String?
-    let width: Int?
-}
-

@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SchoolScrollViewController: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     let images = ["berkeley.jpg"]
     let imageNames = ["UC Berkeley"]
@@ -17,11 +17,21 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
     
     @IBOutlet weak var chooseLabel: UILabel!
     @IBOutlet weak var schoolCollectionView: UICollectionView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerNib()
         self.setupItems()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func setupItems() {
@@ -31,10 +41,6 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
         chooseLabel.font = UIFont.boldSystemFont(ofSize: 32)
         chooseLabel.textAlignment = .left
         chooseLabel.numberOfLines = 0
-    }
-    
-    @IBAction func backSwiped(_ sender: Any) {
-        performSegue(withIdentifier: "backToSpotify", sender: self)
     }
     
     func registerNib() {
@@ -91,3 +97,5 @@ class SchoolScrollViewController: UIViewController, UICollectionViewDataSource, 
         return UIEdgeInsets.init(top: 0, left: collectionView.bounds.size.width * 1/8, bottom: 0, right: collectionView.bounds.size.width * 1/8)
     }
 }
+
+

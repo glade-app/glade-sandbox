@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SocialsViewController: UIViewController, UITextFieldDelegate {
+class SocialsViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var verticalStack: UIStackView!
     @IBOutlet weak var socialsPromptLabel: UILabel!
     @IBOutlet weak var facebookStack: UIStackView!
@@ -22,10 +22,20 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nextButton: UIButton!
     
     var userData: [String: String] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupItems()
-        // Do any additional setup after loading the view.
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func setupItems() {
@@ -81,9 +91,5 @@ class SocialsViewController: UIViewController, UITextFieldDelegate {
                                         "facebook": facebookField.text,
                                         "instagram": instagramField.text])
         performSegue(withIdentifier: "signupToMain", sender: self)
-    }
-    
-    @IBAction func backSwiped(_ sender: Any) {
-        performSegue(withIdentifier: "backToDescription", sender: self)
     }
 }

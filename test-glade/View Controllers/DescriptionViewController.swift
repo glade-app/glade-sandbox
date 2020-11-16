@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DescriptionViewController: UIViewController, UITextViewDelegate {
+class DescriptionViewController: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var verticalStack: UIStackView!
     @IBOutlet weak var descriptionPromptLabel: UILabel!
@@ -19,6 +19,16 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupItems()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func setupItems() {
@@ -47,10 +57,6 @@ class DescriptionViewController: UIViewController, UITextViewDelegate {
     @IBAction func nextButtonTapped(_ sender: Any) {
         DataStorage.updateUserFieldValue(field: "description", value: textView.text)
         performSegue(withIdentifier: "toConnectSocials", sender: self)
-    }
-    
-    @IBAction func backSwiped(_ sender: Any) {
-        performSegue(withIdentifier: "backToSchool", sender: self)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

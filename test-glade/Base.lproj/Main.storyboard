@@ -358,10 +358,10 @@
             </objects>
             <point key="canvasLocation" x="8263.7681159420299" y="711.83035714285711"/>
         </scene>
-        <!--View Controller-->
+        <!--Home Two View Controller-->
         <scene sceneID="yXe-6g-rRH">
             <objects>
-                <viewController id="rrD-Ah-erF" sceneMemberID="viewController">
+                <viewController id="rrD-Ah-erF" customClass="HomeTwoViewController" customModule="test_glade" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0sg-24-bkc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -374,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAr-Cm-eID" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6542.0289855072469" y="711.83035714285711"/>
+            <point key="canvasLocation" x="6481" y="712"/>
         </scene>
         <!--School Scroll View Controller-->
         <scene sceneID="QkQ-uC-Hu3">

@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Firebase
+import FirebaseFirestore
 import CodableFirebase
 // https://github.com/alickbass/CodableFirebase
 

@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		0E2AFE376AF4A25BDCE9C485 /* Pods_test_gladeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */; };
 		9635EA812558BE47009C3950 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9635EA802558BE47009C3950 /* Token.swift */; };
+		9639207125632BEE00D5FE7E /* HomeTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9639207025632BEE00D5FE7E /* HomeTwoViewController.swift */; };
+		9639207A25632CD700D5FE7E /* HomeCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9639207925632CD700D5FE7E /* HomeCellBuilder.swift */; };
+		9639207F25632CED00D5FE7E /* HomeLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9639207E25632CED00D5FE7E /* HomeLayoutBuilder.swift */; };
+		9639208425632DD400D5FE7E /* HomeSongCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9639208325632DD400D5FE7E /* HomeSongCollectionViewCell.swift */; };
+		963920A52563492000D5FE7E /* HomeArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963920A42563491F00D5FE7E /* HomeArtistCollectionViewCell.swift */; };
+		963920AA256350D500D5FE7E /* HomeSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963920A9256350D500D5FE7E /* HomeSectionHeader.swift */; };
+		963920B225635AAE00D5FE7E /* HomeSchoolCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963920B125635AAE00D5FE7E /* HomeSchoolCollectionViewCell.swift */; };
 		963DCAFB2535560500224983 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DCAFA2535560500224983 /* Constants.swift */; };
 		9642D453256073B90052DA58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9642D452256073B90052DA58 /* GoogleService-Info.plist */; };
 		9642E1A12542BF8E00296387 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9642E1982542BF7100296387 /* Alamofire.framework */; };
@@ -67,6 +74,13 @@
 		6F2C0ED7D4AD70857E5C4085 /* Pods-test-gladeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-gladeTests.debug.xcconfig"; path = "Target Support Files/Pods-test-gladeTests/Pods-test-gladeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		88CBBF94506251B568D8D63C /* Pods_test_gladeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_gladeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9635EA802558BE47009C3950 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		9639207025632BEE00D5FE7E /* HomeTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTwoViewController.swift; sourceTree = "<group>"; };
+		9639207925632CD700D5FE7E /* HomeCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellBuilder.swift; sourceTree = "<group>"; };
+		9639207E25632CED00D5FE7E /* HomeLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLayoutBuilder.swift; sourceTree = "<group>"; };
+		9639208325632DD400D5FE7E /* HomeSongCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSongCollectionViewCell.swift; sourceTree = "<group>"; };
+		963920A42563491F00D5FE7E /* HomeArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeArtistCollectionViewCell.swift; sourceTree = "<group>"; };
+		963920A9256350D500D5FE7E /* HomeSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeader.swift; sourceTree = "<group>"; };
+		963920B125635AAE00D5FE7E /* HomeSchoolCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSchoolCollectionViewCell.swift; sourceTree = "<group>"; };
 		963DCAFA2535560500224983 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9642D452256073B90052DA58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9642E1982542BF7100296387 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -153,15 +167,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9642E1C22543FD4400296387 /* Classes */ = {
+		9639207825632CB100D5FE7E /* Structs */ = {
 			isa = PBXGroup;
 			children = (
 				9642E1CE254401D200296387 /* User.swift */,
-				9635EA802558BE47009C3950 /* Token.swift */,
 				96C719372559000F00B30BAE /* Account.swift */,
 				96DB9C29255C867C00542872 /* Artist.swift */,
 				96DB9C2E255C905B00542872 /* Song.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		9642E1C22543FD4400296387 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9635EA802558BE47009C3950 /* Token.swift */,
 				969995B7255F5BA600F18474 /* DataStorage.swift */,
+				9639207925632CD700D5FE7E /* HomeCellBuilder.swift */,
+				9639207E25632CED00D5FE7E /* HomeLayoutBuilder.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -187,6 +210,7 @@
 				96CA7FDB253162D700C221DE /* StartViewController.swift */,
 				969BD35B253BA20800205CC4 /* SocialsViewController.swift */,
 				969BD375253BD69C00205CC4 /* HomeViewController.swift */,
+				9639207025632BEE00D5FE7E /* HomeTwoViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -202,6 +226,10 @@
 				969BD3A3253C147C00205CC4 /* SchoolHomeCollectionViewCell.xib */,
 				969BD3C2253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift */,
 				969BD3C3253C2C6C00205CC4 /* HorizontalCollectionViewCell.xib */,
+				9639208325632DD400D5FE7E /* HomeSongCollectionViewCell.swift */,
+				963920A42563491F00D5FE7E /* HomeArtistCollectionViewCell.swift */,
+				963920A9256350D500D5FE7E /* HomeSectionHeader.swift */,
+				963920B125635AAE00D5FE7E /* HomeSchoolCollectionViewCell.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -231,6 +259,7 @@
 		96CA7FD6253162D700C221DE /* test-glade */ = {
 			isa = PBXGroup;
 			children = (
+				9639207825632CB100D5FE7E /* Structs */,
 				9642E1C22543FD4400296387 /* Classes */,
 				969BD34C253B802F00205CC4 /* Custom Views */,
 				969BD347253B7FAC00205CC4 /* View Controllers */,
@@ -531,19 +560,26 @@
 				96DB9C2F255C905B00542872 /* Song.swift in Sources */,
 				969BD357253B91BE00205CC4 /* DescriptionViewController.swift in Sources */,
 				96CA7FDC253162D700C221DE /* StartViewController.swift in Sources */,
+				963920B225635AAE00D5FE7E /* HomeSchoolCollectionViewCell.swift in Sources */,
 				969BD3F7253C3AF800205CC4 /* ContainerCollectionViewCell.swift in Sources */,
 				969BD376253BD69C00205CC4 /* HomeViewController.swift in Sources */,
 				96CA80E32533881500C221DE /* SchoolCollectionViewCell.swift in Sources */,
 				96C719382559000F00B30BAE /* Account.swift in Sources */,
 				9635EA812558BE47009C3950 /* Token.swift in Sources */,
 				96CA80D2253385AE00C221DE /* SchoolScrollViewController.swift in Sources */,
+				963920AA256350D500D5FE7E /* HomeSectionHeader.swift in Sources */,
 				9642E1CF254401D200296387 /* User.swift in Sources */,
 				96CA80C22532DD5600C221DE /* SpotifyConnectViewController.swift in Sources */,
 				969BD3A4253C147C00205CC4 /* SchoolHomeCollectionViewCell.swift in Sources */,
+				9639207125632BEE00D5FE7E /* HomeTwoViewController.swift in Sources */,
 				96CA7FD8253162D700C221DE /* AppDelegate.swift in Sources */,
+				9639207F25632CED00D5FE7E /* HomeLayoutBuilder.swift in Sources */,
+				9639208425632DD400D5FE7E /* HomeSongCollectionViewCell.swift in Sources */,
 				969BD35C253BA20800205CC4 /* SocialsViewController.swift in Sources */,
+				9639207A25632CD700D5FE7E /* HomeCellBuilder.swift in Sources */,
 				963DCAFB2535560500224983 /* Constants.swift in Sources */,
 				96DB9C2A255C867C00542872 /* Artist.swift in Sources */,
+				963920A52563492000D5FE7E /* HomeArtistCollectionViewCell.swift in Sources */,
 				969995B8255F5BA600F18474 /* DataStorage.swift in Sources */,
 				96CA7FDA253162D700C221DE /* SceneDelegate.swift in Sources */,
 				969BD3C4253C2C6C00205CC4 /* HorizontalCollectionViewCell.swift in Sources */,

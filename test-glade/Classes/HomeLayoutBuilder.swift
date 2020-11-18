@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public class HomeLayoutBuilder {
-    public static func buildSchoolSectionLayout(size: NSCollectionLayoutSize, itemInset:NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0), sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 20.0, leading: 20.0, bottom: 20.0, trailing: 20.0)) -> NSCollectionLayoutSection {
+    public static func buildSchoolSectionLayout(size: NSCollectionLayoutSize, itemInset:NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0), sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 10.0, bottom: 10.0, trailing: 10.0)) -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = itemInset
         let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300)), subitem: item, count: 1)
@@ -21,9 +21,9 @@ public class HomeLayoutBuilder {
     }
     
     public static func buildSongSectionLayout(size: NSCollectionLayoutSize, itemInset:NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0), sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 20.0, bottom: 10.0, trailing: 20.0)) -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalHeight(1.0), heightDimension: .fractionalHeight(1.0)))
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = itemInset
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .estimated(240), heightDimension: .estimated(240)), subitem: item, count: 1)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .estimated(200), heightDimension: .estimated(250)), subitem: item, count: 1)
         
         let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -32,14 +32,14 @@ public class HomeLayoutBuilder {
         section.contentInsets = sectionInset
         section.interGroupSpacing = 20.0
         section.boundarySupplementaryItems = [headerItem]
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.orthogonalScrollingBehavior = .continuous
         return section
     }
     
     public static func buildArtistSectionLayout(size: NSCollectionLayoutSize, itemInset:NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0), sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 20.0, bottom: 10.0, trailing: 20.0)) -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalHeight(1.0), heightDimension: .fractionalHeight(1.0)))
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = itemInset
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .estimated(240), heightDimension: .estimated(240)), subitem: item, count: 1)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .estimated(200), heightDimension: .estimated(235)), subitem: item, count: 1)
         
         let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -48,7 +48,7 @@ public class HomeLayoutBuilder {
         section.contentInsets = sectionInset
         section.interGroupSpacing = 20.0
         section.boundarySupplementaryItems = [headerItem]
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.orthogonalScrollingBehavior = .continuous
         return section
     }
 }

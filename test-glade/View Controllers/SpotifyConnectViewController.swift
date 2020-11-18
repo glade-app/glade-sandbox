@@ -8,11 +8,12 @@
 import UIKit
 import Alamofire
 
-class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate {
+class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var verticalStack: UIStackView!
     @IBOutlet weak var gladeNameLabel: UILabel!
     @IBOutlet var connectButton: UIButton!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
         
     var configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
@@ -34,6 +35,14 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
     
     func setupItems() {
         // Vertical Stack
@@ -49,6 +58,10 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
         // Connect Button
         connectButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
         connectButton.setTitleColor(UIColor.systemGreen, for: .normal)
+        
+        // Error Label
+        errorLabel.text = " "
+        errorLabel.textColor = .systemRed
         
         // Next Button
         nextButton.setTitle("Next", for: .normal)
@@ -76,8 +89,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
                 print("Failed to decode")
                 return
             }
-            user.songs = []
-            user.artists = []
+            user.school = UserDefaults.standard.string(forKey: "school")
             print(user)
             
             let username = user.id!
@@ -118,32 +130,12 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate 
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toSchools", sender: self)
+        if UserDefaults.standard.string(forKey: "username") != nil {
+            errorLabel.text = " "
+            performSegue(withIdentifier: "toDescription", sender: self)
+        }
+        else {
+            errorLabel.text = "Please connect your Spotify account"
+        }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toSchools" {
-//            let schoolsVC: SchoolScrollViewController = segue.destination as! SchoolScrollViewController
-//        }
-//    }
-    
-
-        
-
-    
 }
-
-
-//    // Realtime Database
-//    let data = try! FirebaseEncoder().encode(artist)
-//
-//    // 1) Save artist data to Firebase if artist does not exist in database
-//    ref.child("artists/\(artist.id!)").observeSingleEvent(of: .value, with: { snapshot in
-//        if !snapshot.exists() {
-//            ref.child("artists/\(artist.id!)").setValue(data)
-//        }
-//        // 2) Save the user id under the song
-//        ref.child("artists/\(artist.id!)/users/\(username!)").setValue(true)
-//        // 3) Save the song id under the user
-//        ref.child("users/\(username!)/artists/\(artist.id!)").setValue(true)
-//    })

@@ -31,7 +31,7 @@ class SchoolScrollViewController: UIViewController, UIGestureRecognizerDelegate,
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return false
     }
     
     func setupItems() {
@@ -71,9 +71,10 @@ class SchoolScrollViewController: UIViewController, UIGestureRecognizerDelegate,
         print(imageNames[indexPath.item])
         schoolSelected = imageNames[indexPath.item]
         
-        DataStorage.updateUserFieldValue(field: "school", value: schoolSelected)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(schoolSelected, forKey: "school")
         
-        performSegue(withIdentifier: "toDescription", sender: self)
+        performSegue(withIdentifier: "toSpotifyConnect", sender: self)
     }
     
     // Sets cell size

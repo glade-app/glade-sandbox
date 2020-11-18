@@ -13,7 +13,7 @@ class StartViewController: UIViewController {
     @IBOutlet weak var gladeNameLabel: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
-        performSegue(withIdentifier: "toSpotify", sender: self)
+        performSegue(withIdentifier: "toSchools", sender: self)
     }
     
     override func viewDidLoad() {

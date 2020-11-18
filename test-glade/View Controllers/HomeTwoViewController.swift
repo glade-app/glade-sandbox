@@ -10,7 +10,7 @@
 
 import UIKit
 
-class HomeTwoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     lazy var collectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.makeLayout())

@@ -23,22 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "39CF93B7-306F-4954-B344-AAA14EC93282"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "SpotifyConnectViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CA5B1C14-38FD-40EA-8851-3AD804A0ECE0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,10 +30,10 @@
             filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "nextButtonTapped(_:)"
-            landmarkType = "7">
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "SpotifyConnectViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,8 +94,8 @@
             filePath = "test-glade/View Controllers/SpotifyConnectViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "nextButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>

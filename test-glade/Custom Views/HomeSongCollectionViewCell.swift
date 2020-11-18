@@ -10,26 +10,26 @@ import UIKit
 class HomeSongCollectionViewCell: UICollectionViewCell {
     var container: UIView = {
         let view = UIView()
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var songImageView: UIView = {
+    var songImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 5
-        imageView.image = UIImage(named: "berkeley2")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     var songName: UILabel = {
         let label: UILabel = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = UIColor.white
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.text = "Song"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,10 +37,10 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
     
     var songDescription: UILabel = {
         let label: UILabel = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.white
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.text = "Description"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,25 +62,40 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             self.songImageView.topAnchor.constraint(equalTo: self.container.topAnchor, constant: 0),
-            self.songImageView.bottomAnchor.constraint(equalTo: self.container.bottomAnchor, constant: 0),
             self.songImageView.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 0),
             self.songImageView.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: 0),
+            self.songImageView.heightAnchor.constraint(equalTo: self.container.widthAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            self.songName.bottomAnchor.constraint(equalTo: self.songDescription.topAnchor, constant: -5),
-            self.songName.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 20),
-            self.songName.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -10),
+            self.songName.topAnchor.constraint(equalTo: self.songImageView.bottomAnchor, constant: 5),
+            self.songName.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 0),
+            self.songName.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: 0),
         ])
         
         NSLayoutConstraint.activate([
-            self.songDescription.bottomAnchor.constraint(equalTo: self.container.bottomAnchor, constant: -10),
-            self.songDescription.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 10),
-            self.songDescription.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -10),
+            self.songDescription.topAnchor.constraint(equalTo: self.songName.bottomAnchor, constant: 5),
+            self.songDescription.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 0),
+            self.songDescription.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: 0),
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(data: Song) {
+        let songImageUrl = URL(string: data.album!.images![1].url!)
+        self.songImageView.kf.setImage(with: songImageUrl)
+        self.songName.text = data.name!
+        
+        var description = ""
+        for i in 0...data.artists!.count - 1 {
+            description += "\(data.artists![i].name!)"
+            if i != data.artists!.count - 1 {
+                description += ", "
+            }
+        }
+        self.songDescription.text = description
     }
 }

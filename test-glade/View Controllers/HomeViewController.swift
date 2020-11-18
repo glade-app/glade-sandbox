@@ -1,107 +1,153 @@
 //
-//  Home2ViewController.swift
+//  HomeTwoViewController.swift
 //  test-glade
 //
-//  Created by Allen Gu on 10/18/20.
+//  Created by Allen Gu on 11/16/20.
 //
 
+// https://lickability.com/blog/getting-started-with-uicollectionviewcompositionallayout/
+// https://dev.to/kevinmaarek/replicating-the-appstore-s-collectionviewlayout-orthogonal-in-swift-5-42je
+
 import UIKit
+import Kingfisher
 
-class HomeViewController: UIViewController, UIGestureRecognizerDelegate {
-
-    @IBOutlet weak var homeCollectionView: UICollectionView!
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
     
+    lazy var collectionView: UICollectionView = {
+        let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.makeLayout())
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(HomeSchoolCollectionViewCell.self, forCellWithReuseIdentifier: "school")
+        collectionView.register(HomeSongCollectionViewCell.self, forCellWithReuseIdentifier: "song")
+        collectionView.register(HomeArtistCollectionViewCell.self, forCellWithReuseIdentifier: "artist")
+        collectionView.register(HomeSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    var schoolData: [String: Any] = ["userCount": 0]
+    var topArtists: [Artist] = []
+    var topSongs: [Song] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.registerNibs()
-        self.homeCollectionView.delegate = self
-        self.homeCollectionView.dataSource = self
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.setup()
+        self.getSchoolData()
+        self.getArtistsData()
+        self.getSongsData()
+    }
+    
+    func setup() {
+        self.view.addSubview(self.collectionView)
+        NSLayoutConstraint.activate([
+            self.collectionView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.collectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.collectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        ])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
     
-    func registerNibs() {
-        let schoolNib = UINib(nibName: SchoolHomeCollectionViewCell.nibName, bundle: nil)
-        homeCollectionView?.register(schoolNib, forCellWithReuseIdentifier: SchoolHomeCollectionViewCell.reuseIdentifier)
-        let containerNib = UINib(nibName: ContainerCollectionViewCell.nibName, bundle: nil)
-        homeCollectionView?.register(containerNib, forCellWithReuseIdentifier: ContainerCollectionViewCell.reuseIdentifier)
-        let horizontalNib = UINib(nibName: HorizontalCollectionViewCell.nibName, bundle: nil)
-        homeCollectionView?.register(horizontalNib, forCellWithReuseIdentifier: HorizontalCollectionViewCell.reuseIdentifier)
+    func getSchoolData() {
+        DataStorage.getSchoolData { (result, data) in
+            self.schoolData = data
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
-    func setup() {
-        // Make the navigation bar background clear
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+    func getArtistsData() {
+        DataStorage.getSchoolTopArtists(count: 10) { (result, artists) in
+            self.topArtists = artists
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
-}
-
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func getSongsData() {
+        DataStorage.getSchoolTopSongs(count: 20) { (result, songs) in
+            self.topSongs = songs
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func makeLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            if section == 0 {
+                return HomeLayoutBuilder.buildSchoolSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300)))
+            }
+            else if section == 1 {
+                return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)))
+            }
+            else if section == 2 {
+                return HomeLayoutBuilder.buildArtistSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(225)))
+            }
+            return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25)))
+        }
+        return layout
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
+        else if section == 1 {
+            return self.topSongs.count
+        }
+        else if section == 2 {
+            return self.topArtists.count
+        }
+        return 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == 0 {
-            let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: SchoolHomeCollectionViewCell.reuseIdentifier, for: indexPath) as! SchoolHomeCollectionViewCell
-            let imageToDisplay = UIImage(named: "berkeley2")!
-            cell.configure(schoolName: "UC Berkeley", category1: "Members", value1: 123, category2: "Plays", value2: 9999, image: imageToDisplay)
-            return cell
+        if indexPath.section == 0 {
+            return HomeCellBuilder.getSchoolCell(collectionView: collectionView, indexPath: indexPath, data: self.schoolData)
         }
-        else if indexPath.item == 1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContainerCollectionViewCell.reuseIdentifier, for: indexPath) as! ContainerCollectionViewCell
-            // Propagate with data
-            let data = Array.init(repeating: ("Song", "Description", UIImage(named: "berkeley2")!), count: 10)
-            cell.configure(category: "Top Songs", data: data)
-            return cell
+        else if indexPath.section == 1 {
+            return HomeCellBuilder.getSongCell(collectionView: collectionView, indexPath: indexPath, data: self.topSongs[indexPath.item])
         }
-        else if indexPath.item == 2 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContainerCollectionViewCell.reuseIdentifier, for: indexPath) as! ContainerCollectionViewCell
-            // Propagate with data
-            let data = Array.init(repeating: ("Artist", "Description", UIImage(named: "berkeley2")!), count: 10)
-            cell.configure(category: "Top Artists", data: data)
-            return cell
+        else if indexPath.section == 2 {
+            return HomeCellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item])
         }
-        
         return UICollectionViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item == 0 {
-            let collectionCellWidth: CGFloat = view.frame.width
-            let collectionCellHeight: CGFloat = 360
-            return CGSize(width: collectionCellWidth, height: collectionCellHeight)
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as? HomeSectionHeader else {
+            fatalError("Could not dequeue HomeSectionHeader")
         }
-        else if indexPath.item == 1 || indexPath.item == 2 {
-            return CGSize(width: view.frame.width, height: 280)
+        
+        if indexPath.section == 1 {
+            headerView.configure(text: "Top Songs")
         }
-        return CGSize(width: 0, height: 0)
+        
+        else if indexPath.section == 2 {
+            headerView.configure(text: "Top Artists")
+        }
+        
+        return headerView
     }
     
-    // Changes vertical spacing between each cell (vertical scrolling)
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 30
-        }
-    // Not really sure what this does? Might change vertical spacing but probably won't be useful for us
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    // Changes the left and right end points of the collection view (where the cells start and end)
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 0, left: 0, bottom: 40, right: 0)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Did select a cell here, \(indexPath)")
     }
 }
-
-

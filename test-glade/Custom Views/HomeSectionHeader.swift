@@ -32,7 +32,7 @@ class HomeSectionHeader: UICollectionReusableView {
         self.addSubview(self.headerLabel)
 
         NSLayoutConstraint.activate([
-            self.headerLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 5),
+            self.headerLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 2.5),
             self.headerLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0.0),
             self.headerLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0.0),
         ])

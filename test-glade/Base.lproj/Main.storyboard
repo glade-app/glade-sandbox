@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="2E5-wZ-Laz">
-                                <rect key="frame" x="40" y="385.5" width="334" height="179"/>
+                                <rect key="frame" x="40" y="375" width="334" height="200.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glade" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLg-wG-Vde">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="86"/>
@@ -36,8 +36,14 @@
                                             <action selector="connectButtonTapped:" destination="NU1-42-LJ3" eventType="touchUpInside" id="NRZ-ZJ-HXh"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mq6-yr-9k8">
+                                        <rect key="frame" x="0.0" y="138" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suQ-fY-NC5">
-                                        <rect key="frame" x="0.0" y="138" width="334" height="41"/>
+                                        <rect key="frame" x="0.0" y="159.5" width="334" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Next"/>
                                         <connections>
@@ -58,15 +64,16 @@
                     <navigationItem key="navigationItem" id="bcy-Hc-p2O"/>
                     <connections>
                         <outlet property="connectButton" destination="coC-NH-wkU" id="g3d-hS-cLF"/>
+                        <outlet property="errorLabel" destination="mq6-yr-9k8" id="GDd-ab-sSh"/>
                         <outlet property="gladeNameLabel" destination="hLg-wG-Vde" id="VgA-Uo-BFQ"/>
                         <outlet property="nextButton" destination="suQ-fY-NC5" id="BvK-Cd-Yyh"/>
                         <outlet property="verticalStack" destination="2E5-wZ-Laz" id="MJf-ci-zYY"/>
-                        <segue destination="fOy-iq-FRF" kind="show" identifier="toSchools" id="7yZ-fW-CL0"/>
+                        <segue destination="EIq-dB-eGg" kind="show" identifier="toDescription" id="GAD-nC-53y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZe-z8-hVw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1752.1739130434785" y="389.73214285714283"/>
+            <point key="canvasLocation" x="2477" y="390"/>
         </scene>
         <!--Description View Controller-->
         <scene sceneID="16X-9I-O6N">
@@ -286,34 +293,12 @@
                     <view key="view" contentMode="scaleToFill" id="WYQ-nP-LAg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YUw-sg-fxC">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mkf-rB-Lk5">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="LFh-NH-1QU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="LFh-NH-1QU" firstAttribute="trailing" secondItem="YUw-sg-fxC" secondAttribute="trailing" id="6MJ-wg-IF9"/>
-                            <constraint firstItem="LFh-NH-1QU" firstAttribute="bottom" secondItem="YUw-sg-fxC" secondAttribute="bottom" id="lZn-Jy-eAr"/>
-                            <constraint firstItem="YUw-sg-fxC" firstAttribute="leading" secondItem="LFh-NH-1QU" secondAttribute="leading" id="t4O-2R-sqQ"/>
-                            <constraint firstItem="YUw-sg-fxC" firstAttribute="top" secondItem="LFh-NH-1QU" secondAttribute="top" id="zXV-oJ-8eW"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WEo-64-wZg">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="5Bb-KV-yl1"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="homeCollectionView" destination="YUw-sg-fxC" id="7gF-zS-ONP"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teE-vr-G6y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -331,9 +316,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="YTq-yx-Uwq" kind="relationship" relationship="viewControllers" id="J4R-SW-fbi"/>
+                        <segue destination="wlH-0b-YB7" kind="relationship" relationship="viewControllers" id="Z7E-rd-S7J"/>
                         <segue destination="kQN-b4-s3C" kind="relationship" relationship="viewControllers" id="Q62-dx-RMo"/>
                         <segue destination="PAX-L8-mqt" kind="relationship" relationship="viewControllers" id="1ej-Md-zeG"/>
-                        <segue destination="wlH-0b-YB7" kind="relationship" relationship="viewControllers" id="Z7E-rd-S7J"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQx-om-QzZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -358,10 +343,10 @@
             </objects>
             <point key="canvasLocation" x="8263.7681159420299" y="711.83035714285711"/>
         </scene>
-        <!--Home Two View Controller-->
+        <!--View Controller-->
         <scene sceneID="yXe-6g-rRH">
             <objects>
-                <viewController id="rrD-Ah-erF" customClass="HomeTwoViewController" customModule="test_glade" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rrD-Ah-erF" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0sg-24-bkc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,12 +408,12 @@
                     <connections>
                         <outlet property="chooseLabel" destination="nDY-E1-ww7" id="37Y-tg-c8x"/>
                         <outlet property="schoolCollectionView" destination="B0P-gk-JaU" id="uN9-PT-ew5"/>
-                        <segue destination="EIq-dB-eGg" kind="show" identifier="toDescription" id="4kR-c7-2fG"/>
+                        <segue destination="NU1-42-LJ3" kind="show" identifier="toSpotifyConnect" id="CFd-oK-83v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AbM-5m-ucc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2497.1014492753625" y="389.73214285714283"/>
+            <point key="canvasLocation" x="1704" y="390"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -463,7 +448,7 @@
                     <connections>
                         <outlet property="gladeNameLabel" destination="eTZ-0Q-luQ" id="XkN-DC-Juu"/>
                         <outlet property="verticalStack" destination="pfj-tR-nJe" id="rTa-1A-8Ks"/>
-                        <segue destination="NU1-42-LJ3" kind="show" identifier="toSpotify" id="cMD-HB-xJa"/>
+                        <segue destination="fOy-iq-FRF" kind="show" identifier="toSchools" id="oXv-OP-OzQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -507,11 +492,11 @@
             </objects>
             <point key="canvasLocation" x="5632" y="68"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="cdI-Iw-Ayc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wlH-0b-YB7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="T0x-2F-eHF"/>
+                    <tabBarItem key="tabBarItem" title="" id="T0x-2F-eHF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xlX-w4-KPs">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

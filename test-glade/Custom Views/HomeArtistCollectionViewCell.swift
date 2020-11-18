@@ -6,30 +6,31 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeArtistCollectionViewCell: UICollectionViewCell {
     var container: UIView = {
         let view = UIView()
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var artistImageView: UIView = {
+    var artistImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 5
-        imageView.image = UIImage(named: "berkeley2")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     var artistName: UILabel = {
         let label: UILabel = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = UIColor.white
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.text = "Artist"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -50,19 +51,25 @@ class HomeArtistCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             self.artistImageView.topAnchor.constraint(equalTo: self.container.topAnchor, constant: 0),
-            self.artistImageView.bottomAnchor.constraint(equalTo: self.container.bottomAnchor, constant: 0),
             self.artistImageView.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 0),
             self.artistImageView.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: 0),
+            self.artistImageView.heightAnchor.constraint(equalTo: self.container.widthAnchor, constant: 0),
         ])
         
         NSLayoutConstraint.activate([
-            self.artistName.bottomAnchor.constraint(equalTo: self.container.bottomAnchor, constant: -10),
-            self.artistName.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 20),
-            self.artistName.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -10),
+            self.artistName.topAnchor.constraint(equalTo: self.artistImageView.bottomAnchor, constant: 5),
+            self.artistName.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 0),
+            self.artistName.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: 0),
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(data: Artist) {
+        let artistImageUrl = URL(string: data.images![1].url!)
+        self.artistImageView.kf.setImage(with: artistImageUrl)
+        self.artistName.text = data.name!
     }
 }

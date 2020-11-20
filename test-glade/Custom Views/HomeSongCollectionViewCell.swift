@@ -27,7 +27,7 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
     var songName: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.textColor = UIColor.white
         label.textAlignment = .left
         label.text = "Song"
@@ -74,7 +74,7 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.songDescription.topAnchor.constraint(equalTo: self.songName.bottomAnchor, constant: 5),
+            self.songDescription.topAnchor.constraint(equalTo: self.songName.bottomAnchor, constant: 0),
             self.songDescription.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 0),
             self.songDescription.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: 0),
         ])

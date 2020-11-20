@@ -449,6 +449,7 @@
                         <outlet property="gladeNameLabel" destination="eTZ-0Q-luQ" id="XkN-DC-Juu"/>
                         <outlet property="verticalStack" destination="pfj-tR-nJe" id="rTa-1A-8Ks"/>
                         <segue destination="fOy-iq-FRF" kind="show" identifier="toSchools" id="oXv-OP-OzQ"/>
+                        <segue destination="Nz4-lY-dDT" kind="show" identifier="startToMain" id="kgv-wX-vcR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -550,6 +551,9 @@
             <point key="canvasLocation" x="7353.6231884057979" y="711.83035714285711"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qCL-ZF-amS"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -28,7 +28,7 @@ class HomeArtistCollectionViewCell: UICollectionViewCell {
     var artistName: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.textColor = UIColor.white
         label.textAlignment = .left
         label.text = "Artist"

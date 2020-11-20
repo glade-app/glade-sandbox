@@ -78,10 +78,6 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         let spotifyAccessToken = session.accessToken
         let spotifyRefreshToken = session.refreshToken
         
-        // Store tokens to Keychain
-        try? Token.setToken(spotifyAccessToken, "Access Token")
-        try? Token.setToken(spotifyRefreshToken, "Refresh Token")
-        
         let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: spotifyAccessToken)]
         let request = AF.request("https://api.spotify.com/v1/me", headers: headers)
         request.responseDecodable(of: User.self) { (response) in
@@ -106,6 +102,12 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
                 // Request user's top songs from Spotify and save to Firebase
                 DataStorage.storeUserTopSongs()
             }
+            
+            
+            // Store tokens to Keychain
+            try? Token.setToken(spotifyAccessToken, "accessToken", username: username)
+            try? Token.setToken(spotifyRefreshToken, "refreshToken", username: username)
+            try? Token.refreshAccessToken()
         }
     }
 

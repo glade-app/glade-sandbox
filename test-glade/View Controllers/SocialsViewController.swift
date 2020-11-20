@@ -90,6 +90,8 @@ class SocialsViewController: UIViewController, UITextFieldDelegate, UIGestureRec
                                         "snapchat": snapchatField.text,
                                         "facebook": facebookField.text,
                                         "instagram": instagramField.text])
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(true, forKey: "signedUp")
         performSegue(withIdentifier: "signupToMain", sender: self)
     }
 }

@@ -13,6 +13,22 @@ class StartViewController: UIViewController {
     @IBOutlet weak var gladeNameLabel: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
+        let signedUp = UserDefaults.standard.bool(forKey: "signedUp")
+//        if signedUp {
+//            Token.refreshAccessToken()
+//            let userDefaults = UserDefaults.standard.string(forKey: "username")
+//
+//            // Request user's top artists from Spotify and save to Firebase
+//            DataStorage.storeUserTopArtists()
+//
+//            // Request user's top songs from Spotify and save to Firebase
+//            DataStorage.storeUserTopSongs()
+//
+//            performSegue(withIdentifier: "startToMain", sender: self)
+//        }
+//        else {
+//            performSegue(withIdentifier: "toSchools", sender: self)
+//        }
         performSegue(withIdentifier: "toSchools", sender: self)
     }
     

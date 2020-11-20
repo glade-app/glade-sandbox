@@ -28,7 +28,7 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
     var schoolName: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 48, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
         label.textColor = UIColor.white
         label.textAlignment = .left
         label.text = "School"
@@ -39,7 +39,7 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
     var membersLabel: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.textColor = UIColor.white
         label.textAlignment = .left
         label.text = "Members"

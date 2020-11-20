@@ -70,6 +70,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func getArtistsData() {
         DataStorage.getSchoolTopArtists(count: 10) { (result, artists) in
             self.topArtists = artists
+            print(self.topArtists)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -79,6 +80,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func getSongsData() {
         DataStorage.getSchoolTopSongs(count: 20) { (result, songs) in
             self.topSongs = songs
+            print(self.topArtists)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -94,7 +96,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)))
             }
             else if section == 2 {
-                return HomeLayoutBuilder.buildArtistSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(225)))
+                return HomeLayoutBuilder.buildArtistSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(240)))
             }
             return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25)))
         }

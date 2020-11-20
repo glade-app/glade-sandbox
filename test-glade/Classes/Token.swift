@@ -7,6 +7,7 @@
 
 import Foundation
 import Security
+import Alamofire
 
 enum TokenError: Error {
     case failedConversion
@@ -34,11 +35,17 @@ extension TokenError: LocalizedError {
 }
 
 struct Token {
-    static func setToken(_ token: String, _ tokenType: String) throws {
-        print("Setting token - \(tokenType):", token)
-//        let tag = "Allen-Gu.test-glade".data(using: .utf8)!
+    private static let serviceName: String = {
+        guard let bundleID = Bundle.main.bundleIdentifier else {
+            return "Bundle ID Not Found"
+        }
+        return bundleID
+    }()
+    
+    static func setToken(_ token: String, _ tokenType: String, username: String) throws {        
         var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
-                                    kSecAttrLabel as String: tokenType]
+                                    kSecAttrAccount as String: "\(username)_\(tokenType)",
+                                    kSecAttrService as String: serviceName]
         let encodedToken = token.data(using: .utf8)
         var status = SecItemCopyMatching(query as CFDictionary, nil)
         switch status {
@@ -59,13 +66,15 @@ struct Token {
         }
     }
     
-    static func getToken(_ tokenType: String) throws -> String {
+    static func getToken(_ tokenType: String, username: String) throws -> String {
+
         let getquery: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
-                                       kSecAttrLabel as String: tokenType,
+                                       kSecAttrAccount as String: "\(username)_\(tokenType)",
+                                       kSecAttrService as String: serviceName,
                                        kSecMatchLimit as String: kSecMatchLimitOne,
-                                       kSecReturnAttributes as String: true,
-                                       kSecReturnData as String: true]
-        
+                                       kSecReturnAttributes as String: kCFBooleanTrue!,
+                                       kSecReturnData as String: kCFBooleanTrue!]
+    
         var item: CFTypeRef?
         let status = SecItemCopyMatching(getquery as CFDictionary, &item)
         print("Finished getting token - \(tokenType) - with status: \(status)")
@@ -82,5 +91,26 @@ struct Token {
         return token
     }
     
-    // Need code to refresh token
+    static func refreshAccessToken() {
+        let username = UserDefaults.standard.string(forKey: "username")
+        let refreshToken = try? getToken("refreshToken", username: username!)
+        let parameters: Parameters = ["refresh_token": refreshToken! as Any]
+        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/x-www-form-urlencoded")]
+        AF.request(Constants.tokenRefreshURLString, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case let .success(value):
+                if let responseDict = value as? [String: String] {
+                    do {
+                        try setToken(responseDict["access_token"]!, "accessToken", username: username!)
+                        print("Successfully refreshed Spotify access token")
+                    }
+                    catch {
+                        print("Failed to refresh Spotify access token")
+                    }
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
 }

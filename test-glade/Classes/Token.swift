@@ -91,18 +91,22 @@ struct Token {
         return token
     }
     
-    static func refreshAccessToken() {
+    static func refreshAccessToken(completion: @escaping (_ result: Bool) -> ()) {
         let username = UserDefaults.standard.string(forKey: "username")
         let refreshToken = try? getToken("refreshToken", username: username!)
+        
         let parameters: Parameters = ["refresh_token": refreshToken! as Any]
         let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/x-www-form-urlencoded")]
         AF.request(Constants.tokenRefreshURLString, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
+
             switch response.result {
             case let .success(value):
-                if let responseDict = value as? [String: String] {
+                if let responseDict = value as? [String: Any] {
                     do {
-                        try setToken(responseDict["access_token"]!, "accessToken", username: username!)
+                        let accessToken: String = responseDict["access_token"]! as! String
+                        try setToken(accessToken, "accessToken", username: username!)
                         print("Successfully refreshed Spotify access token")
+                        completion(true)
                     }
                     catch {
                         print("Failed to refresh Spotify access token")

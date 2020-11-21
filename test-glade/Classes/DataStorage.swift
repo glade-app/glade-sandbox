@@ -13,9 +13,28 @@ import CodableFirebase
 // https://github.com/alickbass/CodableFirebase
 
 class DataStorage {
+    static func getUserData(accessToken: String, completion: @escaping (_ result: Bool, _ user: User) -> ()) {
+        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
+        let request = AF.request("https://api.spotify.com/v1/me", headers: headers)
+        request.responseDecodable(of: User.self) { (response) in
+            guard var user = response.value else {
+                print("Failed to decode")
+                return
+            }
+            user.school = UserDefaults.standard.string(forKey: "school")
+            print(user)
+            
+            completion(true, user)
+        }
+    }
+    
     static func storeUserData(user: User, completion: @escaping (_ result: Bool) -> ()) {
         let username = UserDefaults.standard.string(forKey: "username")
         let school = UserDefaults.standard.string(forKey: "school")
+        
+        // Save username to UserDefaults
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(username, forKey: "username")
         
         let db = Firestore.firestore()
         let userReference = db.collection("users").document(username!)
@@ -61,7 +80,7 @@ class DataStorage {
         }
     }
     
-    static func ifUserExists(completion: @escaping (Bool) -> ()) {
+    static func ifUserExists(completion: @escaping (_ result: Bool) -> ()) {
         let db = Firestore.firestore()
         let username = UserDefaults.standard.string(forKey: "username")
         let userReference = db.collection("users").document(username!)
@@ -136,7 +155,7 @@ class DataStorage {
         }
     }
     
-    static func storeArtist(artist: Artist, completion: @escaping (Bool) -> ()) {
+    static func storeArtist(artist: Artist, completion: @escaping (_ result: Bool) -> ()) {
         let db = Firestore.firestore()
         let data = try! FirestoreEncoder().encode(artist)
         
@@ -190,7 +209,7 @@ class DataStorage {
         }
     }
     
-    static func storeSong(song: Song, completion: @escaping (Bool) -> ()) {
+    static func storeSong(song: Song, completion: @escaping (_ result: Bool) -> ()) {
         let db = Firestore.firestore()
         let data = try! FirestoreEncoder().encode(song)
         
@@ -245,7 +264,7 @@ class DataStorage {
         }
     }
     
-    static func removeUserPreviousArtists(completion: @escaping (Bool) -> ()) {
+    static func removeUserPreviousArtists(completion: @escaping (_ result: Bool) -> ()) {
         let db = Firestore.firestore()
         
         let username = UserDefaults.standard.string(forKey: "username")
@@ -290,7 +309,7 @@ class DataStorage {
         }
     }
     
-    static func removeUserPreviousSongs(completion: @escaping (Bool) -> ()) {
+    static func removeUserPreviousSongs(completion: @escaping (_ result: Bool) -> ()) {
         let db = Firestore.firestore()
         
         let username = UserDefaults.standard.string(forKey: "username")
@@ -336,65 +355,41 @@ class DataStorage {
         }
     }
     
-    static func storeUserTopArtists(completion: @escaping (Bool) -> ()) {
-        let username = UserDefaults.standard.string(forKey: "username")
-        let accessToken = try! Token.getToken("accessToken", username: username!)
-        
-        getUserTopArtists(accessToken: accessToken) { (result, artists) in
-            if result {
-                print("Success - request top artists")
-
-                // Remove current artists related to the user
-                removeUserPreviousArtists() { (result) in
-                    // Add new top artists related to the user
-                    let group = DispatchGroup()
-                    for artist in artists {
-                        group.enter()
-                        self.storeArtist(artist: artist) { (result) in
-                            group.leave()
-                        }
-                    }
-                    
-                    group.notify(queue: .main) {
-                        completion(true)
-                    }
+    static func storeUserTopArtists(artists: [Artist], completion: @escaping (_ result: Bool) -> ()) {
+        // Remove current artists related to the user
+        removeUserPreviousArtists() { (result) in
+            // Add new top artists related to the user
+            let group = DispatchGroup()
+            for artist in artists {
+                group.enter()
+                self.storeArtist(artist: artist) { (result) in
+                    group.leave()
                 }
             }
-            else {
-                print("Failure - request top artists")
-
+            
+            group.notify(queue: .main) {
+                completion(true)
             }
         }
     }
     
-    static func storeUserTopSongs(completion: @escaping (Bool) -> ()) {
-        let username = UserDefaults.standard.string(forKey: "username")
-        let accessToken = try! Token.getToken("accessToken", username: username!)
-        
-        // Add new top songs related to the user
-        getUserTopSongs(accessToken: accessToken) { (result, songs) in
-            print("Success - request top artists")
-            if result {
-                // Remove current songs related to the user
-                removeUserPreviousSongs() { (result) in
-                    // Add new top songs related to the user
-                    let group = DispatchGroup()
-                    for song in songs {
-                        group.enter()
-                        self.storeSong(song: song) { (result) in
-                            group.leave()
-                        }
-                    }
-                    group.notify(queue: .main) {
-                        completion(true)
-                    }
+    static func storeUserTopSongs(songs: [Song], completion: @escaping (_ result: Bool) -> ()) {
+        // Remove current songs related to the user
+        removeUserPreviousSongs() { (result) in
+            // Add new top songs related to the user
+            let group = DispatchGroup()
+            for song in songs {
+                group.enter()
+                self.storeSong(song: song) { (result) in
+                    group.leave()
                 }
             }
-            else {
-                print("Failure - request top artists")
+            group.notify(queue: .main) {
+                completion(true)
             }
         }
     }
+  
     
     static func getSchoolData(completion: @escaping (_ result: Bool, _ data: Dictionary<String, Any>) -> ()) {
         let db = Firestore.firestore()

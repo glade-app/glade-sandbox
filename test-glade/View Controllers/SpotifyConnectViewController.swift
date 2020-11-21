@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate, UIGestureRecognizerDelegate {
 
@@ -79,49 +78,38 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         let spotifyAccessToken = session.accessToken
         let spotifyRefreshToken = session.refreshToken
         
-        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: spotifyAccessToken)]
-        let request = AF.request("https://api.spotify.com/v1/me", headers: headers)
-        request.responseDecodable(of: User.self) { (response) in
-            guard var user = response.value else {
-                print("Failed to decode")
-                return
-            }
-            user.school = UserDefaults.standard.string(forKey: "school")
-            print(user)
-            
-            let username = user.id!
-            
-            // Save username to UserDefaults
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(username, forKey: "username")
-            
-            
-            // Store tokens to Keychain
-            try? Token.setToken(spotifyAccessToken, "accessToken", username: username)
-            try? Token.setToken(spotifyRefreshToken, "refreshToken", username: username)
-            
-            // Save user data to Firebase
+        DataStorage.getUserData(accessToken: spotifyAccessToken) { (result, user) in
             DataStorage.storeUserData(user: user) { result in
+                // Store tokens to Keychain
+                let username = user.id!
+                try? Token.setToken(spotifyAccessToken, "accessToken", username: username)
+                try? Token.setToken(spotifyRefreshToken, "refreshToken", username: username)
+                
+                // Store artists and songs data to Firestore
                 let group = DispatchGroup()
                 let queue = DispatchQueue(label: Bundle.main.bundleIdentifier! + ".datastorage.queue", attributes: .concurrent)
                 // Request user's top artists from Spotify and save to Firebase
                 group.enter()
                 queue.async {
-                    DataStorage.storeUserTopArtists() { (result) in
-                        print("Finished storing top artists")
-                        group.leave()
+                    DataStorage.getUserTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
+                        DataStorage.storeUserTopArtists(artists: artists) { (result) in
+                            print("Finished storing top artists")
+                            group.leave()
+                        }
                     }
                 }
-                
+        
                 // Request user's top songs from Spotify and save to Firebase
                 group.enter()
                 queue.async(group: group) {
-                    DataStorage.storeUserTopSongs() { (result) in
-                        print("Finished storing top songs")
-                        group.leave()
+                    DataStorage.getUserTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
+                        DataStorage.storeUserTopSongs(songs: songs) { (result) in
+                            print("Finished storing top songs")
+                            group.leave()
+                        }
                     }
                 }
-                
+        
                 group.notify(queue: .main) {
                     print("Finished storing data to Firestore")
                 }

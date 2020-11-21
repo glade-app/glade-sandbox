@@ -18,7 +18,6 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
     var songImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -88,7 +87,8 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
         let songImageUrl = URL(string: data.album!.images![1].url!)
         self.songImageView.kf.setImage(with: songImageUrl)
         self.songName.text = data.name!
-        
+        self.songImageView.layer.cornerRadius = self.songImageView.frame.height / 2
+
         var description = ""
         for i in 0...data.artists!.count - 1 {
             description += "\(data.artists![i].name!)"

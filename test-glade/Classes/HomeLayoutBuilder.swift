@@ -30,7 +30,7 @@ public class HomeLayoutBuilder {
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = sectionInset
-        section.interGroupSpacing = 20.0
+        section.interGroupSpacing = 40.0
         section.boundarySupplementaryItems = [headerItem]
         section.orthogonalScrollingBehavior = .continuous
         return section
@@ -46,7 +46,7 @@ public class HomeLayoutBuilder {
 
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = sectionInset
-        section.interGroupSpacing = 20.0
+        section.interGroupSpacing = 40.0
         section.boundarySupplementaryItems = [headerItem]
         section.orthogonalScrollingBehavior = .continuous
         return section

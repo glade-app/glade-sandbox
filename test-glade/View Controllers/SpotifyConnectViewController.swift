@@ -17,6 +17,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
     @IBOutlet weak var nextButton: UIButton!
         
     var configuration = SPTConfiguration(clientID: Constants.clientID, redirectURL: Constants.redirectURI)
+    var done: Bool = false
     
     lazy var sessionManager: SPTSessionManager = {
         if let tokenSwapURL = Constants.tokenSwapURL,
@@ -94,20 +95,37 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
             let userDefaults = UserDefaults.standard
             userDefaults.set(username, forKey: "username")
             
-            // Save user data to Firebase
-            DataStorage.storeUserData(user: user) { result in
-                // Request user's top artists from Spotify and save to Firebase
-                DataStorage.storeUserTopArtists()
-                
-                // Request user's top songs from Spotify and save to Firebase
-                DataStorage.storeUserTopSongs()
-            }
-            
             
             // Store tokens to Keychain
             try? Token.setToken(spotifyAccessToken, "accessToken", username: username)
             try? Token.setToken(spotifyRefreshToken, "refreshToken", username: username)
-            try? Token.refreshAccessToken()
+            
+            // Save user data to Firebase
+            DataStorage.storeUserData(user: user) { result in
+                let group = DispatchGroup()
+                let queue = DispatchQueue(label: Bundle.main.bundleIdentifier! + ".datastorage.queue", attributes: .concurrent)
+                // Request user's top artists from Spotify and save to Firebase
+                group.enter()
+                queue.async {
+                    DataStorage.storeUserTopArtists() { (result) in
+                        print("Finished storing top artists")
+                        group.leave()
+                    }
+                }
+                
+                // Request user's top songs from Spotify and save to Firebase
+                group.enter()
+                queue.async(group: group) {
+                    DataStorage.storeUserTopSongs() { (result) in
+                        print("Finished storing top songs")
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    print("Finished storing data to Firestore")
+                }
+            }
         }
     }
 

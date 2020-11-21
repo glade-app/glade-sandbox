@@ -136,7 +136,7 @@ class DataStorage {
         }
     }
     
-    static func storeArtist(artist: Artist) {
+    static func storeArtist(artist: Artist, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
         let data = try! FirestoreEncoder().encode(artist)
         
@@ -164,6 +164,7 @@ class DataStorage {
                         }
                         else {
                             print("Success writing artist data - \(artist.id!)")
+                            completion(true)
                         }
                     }
                 }
@@ -180,6 +181,7 @@ class DataStorage {
                         }
                         else {
                             print("Success updating artist data - \(artist.id!)")
+                            completion(true)
                         }
                     }
                 }
@@ -187,7 +189,7 @@ class DataStorage {
         }
     }
     
-    static func storeSong(song: Song) {
+    static func storeSong(song: Song, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
         let data = try! FirestoreEncoder().encode(song)
         
@@ -200,7 +202,7 @@ class DataStorage {
         // Try requesting the song's document from Firestore
         songReference.getDocument { (document, error) in
             if let document = document {
-                // If the song's document doesn't exist
+                // If the song's document doesn't exist, first set the document data
                 if !document.exists {
                     let batch = db.batch()
                     batch.setData(data, forDocument: songReference)
@@ -215,9 +217,11 @@ class DataStorage {
                         }
                         else {
                             print("Success writing song data - \(song.id!)")
+                            completion(true)
                         }
                     }
                 }
+                // Else if song's document does exist, update data rather than set it
                 else {
                     let batch = db.batch()
                     batch.updateData([
@@ -231,6 +235,7 @@ class DataStorage {
                         }
                         else {
                             print("Success updating song data - \(song.id!)")
+                            completion(true)
                         }
                     }
                 }
@@ -321,6 +326,7 @@ class DataStorage {
         }) { (object, error) in
             if let error = error {
                 print("Remove songs transaction failed", error)
+                return
             } else {
                 print("Remove songs transaction succeeded")
                 completion(true)
@@ -328,7 +334,7 @@ class DataStorage {
         }
     }
     
-    static func storeUserTopArtists() {
+    static func storeUserTopArtists(completion: @escaping (Bool) -> ()) {
         let username = UserDefaults.standard.string(forKey: "username")
         let accessToken = try! Token.getToken("accessToken", username: username!)
         
@@ -339,18 +345,27 @@ class DataStorage {
                 // Remove current artists related to the user
                 removeUserPreviousArtists() { (result) in
                     // Add new top artists related to the user
+                    let group = DispatchGroup()
                     for artist in artists {
-                        self.storeArtist(artist: artist)
+                        group.enter()
+                        self.storeArtist(artist: artist) { (result) in
+                            group.leave()
+                        }
+                    }
+                    
+                    group.notify(queue: .main) {
+                        completion(true)
                     }
                 }
             }
             else {
                 print("Failure - request top artists")
+
             }
         }
     }
     
-    static func storeUserTopSongs() {
+    static func storeUserTopSongs(completion: @escaping (Bool) -> ()) {
         let username = UserDefaults.standard.string(forKey: "username")
         let accessToken = try! Token.getToken("accessToken", username: username!)
         
@@ -361,8 +376,15 @@ class DataStorage {
                 // Remove current songs related to the user
                 removeUserPreviousSongs() { (result) in
                     // Add new top songs related to the user
+                    let group = DispatchGroup()
                     for song in songs {
-                        self.storeSong(song: song)
+                        group.enter()
+                        self.storeSong(song: song) { (result) in
+                            group.leave()
+                        }
+                    }
+                    group.notify(queue: .main) {
+                        completion(true)
                     }
                 }
             }
@@ -380,6 +402,7 @@ class DataStorage {
         schoolReference.getDocument { (document, error) in
             if let error = error {
                 print("Failed to get school's data from Firestore:", error)
+                completion(false, [:])
             }
             else {
                 if let document = document, document.exists {
@@ -399,6 +422,7 @@ class DataStorage {
         artistsQuery.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Failed to get school's top artists:", error)
+                completion(false, [])
             }
             else {
                 var artists: [Artist] = []
@@ -421,6 +445,7 @@ class DataStorage {
         songsQuery.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Failed to get school's top songs:", error)
+                completion(false, [])
             }
             else {
                 var songs: [Song] = []

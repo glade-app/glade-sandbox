@@ -14,22 +14,40 @@ class StartViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         let signedUp = UserDefaults.standard.bool(forKey: "signedUp")
-//        if signedUp {
-//            Token.refreshAccessToken()
-//            let userDefaults = UserDefaults.standard.string(forKey: "username")
-//
-//            // Request user's top artists from Spotify and save to Firebase
-//            DataStorage.storeUserTopArtists()
-//
-//            // Request user's top songs from Spotify and save to Firebase
-//            DataStorage.storeUserTopSongs()
-//
-//            performSegue(withIdentifier: "startToMain", sender: self)
-//        }
-//        else {
-//            performSegue(withIdentifier: "toSchools", sender: self)
-//        }
-        performSegue(withIdentifier: "toSchools", sender: self)
+        
+        // If user is signed up: Refresh their access token, update their data in Firestore, then send to home page
+        if signedUp {
+            Token.refreshAccessToken()
+
+            let group = DispatchGroup()
+            let queue = DispatchQueue(label: Bundle.main.bundleIdentifier! + ".datastorage.queue", attributes: .concurrent)
+            // Request user's top artists from Spotify and save to Firebase
+            group.enter()
+            queue.async {
+                DataStorage.storeUserTopArtists() { (result) in
+                    print("Finished storing top artists")
+                    group.leave()
+                }
+            }
+            
+            // Request user's top songs from Spotify and save to Firebase
+            group.enter()
+            queue.async(group: group) {
+                DataStorage.storeUserTopSongs() { (result) in
+                    print("Finished storing top songs")
+                    group.leave()
+                }
+            }
+            
+            group.notify(queue: .main) {
+                print("Finished storing data to Firestore")
+                self.performSegue(withIdentifier: "startToMain", sender: self)
+            }
+        }
+        // If user isn't signed up: Send them to the sign up sequence
+        else {
+            performSegue(withIdentifier: "toSchools", sender: self)
+        }
     }
     
     override func viewDidLoad() {

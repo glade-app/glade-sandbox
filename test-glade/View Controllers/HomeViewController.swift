@@ -40,6 +40,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func setup() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(profileButtonTapped(sender:)))
+        
         self.view.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
@@ -47,6 +49,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.collectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             self.collectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
+    }
+    
+    @objc func profileButtonTapped(sender: UIBarButtonItem) {
+        print("Profile button tapped")
+        
+        // Safe Present
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
+        {
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

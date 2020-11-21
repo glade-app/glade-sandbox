@@ -284,7 +284,106 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7T-y8-juV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8265.217391304348" y="67.633928571428569"/>
+            <point key="canvasLocation" x="4494" y="1102"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="8li-oF-A0V">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Tob-J0-h1C" customClass="ProfileViewController" customModule="test_glade" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UkU-TX-liJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MaO-5o-QPX">
+                                <rect key="frame" x="107" y="104" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="BfK-AO-5hc"/>
+                                    <constraint firstAttribute="width" constant="200" id="e59-z7-V4p"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="top" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WVA-jW-8LZ">
+                                <rect key="frame" x="40" y="364" width="334" height="123"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Way-rJ-PMV">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsX-pi-1GT">
+                                        <rect key="frame" x="0.0" y="20.5" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Socials" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PG-wV-NPg" userLabel="Socials">
+                                        <rect key="frame" x="0.0" y="41" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-Mf-CDW">
+                                        <rect key="frame" x="0.0" y="61.5" width="334" height="61.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDH-ml-dmi">
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-N9-TfI">
+                                                <rect key="frame" x="0.0" y="20.5" width="334" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snapchat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMU-l7-APO">
+                                                <rect key="frame" x="0.0" y="41" width="334" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="xMU-l7-APO" firstAttribute="centerX" secondItem="AHC-Mf-CDW" secondAttribute="centerX" id="VNL-3x-pQh"/>
+                                            <constraint firstItem="KDH-ml-dmi" firstAttribute="centerX" secondItem="AHC-Mf-CDW" secondAttribute="centerX" id="obh-th-ezD"/>
+                                            <constraint firstItem="1d4-N9-TfI" firstAttribute="centerX" secondItem="AHC-Mf-CDW" secondAttribute="centerX" id="yqu-iW-m72"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="CsX-pi-1GT" firstAttribute="centerX" secondItem="WVA-jW-8LZ" secondAttribute="centerX" id="1GW-ku-gio"/>
+                                    <constraint firstItem="AHC-Mf-CDW" firstAttribute="centerX" secondItem="WVA-jW-8LZ" secondAttribute="centerX" id="Dru-yY-VzT"/>
+                                    <constraint firstItem="8PG-wV-NPg" firstAttribute="centerX" secondItem="WVA-jW-8LZ" secondAttribute="centerX" id="U3T-md-PFS"/>
+                                    <constraint firstItem="Way-rJ-PMV" firstAttribute="centerX" secondItem="WVA-jW-8LZ" secondAttribute="centerX" id="WVy-wK-maX"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zoq-jU-dDd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WVA-jW-8LZ" firstAttribute="top" secondItem="MaO-5o-QPX" secondAttribute="bottom" constant="60" id="3YQ-if-2xK"/>
+                            <constraint firstItem="Zoq-jU-dDd" firstAttribute="trailing" secondItem="WVA-jW-8LZ" secondAttribute="trailing" constant="40" id="Meo-M9-ZIY"/>
+                            <constraint firstItem="WVA-jW-8LZ" firstAttribute="leading" secondItem="Zoq-jU-dDd" secondAttribute="leading" constant="40" id="Xkf-JB-Vsi"/>
+                            <constraint firstItem="MaO-5o-QPX" firstAttribute="centerX" secondItem="Zoq-jU-dDd" secondAttribute="centerX" id="aka-cp-fwY"/>
+                            <constraint firstItem="MaO-5o-QPX" firstAttribute="top" secondItem="Zoq-jU-dDd" secondAttribute="top" constant="60" id="lBo-QM-v1C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="CsX-pi-1GT" id="Hj7-wQ-X7B"/>
+                        <outlet property="detailStackView" destination="WVA-jW-8LZ" id="xiV-d2-kRz"/>
+                        <outlet property="facebookLabel" destination="KDH-ml-dmi" id="o3j-0d-M7J"/>
+                        <outlet property="instagramLabel" destination="1d4-N9-TfI" id="lYV-US-DWj"/>
+                        <outlet property="nameLabel" destination="Way-rJ-PMV" id="Wfr-NC-BdM"/>
+                        <outlet property="profilePicture" destination="MaO-5o-QPX" id="3Qw-5j-FGE"/>
+                        <outlet property="snapchatLabel" destination="xMU-l7-APO" id="9FD-AN-fHa"/>
+                        <outlet property="socialsLabel" destination="8PG-wV-NPg" id="7Hj-bA-VUP"/>
+                        <outlet property="socialsStackView" destination="AHC-Mf-CDW" id="nSJ-Ha-ZK4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbT-Q7-8SJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5629" y="1424"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Quh-2F-mga">
@@ -302,7 +401,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teE-vr-G6y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6481.1594202898559" y="67.633928571428569"/>
+            <point key="canvasLocation" x="2710" y="1102"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3W4-Oq-2K6">
@@ -323,7 +422,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQx-om-QzZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4689.8550724637689" y="389.73214285714283"/>
+            <point key="canvasLocation" x="919" y="1424"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="HkC-bX-GDF">
@@ -341,7 +440,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gg6-u4-KAF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8263.7681159420299" y="711.83035714285711"/>
+            <point key="canvasLocation" x="4493" y="1746"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yXe-6g-rRH">
@@ -359,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAr-Cm-eID" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6481" y="712"/>
+            <point key="canvasLocation" x="2709" y="1746"/>
         </scene>
         <!--School Scroll View Controller-->
         <scene sceneID="QkQ-uC-Hu3">
@@ -491,7 +590,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anp-GR-CQR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5632" y="68"/>
+            <point key="canvasLocation" x="1861" y="1102"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cdI-Iw-Ayc">
@@ -510,7 +609,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8u-v7-lNd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5631.884057971015" y="711.83035714285711"/>
+            <point key="canvasLocation" x="1861" y="1746"/>
         </scene>
         <!--Item-->
         <scene sceneID="6fy-Ri-8SE">
@@ -529,7 +628,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mE-Nj-l7l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7355.0724637681169" y="67.633928571428569"/>
+            <point key="canvasLocation" x="3584" y="1102"/>
         </scene>
         <!--Item-->
         <scene sceneID="Vr9-Kc-bWC">
@@ -548,7 +647,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaJ-wM-nLh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7353.6231884057979" y="711.83035714285711"/>
+            <point key="canvasLocation" x="3583" y="1746"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

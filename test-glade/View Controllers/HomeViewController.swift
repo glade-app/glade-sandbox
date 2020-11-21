@@ -27,8 +27,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }()
     
     var schoolData: [String: Any] = ["userCount": 0]
-    var topArtists: [Artist] = []
-    var topSongs: [Song] = []
+    var topArtists: [Artist?] = []
+    var topSongs: [Song?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +70,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func getArtistsData() {
         DataStorage.getSchoolTopArtists(count: 10) { (result, artists) in
             self.topArtists = artists
-            print(self.topArtists)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -80,7 +79,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func getSongsData() {
         DataStorage.getSchoolTopSongs(count: 20) { (result, songs) in
             self.topSongs = songs
-            print(self.topArtists)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -125,10 +123,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return HomeCellBuilder.getSchoolCell(collectionView: collectionView, indexPath: indexPath, data: self.schoolData)
         }
         else if indexPath.section == 1 {
-            return HomeCellBuilder.getSongCell(collectionView: collectionView, indexPath: indexPath, data: self.topSongs[indexPath.item])
+            return HomeCellBuilder.getSongCell(collectionView: collectionView, indexPath: indexPath, data: self.topSongs[indexPath.item]!)
         }
         else if indexPath.section == 2 {
-            return HomeCellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item])
+            return HomeCellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item]!)
         }
         return UICollectionViewCell()
     }

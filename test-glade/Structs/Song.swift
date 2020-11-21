@@ -22,7 +22,7 @@ struct Song: Codable {
     let name: String?
     let artists: [Artist]?
     let id: String?
-    let users: [String]?
+    var users: [String]?
 }
 
 struct SongResponse: Codable {

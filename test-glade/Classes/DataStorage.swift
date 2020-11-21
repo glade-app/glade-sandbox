@@ -144,8 +144,9 @@ class DataStorage {
         let school = UserDefaults.standard.string(forKey: "school")
         
         let userReference = db.collection("users").document(username!)
-        let artistReference = db.collection("schools").document(school!).collection("artists").document(artist.id!)
-
+        let artistReference = db.collection("artists").document(artist.id!)
+        let schoolArtistReference = db.collection("schools").document(school!).collection("artists").document(artist.id!)
+        
         // Try requesting the artist's document from Firestore
         artistReference.getDocument { (document, error) in
             if let document = document {
@@ -153,10 +154,10 @@ class DataStorage {
                 if !document.exists {
                     let batch = db.batch()
                     batch.setData(data, forDocument: artistReference)
-                    batch.updateData([
+                    batch.setData([
                                         "user_count": 1,
                                         "users": FieldValue.arrayUnion([username!])
-                    ], forDocument: artistReference)
+                    ], forDocument: schoolArtistReference)
                     batch.updateData(["artists": FieldValue.arrayUnion([artist.id!])], forDocument: userReference)
                     batch.commit() { (error) in
                         if let error = error {
@@ -173,7 +174,7 @@ class DataStorage {
                     batch.updateData([
                                         "users": FieldValue.arrayUnion([username!]),
                                         "user_count": FieldValue.increment(Int64(1)),
-                    ], forDocument: artistReference)
+                    ], forDocument: schoolArtistReference)
                     batch.updateData(["artists": FieldValue.arrayUnion([artist.id!])], forDocument: userReference)
                     batch.commit() { (error) in
                         if let error = error {
@@ -197,7 +198,8 @@ class DataStorage {
         let school = UserDefaults.standard.string(forKey: "school")
         
         let userReference = db.collection("users").document(username!)
-        let songReference = db.collection("schools").document(school!).collection("songs").document(song.id!)
+        let songReference = db.collection("songs").document(song.id!)
+        let schoolSongReference = db.collection("schools").document(school!).collection("songs").document(song.id!)
 
         // Try requesting the song's document from Firestore
         songReference.getDocument { (document, error) in
@@ -206,10 +208,10 @@ class DataStorage {
                 if !document.exists {
                     let batch = db.batch()
                     batch.setData(data, forDocument: songReference)
-                    batch.updateData([
+                    batch.setData([
                                         "user_count": 1,
                                         "users": FieldValue.arrayUnion([username!]),
-                    ], forDocument: songReference)
+                    ], forDocument: schoolSongReference)
                     batch.updateData(["songs": FieldValue.arrayUnion([song.id!])], forDocument: userReference)
                     batch.commit() { (error) in
                         if let error = error {
@@ -227,7 +229,7 @@ class DataStorage {
                     batch.updateData([
                                         "users": FieldValue.arrayUnion([username!]),
                                         "user_count": FieldValue.increment(Int64(1))
-                    ], forDocument: songReference)
+                    ], forDocument: schoolSongReference)
                     batch.updateData(["songs": FieldValue.arrayUnion([song.id!])], forDocument: userReference)
                     batch.commit() { (error) in
                         if let error = error {
@@ -266,13 +268,13 @@ class DataStorage {
             }
             
             for artist in previousArtists {
-                let artistReference = db.collection("schools").document(school!).collection("artists").document(artist)
+                let schoolArtistReference = db.collection("schools").document(school!).collection("artists").document(artist)
                 
                 // Database cleaning here if decrements to 0?
                 transaction.updateData([
                     "user_count": FieldValue.increment(Int64(-1)), // Decrement by 1
                     "users": FieldValue.arrayRemove([username!])
-                ], forDocument: artistReference)
+                ], forDocument: schoolArtistReference)
                 transaction.updateData([
                     "artists": FieldValue.arrayRemove([artist])
                 ], forDocument: userReference)
@@ -311,13 +313,13 @@ class DataStorage {
             }
             
             for song in previousSongs {
-                let songReference = db.collection("schools").document(school!).collection("songs").document(song)
+                let schoolSongReference = db.collection("schools").document(school!).collection("songs").document(song)
                 
                 // Database cleaning here if decrements to 0?
                 transaction.updateData([
                     "user_count": FieldValue.increment(Int64(-1)), // Decrement by 1
                     "users": FieldValue.arrayRemove([username!])
-                ], forDocument: songReference)
+                ], forDocument: schoolSongReference)
                 transaction.updateData([
                     "songs": FieldValue.arrayRemove([song])
                 ], forDocument: userReference)
@@ -413,48 +415,88 @@ class DataStorage {
         }
     }
     
-    static func getSchoolTopArtists(count: Int, completion: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
+    static func getSchoolTopArtists(count: Int, completion: @escaping (_ result: Bool, _ artists: [Artist?]) -> ()) {
         let db = Firestore.firestore()
         let school = UserDefaults.standard.string(forKey: "school")
-        let artistsReference = db.collection("schools").document(school!).collection("artists")
-        let artistsQuery = artistsReference.order(by: "user_count", descending: true).limit(to: count)
+        let schoolArtistsReference = db.collection("schools").document(school!).collection("artists")
+        let schoolArtistsQuery = schoolArtistsReference.order(by: "user_count", descending: true).limit(to: count)
         
-        artistsQuery.getDocuments() { (querySnapshot, error) in
+        schoolArtistsQuery.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Failed to get school's top artists:", error)
-                completion(false, [])
             }
             else {
-                var artists: [Artist] = []
-                for document in querySnapshot!.documents {
-                    let artist = try! FirestoreDecoder().decode(Artist.self, from: document.data())
-                    artists.append(artist)
-                    print("Success querying artist: \(artist.id!)")
+                var artists: [Artist?] = Array.init(repeating: nil, count: querySnapshot!.documents.count)
+                let group = DispatchGroup()
+                for i in 0...querySnapshot!.documents.count - 1 {
+                    group.enter()
+                    let document = querySnapshot!.documents[i]
+                    let id = document.documentID
+                    let users: [String] = document.get("users") as! [String]
+                    
+                    let artistReference = db.collection("artists").document(id)
+                    artistReference.getDocument() { (artistDocument, error) in
+                        if let artistDocument = artistDocument {
+                            if artistDocument.exists {
+                                var artist = try! FirestoreDecoder().decode(Artist.self, from: artistDocument.data()!)
+                                artist.users = users
+                                artists[i] = artist
+                                print("Success querying artist: \(artist.id!)")
+                            }
+                            group.leave()
+                        }
+                        else {
+                            print("Failed to get artist document - \(id) -", error)
+                            group.leave()
+                        }
+                    }
                 }
-                completion(true, artists)
+                group.notify(queue: .main) {
+                    completion(true, artists)
+                }
             }
         }
     }
     
-    static func getSchoolTopSongs(count: Int, completion: @escaping (_ result: Bool, _ songs: [Song]) -> ()) {
+    static func getSchoolTopSongs(count: Int, completion: @escaping (_ result: Bool, _ songs: [Song?]) -> ()) {
         let db = Firestore.firestore()
         let school = UserDefaults.standard.string(forKey: "school")
-        let songsReference = db.collection("schools").document(school!).collection("songs")
-        let songsQuery = songsReference.order(by: "user_count", descending: true).limit(to: count)
+        let schoolSongsReference = db.collection("schools").document(school!).collection("songs")
+        let schoolSongsQuery = schoolSongsReference.order(by: "user_count", descending: true).limit(to: count)
         
-        songsQuery.getDocuments() { (querySnapshot, error) in
+        schoolSongsQuery.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Failed to get school's top songs:", error)
-                completion(false, [])
             }
             else {
-                var songs: [Song] = []
-                for document in querySnapshot!.documents {
-                    let song = try! FirestoreDecoder().decode(Song.self, from: document.data())
-                    songs.append(song)
-                    print("Success querying song: \(song.id!)")
+                var songs: [Song?] = Array.init(repeating: nil, count: querySnapshot!.documents.count)
+                let group = DispatchGroup()
+                for i in 0...querySnapshot!.documents.count - 1 {
+                    group.enter()
+                    let document = querySnapshot!.documents[i]
+                    let id = document.documentID
+                    let users: [String] = document.get("users") as! [String]
+                    
+                    let songReference = db.collection("songs").document(id)
+                    songReference.getDocument() { (document, error) in
+                        if let document = document {
+                            if document.exists {
+                                var song = try! FirestoreDecoder().decode(Song.self, from: document.data()!)
+                                song.users = users
+                                songs[i] = song
+                                print("Success querying song: \(song.id!)")
+                            }
+                            group.leave()
+                        }
+                        else {
+                            print("Failed to get song document - \(id) -", error)
+                            group.leave()
+                        }
+                    }
                 }
-                completion(true, songs)
+                group.notify(queue: .main) {
+                    completion(true, songs)
+                }
             }
         }
     }

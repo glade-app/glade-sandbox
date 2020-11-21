@@ -17,7 +17,7 @@ struct Artist: Codable {
     let id: String?
     let images: [ArtistImage]?
     let name: String?
-    let users: [String]?
+    var users: [String]?
 }
 
 struct ArtistResponse: Codable {

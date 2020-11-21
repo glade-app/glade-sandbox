@@ -18,6 +18,7 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
     var songImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -44,6 +45,11 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.songImageView.layer.cornerRadius = self.songImageView.frame.height / 2
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,7 +93,7 @@ class HomeSongCollectionViewCell: UICollectionViewCell {
         let songImageUrl = URL(string: data.album!.images![1].url!)
         self.songImageView.kf.setImage(with: songImageUrl)
         self.songName.text = data.name!
-        self.songImageView.layer.cornerRadius = self.songImageView.frame.height / 2
+//        self.songImageView.layer.cornerRadius = self.songImageView.frame.height / 2
 
         var description = ""
         for i in 0...data.artists!.count - 1 {

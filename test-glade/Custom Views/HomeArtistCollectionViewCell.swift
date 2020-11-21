@@ -19,6 +19,8 @@ class HomeArtistCollectionViewCell: UICollectionViewCell {
     var artistImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 100
+        imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -35,8 +37,14 @@ class HomeArtistCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.artistImageView.layer.cornerRadius = self.artistImageView.frame.height / 2
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.contentView.addSubview(self.container)
         self.container.addSubview(self.artistImageView)
         self.container.addSubview(self.artistName)
@@ -69,7 +77,6 @@ class HomeArtistCollectionViewCell: UICollectionViewCell {
     func configure(data: Artist) {
         let artistImageUrl = URL(string: data.images![1].url!)
         self.artistImageView.kf.setImage(with: artistImageUrl)
-        self.artistImageView.layer.cornerRadius = self.artistImageView.frame.height / 2
         self.artistName.text = data.name!
     }
 }

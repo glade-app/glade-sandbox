@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Account {
+public struct Account {
     var name: String?
     var token: String?
 }

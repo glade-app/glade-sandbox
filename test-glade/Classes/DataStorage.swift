@@ -6,25 +6,27 @@
 //
 
 import Foundation
-import Alamofire
 import Firebase
 import FirebaseFirestore
 import CodableFirebase
 // https://github.com/alickbass/CodableFirebase
 
 class DataStorage {
-    static func getUserData(accessToken: String, completion: @escaping (_ result: Bool, _ user: User) -> ()) {
-        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
-        let request = AF.request("https://api.spotify.com/v1/me", headers: headers)
-        request.responseDecodable(of: User.self) { (response) in
-            guard var user = response.value else {
-                print("Failed to decode")
-                return
+    /// User Data
+    static func getUserData(username: String, completion: @escaping (_ result: Bool, _ user: User) -> ()) {
+        let db = Firestore.firestore()
+        let userReference = db.collection("users").document(username)
+        
+        userReference.getDocument { (document, error) in
+            if let error = error {
+                print("Failed to get school's data from Firestore:", error)
             }
-            user.school = UserDefaults.standard.string(forKey: "school")
-            print(user)
-            
-            completion(true, user)
+            else {
+                if let document = document, document.exists {
+                    let user = try! FirestoreDecoder().decode(User.self, from: document.data()!)
+                    completion(true, user)
+                }
+            }
         }
     }
     
@@ -113,44 +115,42 @@ class DataStorage {
         }
     }
     
-    static func getUserTopArtists(accessToken: String, completion: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
-        var artists: [Artist] = []
-
-        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
-        let parameters: Parameters = ["time_range": "short_term", "limit": 50]
-        let request = AF.request("https://api.spotify.com/v1/me/top/artists", parameters: parameters, headers: headers)
+    /// Artist Data
+    static func getUserTopArtists(count: Int, user: User, completion: @escaping (_ result: Bool, _ artists: [Artist]) -> ()) {
+        let db = Firestore.firestore()
+        let username = user.id
+        let userReference = db.collection("users").document(username!)
         
-        request.responseDecodable(of: ArtistResponse.self) { (response) in
-            if let artistResponse = response.value {
-                for artist in artistResponse.items! {
-                    artists.append(artist)
+        userReference.getDocument() { (document, error) in
+            if let document = document {
+                // If user does not already exist in the database
+                if document.exists {
+                    let artistIDsResponse: [String] = document.get("artists") as! [String]
+                    let artistIDs: [String] = Array(artistIDsResponse.prefix(min(count, artistIDsResponse.count)))
+                    var artists: [Artist] = []
+                    let group = DispatchGroup()
+                    for id in artistIDs {
+                        group.enter()
+                        let artistReference = db.collection("artists").document(id)
+                        artistReference.getDocument() { (artistDocument, error) in
+                            if let artistDocument = artistDocument {
+                                if artistDocument.exists {
+                                    let artist = try! FirestoreDecoder().decode(Artist.self, from: artistDocument.data()!)
+                                    artists.append(artist)
+                                    print("Success querying artist: \(artist.id!)")
+                                }
+                                group.leave()
+                            }
+                            else {
+                                print("Failed to get artist document - \(id) -", error)
+                                group.leave()
+                            }
+                        }
+                    }
+                    group.notify(queue: .main) {
+                        completion(true, artists)
+                    }
                 }
-                completion(true, artists)
-            }
-            else {
-                print("Failed to decode artists")
-                completion(false, [])
-            }
-        }
-    }
-    
-    static func getUserTopSongs(accessToken: String, completion: @escaping (_ result: Bool, _ songs: [Song]) -> ()) {
-        var songs: [Song] = []
-
-        let headers: HTTPHeaders = [.accept("application/json"), .contentType("application/json"), .authorization(bearerToken: accessToken)]
-        let parameters: Parameters = ["time_range": "short_term", "limit": 50]
-        let request = AF.request("https://api.spotify.com/v1/me/top/tracks", parameters: parameters, headers: headers)
-        
-        request.responseDecodable(of: SongResponse.self) { (response) in
-            if let songResponse = response.value {
-                for song in songResponse.items! {
-                    songs.append(song)
-                }
-                completion(true, songs)
-            }
-            else {
-                print("Failed to decode songs")
-                completion(false, [])
             }
         }
     }
@@ -203,6 +203,109 @@ class DataStorage {
                             print("Success updating artist data - \(artist.id!)")
                             completion(true)
                         }
+                    }
+                }
+            }
+        }
+    }
+    
+    static func removeUserPreviousArtists(completion: @escaping (_ result: Bool) -> ()) {
+        let db = Firestore.firestore()
+        
+        let username = UserDefaults.standard.string(forKey: "username")
+        let userReference = db.collection("users").document(username!)
+        let school = UserDefaults.standard.string(forKey: "school")
+        
+        db.runTransaction({ (transaction, errorPointer) -> Any?  in
+            let userDocument: DocumentSnapshot
+            do {
+                try userDocument = transaction.getDocument(userReference)
+            } catch let error as NSError {
+                errorPointer?.pointee = error
+                return nil
+            }
+            
+            guard let previousArtists = userDocument.data()?["artists"] as? [String] else {
+                let error = NSError(domain: "GladeErrorDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to read user's artists at Firestore path: \(userReference.path)"])
+                errorPointer?.pointee = error
+                return nil
+            }
+            
+            for artist in previousArtists {
+                let schoolArtistReference = db.collection("schools").document(school!).collection("artists").document(artist)
+                
+                // Database cleaning here if decrements to 0?
+                transaction.updateData([
+                    "user_count": FieldValue.increment(Int64(-1)), // Decrement by 1
+                    "users": FieldValue.arrayRemove([username!])
+                ], forDocument: schoolArtistReference)
+                transaction.updateData([
+                    "artists": FieldValue.arrayRemove([artist])
+                ], forDocument: userReference)
+            }
+            return nil
+        }) { (object, error) in
+            if let error = error {
+                print("Remove artists transaction failed", error)
+            } else {
+                print("Remove artists transaction succeeded")
+                completion(true)
+            }
+        }
+    }
+    
+    static func storeUserTopArtists(artists: [Artist], completion: @escaping (_ result: Bool) -> ()) {
+        // Remove current artists related to the user
+        removeUserPreviousArtists() { (result) in
+            // Add new top artists related to the user
+            let group = DispatchGroup()
+            for artist in artists {
+                group.enter()
+                self.storeArtist(artist: artist) { (result) in
+                    group.leave()
+                }
+            }
+            
+            group.notify(queue: .main) {
+                completion(true)
+            }
+        }
+    }
+    
+    /// Song Data
+    static func getUserTopSongs(count: Int, user: User, completion: @escaping (_ result: Bool, _ songs: [Song]) -> ()) {
+        let db = Firestore.firestore()
+        let username = user.id
+        let userReference = db.collection("users").document(username!)
+        
+        userReference.getDocument() { (document, error) in
+            if let document = document {
+                // If user does not already exist in the database
+                if document.exists {
+                    let songIDsResponse: [String] = document.get("songs") as! [String]
+                    let songIDs: [String] = Array(songIDsResponse.prefix(min(count, songIDsResponse.count)))
+                    var songs: [Song] = []
+                    let group = DispatchGroup()
+                    for id in songIDs {
+                        group.enter()
+                        let songReference = db.collection("songs").document(id)
+                        songReference.getDocument() { (songDocument, error) in
+                            if let songDocument = songDocument {
+                                if songDocument.exists {
+                                    let song = try! FirestoreDecoder().decode(Song.self, from: songDocument.data()!)
+                                    songs.append(song)
+                                    print("Success querying artist: \(song.id!)")
+                                }
+                                group.leave()
+                            }
+                            else {
+                                print("Failed to get artist document - \(id) -", error)
+                                group.leave()
+                            }
+                        }
+                    }
+                    group.notify(queue: .main) {
+                        completion(true, songs)
                     }
                 }
             }
@@ -264,51 +367,6 @@ class DataStorage {
         }
     }
     
-    static func removeUserPreviousArtists(completion: @escaping (_ result: Bool) -> ()) {
-        let db = Firestore.firestore()
-        
-        let username = UserDefaults.standard.string(forKey: "username")
-        let userReference = db.collection("users").document(username!)
-        let school = UserDefaults.standard.string(forKey: "school")
-        
-        db.runTransaction({ (transaction, errorPointer) -> Any?  in
-            let userDocument: DocumentSnapshot
-            do {
-                try userDocument = transaction.getDocument(userReference)
-            } catch let error as NSError {
-                errorPointer?.pointee = error
-                return nil
-            }
-            
-            guard let previousArtists = userDocument.data()?["artists"] as? [String] else {
-                let error = NSError(domain: "GladeErrorDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to read user's artists at Firestore path: \(userReference.path)"])
-                errorPointer?.pointee = error
-                return nil
-            }
-            
-            for artist in previousArtists {
-                let schoolArtistReference = db.collection("schools").document(school!).collection("artists").document(artist)
-                
-                // Database cleaning here if decrements to 0?
-                transaction.updateData([
-                    "user_count": FieldValue.increment(Int64(-1)), // Decrement by 1
-                    "users": FieldValue.arrayRemove([username!])
-                ], forDocument: schoolArtistReference)
-                transaction.updateData([
-                    "artists": FieldValue.arrayRemove([artist])
-                ], forDocument: userReference)
-            }
-            return nil
-        }) { (object, error) in
-            if let error = error {
-                print("Remove artists transaction failed", error)
-            } else {
-                print("Remove artists transaction succeeded")
-                completion(true)
-            }
-        }
-    }
-    
     static func removeUserPreviousSongs(completion: @escaping (_ result: Bool) -> ()) {
         let db = Firestore.firestore()
         
@@ -355,24 +413,6 @@ class DataStorage {
         }
     }
     
-    static func storeUserTopArtists(artists: [Artist], completion: @escaping (_ result: Bool) -> ()) {
-        // Remove current artists related to the user
-        removeUserPreviousArtists() { (result) in
-            // Add new top artists related to the user
-            let group = DispatchGroup()
-            for artist in artists {
-                group.enter()
-                self.storeArtist(artist: artist) { (result) in
-                    group.leave()
-                }
-            }
-            
-            group.notify(queue: .main) {
-                completion(true)
-            }
-        }
-    }
-    
     static func storeUserTopSongs(songs: [Song], completion: @escaping (_ result: Bool) -> ()) {
         // Remove current songs related to the user
         removeUserPreviousSongs() { (result) in
@@ -389,8 +429,8 @@ class DataStorage {
             }
         }
     }
-  
     
+    /// School Data
     static func getSchoolData(completion: @escaping (_ result: Bool, _ data: Dictionary<String, Any>) -> ()) {
         let db = Firestore.firestore()
         let school = UserDefaults.standard.string(forKey: "school")

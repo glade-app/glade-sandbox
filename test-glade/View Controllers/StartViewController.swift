@@ -16,12 +16,15 @@ class StartViewController: UIViewController {
         let signedUp = UserDefaults.standard.bool(forKey: "signedUp")
 //        let signedUp = false // Testing Purposes
         
+        performSegue(withIdentifier: "startToMain", sender: self)
+        return
+        
         // If user is signed up: Refresh their access token, update their data in Firestore, then send to home page
         if signedUp {
             Token.refreshAccessToken() { (result) in
                 let username = UserDefaults.standard.string(forKey: "username")
                 let accessToken = try! Token.getToken("accessToken", username: username!)
-                DataStorage.getUserData(accessToken: accessToken) { (result, user) in
+                Spotify.getUserData(accessToken: accessToken) { (result, user) in
                     DataStorage.storeUserData(user: user) { result in
                         // Store artists and songs data to Firestore
                         let group = DispatchGroup()
@@ -29,7 +32,7 @@ class StartViewController: UIViewController {
                         // Request user's top artists from Spotify and save to Firebase
                         group.enter()
                         queue.async {
-                            DataStorage.getUserTopArtists(accessToken: accessToken) { (result, artists) in
+                            Spotify.getUserTopArtists(accessToken: accessToken) { (result, artists) in
                                 DataStorage.storeUserTopArtists(artists: artists) { (result) in
                                     print("Finished storing top artists")
                                     group.leave()
@@ -40,7 +43,7 @@ class StartViewController: UIViewController {
                         // Request user's top songs from Spotify and save to Firebase
                         group.enter()
                         queue.async(group: group) {
-                            DataStorage.getUserTopSongs(accessToken: accessToken) { (result, songs) in
+                            Spotify.getUserTopSongs(accessToken: accessToken) { (result, songs) in
                                 DataStorage.storeUserTopSongs(songs: songs) { (result) in
                                     print("Finished storing top songs")
                                     group.leave()
@@ -66,6 +69,8 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         self.setupItems()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.overrideUserInterfaceStyle = .light
+
     }
     
     func setupItems() {
@@ -78,5 +83,6 @@ class StartViewController: UIViewController {
         gladeNameLabel.font = UIFont.boldSystemFont(ofSize: 72)
         gladeNameLabel.textAlignment = .center
         gladeNameLabel.numberOfLines = 0
+        
     }
 }

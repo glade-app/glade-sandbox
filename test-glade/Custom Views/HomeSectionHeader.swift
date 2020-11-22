@@ -13,7 +13,6 @@ class HomeSectionHeader: UICollectionReusableView {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 36, weight: .semibold)
-        label.textColor = UIColor.white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,7 +31,11 @@ class HomeSectionHeader: UICollectionReusableView {
         self.addSubview(self.headerLabel)
 
         NSLayoutConstraint.activate([
-            self.headerLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 2.5),
+            self.heightAnchor.constraint(equalToConstant: 70)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.headerLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.headerLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0.0),
             self.headerLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0.0),
         ])

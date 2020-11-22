@@ -5,13 +5,13 @@
 //  Created by Allen Gu on 10/24/20.
 //
 
-struct ProfileImage: Codable {
+public struct ProfileImage: Codable {
     let height: Int?
     let url: String?
     let width: Int?
 }
 
-struct User: Codable {
+public struct User: Codable {
     let displayName: String?
     let email: String?
     let href: String?
@@ -21,7 +21,8 @@ struct User: Codable {
     var songs: [String]?
     var artists: [String]?
     var school: String?
-    var socials: [String]?
+    var description: String?
+    var socials: [String: String]?
 
 
     
@@ -35,6 +36,7 @@ struct User: Codable {
         case songs
         case artists
         case school
+        case description
         case socials
     }
 }

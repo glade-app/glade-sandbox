@@ -11,7 +11,12 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
     var container: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.clipsToBounds = true
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 2.0, height: 2.0);
+        view.layer.shadowRadius = 1.0
+        view.layer.shadowOpacity = 0.3
+        view.clipsToBounds = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -20,7 +25,8 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "berkeley_school")
+        imageView.layer.cornerRadius = 10
+        imageView.image = UIImage(named: "berkeley_home")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -58,28 +64,6 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-//    var playsLabel: UILabel = {
-//        let label: UILabel = UILabel()
-//        label.numberOfLines = 0
-//        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-//        label.textColor = UIColor.white
-//        label.textAlignment = .left
-//        label.text = "Plays"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-//
-//    var playsValue: UILabel = {
-//        let label: UILabel = UILabel()
-//        label.numberOfLines = 0
-//        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-//        label.textColor = UIColor.white
-//        label.textAlignment = .left
-//        label.text = "9999"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.addSubview(self.container)
@@ -87,8 +71,6 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
         self.container.addSubview(self.schoolName)
         self.container.addSubview(self.membersLabel)
         self.container.addSubview(self.membersValue)
-//        self.container.addSubview(self.playsLabel)
-//        self.container.addSubview(self.playsValue)
         
         NSLayoutConstraint.activate([
             self.container.topAnchor.constraint(equalTo: self.contentView.topAnchor),
@@ -120,15 +102,6 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
             self.membersValue.leftAnchor.constraint(equalTo: self.membersLabel.leftAnchor),
         ])
         
-//        NSLayoutConstraint.activate([
-//            self.playsLabel.bottomAnchor.constraint(equalTo: self.playsValue.topAnchor, constant: 0),
-//            self.playsLabel.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -20),
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            self.playsValue.bottomAnchor.constraint(equalTo: self.container.bottomAnchor, constant: -20),
-//            self.playsValue.leftAnchor.constraint(equalTo: self.playsLabel.leftAnchor),
-//        ])
     }
     
     required init?(coder: NSCoder) {
@@ -138,7 +111,6 @@ class HomeSchoolCollectionViewCell: UICollectionViewCell {
     func configure(data: Dictionary<String, Any>) {
         let school = UserDefaults.standard.string(forKey: "school")
         self.schoolName.text = school!
-//        self.schoolImageView.image = image
         self.membersValue.text = "\(data["userCount"]!)"
     }
 }

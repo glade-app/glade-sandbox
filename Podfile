@@ -17,6 +17,7 @@ target 'test-glade' do
   pod 'Firebase/Database'
 
   pod 'CodableFirebase'
+  pod 'FontAwesome.swift'
 
   target 'test-gladeTests' do
     inherit! :search_paths

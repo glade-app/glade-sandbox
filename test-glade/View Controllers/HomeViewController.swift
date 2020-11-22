@@ -12,14 +12,14 @@ import UIKit
 import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
-    
     lazy var collectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.makeLayout())
+        collectionView.backgroundColor = UIColor.white
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(HomeSchoolCollectionViewCell.self, forCellWithReuseIdentifier: "school")
-        collectionView.register(HomeSongCollectionViewCell.self, forCellWithReuseIdentifier: "song")
-        collectionView.register(HomeArtistCollectionViewCell.self, forCellWithReuseIdentifier: "artist")
+        collectionView.register(SongCollectionViewCell.self, forCellWithReuseIdentifier: "song")
+        collectionView.register(ArtistCollectionViewCell.self, forCellWithReuseIdentifier: "artist")
         collectionView.register(HomeSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.setup()
         self.getSchoolData()
         self.getArtistsData()
@@ -55,9 +55,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         print("Profile button tapped")
         
         // Safe Present
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
+        if let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
         {
-            present(vc, animated: true, completion: nil)
+            let username = UserDefaults.standard.string(forKey: "username")
+            DataStorage.getUserData(username: username!) { (result, user) in
+                profileVC.user = user
+                self.present(profileVC, animated: true, completion: nil)
+                profileVC.loadSocials()
+                profileVC.loadUserTopArtists()
+                profileVC.loadUserTopSongs()
+            }
         }
     }
     
@@ -100,15 +107,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func makeLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             if section == 0 {
-                return HomeLayoutBuilder.buildSchoolSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300)))
+                return LayoutBuilder.buildSchoolSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300)))
             }
+//            else if section == 1 {
+//                return HomeLayoutBuilder.buildArtistSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(240)))
+//            }
+            
             else if section == 1 {
-                return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)))
+                return LayoutBuilder.buildArtistsSectionLayout()
             }
+            
+//            else if section == 2 {
+//                return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)))
+//            }
             else if section == 2 {
-                return HomeLayoutBuilder.buildArtistSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(240)))
+                return LayoutBuilder.buildSongsSectionLayout()
             }
-            return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25)))
+            return LayoutBuilder.buildSongsSectionLayout()
         }
         return layout
     }
@@ -122,23 +137,26 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return 1
         }
         else if section == 1 {
-            return self.topSongs.count
-        }
-        else if section == 2 {
             return self.topArtists.count
+        }
+//        else if section == 2 {
+//            return self.topSongs.count
+//        }
+        else if section == 2 {
+            return self.topSongs.count
         }
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            return HomeCellBuilder.getSchoolCell(collectionView: collectionView, indexPath: indexPath, data: self.schoolData)
+            return CellBuilder.getSchoolCell(collectionView: collectionView, indexPath: indexPath, data: self.schoolData)
         }
         else if indexPath.section == 1 {
-            return HomeCellBuilder.getSongCell(collectionView: collectionView, indexPath: indexPath, data: self.topSongs[indexPath.item]!)
+            return CellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item]!)
         }
         else if indexPath.section == 2 {
-            return HomeCellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item]!)
+            return CellBuilder.getSongCell(collectionView: collectionView, indexPath: indexPath, data: self.topSongs[indexPath.item]!)
         }
         return UICollectionViewCell()
     }
@@ -149,11 +167,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         if indexPath.section == 1 {
-            headerView.configure(text: "Top Songs")
+            headerView.configure(text: "Top Artists")
         }
         
         else if indexPath.section == 2 {
-            headerView.configure(text: "Top Artists")
+            headerView.configure(text: "Top Songs")
         }
         
         return headerView

@@ -78,7 +78,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
         let spotifyAccessToken = session.accessToken
         let spotifyRefreshToken = session.refreshToken
         
-        DataStorage.getUserData(accessToken: spotifyAccessToken) { (result, user) in
+        Spotify.getUserData(accessToken: spotifyAccessToken) { (result, user) in
             DataStorage.storeUserData(user: user) { result in
                 // Store tokens to Keychain
                 let username = user.id!
@@ -91,7 +91,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
                 // Request user's top artists from Spotify and save to Firebase
                 group.enter()
                 queue.async {
-                    DataStorage.getUserTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
+                    Spotify.getUserTopArtists(accessToken: spotifyAccessToken) { (result, artists) in
                         DataStorage.storeUserTopArtists(artists: artists) { (result) in
                             print("Finished storing top artists")
                             group.leave()
@@ -102,7 +102,7 @@ class SpotifyConnectViewController: UIViewController, SPTSessionManagerDelegate,
                 // Request user's top songs from Spotify and save to Firebase
                 group.enter()
                 queue.async(group: group) {
-                    DataStorage.getUserTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
+                    Spotify.getUserTopSongs(accessToken: spotifyAccessToken) { (result, songs) in
                         DataStorage.storeUserTopSongs(songs: songs) { (result) in
                             print("Finished storing top songs")
                             group.leave()

@@ -37,9 +37,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
 
         self.getSchoolData()
-        self.getCurrentUser()
-        self.getArtistsData()
-        self.getSongsData()
+        self.getCurrentUser() { (result) in
+            self.getArtistsData()
+            self.getSongsData()
+        }
         self.setup()
         self.refreshCollectionView()
     }
@@ -82,20 +83,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.displayProfile(user: self.currentUser!)
     }
     
-    func getCurrentUser() {
+    func getCurrentUser(completion: @escaping (_ result: Bool) -> ()) {
         let username = UserDefaults.standard.string(forKey: "username")
         DataStorage.getUserData(username: username!) { (result, user) in
             self.currentUser = user
             DispatchQueue.main.async {
                 self.refreshCollectionView()
             }
+            completion(true)
         }
     }
     
     func getSchoolData() {
         DataStorage.getSchoolUsersData { (result, data) in
             self.schoolData = data
-            let userIDs: [String] = data["users"]! as! [String]
+            var userIDs: [String] = data["users"]! as! [String]
+            userIDs.shuffle()
             let group = DispatchGroup()
             for userID in userIDs {
                 if userID != self.currentUser!.id! {

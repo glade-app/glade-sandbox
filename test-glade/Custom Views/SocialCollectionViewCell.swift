@@ -82,7 +82,7 @@ class SocialCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.tagLabel.centerYAnchor.constraint(equalTo: self.container.centerYAnchor),
+            self.tagLabel.centerYAnchor.constraint(equalTo: self.socialImageContainer.centerYAnchor),
             self.tagLabel.leftAnchor.constraint(equalTo: self.socialImageContainer.rightAnchor, constant: 10),
             self.tagLabel.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -10),
         ])

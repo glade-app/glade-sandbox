@@ -35,6 +35,15 @@ public class CellBuilder {
         }
     }
     
+    static func getUserCell(collectionView: UICollectionView, indexPath: IndexPath, data: User) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "user", for: indexPath) as? UserCollectionViewCell {
+            cell.configure(data: data)
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+    
     static func getSongCell(collectionView: UICollectionView, indexPath: IndexPath, data: Song) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "song", for: indexPath) as? SongCollectionViewCell {
             cell.configure(data: data, index: indexPath.item)

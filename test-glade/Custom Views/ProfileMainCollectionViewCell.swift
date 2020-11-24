@@ -60,11 +60,22 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+        
     override func layoutSubviews() {
+        super.layoutSubviews()
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.width / 2
         
         self.profilePictureContainer.layer.cornerRadius = self.profilePictureContainer.frame.width / 2
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.contentView.addSubview(self.container)
+        self.container.addSubview(self.profilePictureContainer)
+        self.profilePictureContainer.addSubview(self.profilePicture)
+        self.container.addSubview(self.nameLabel)
+        self.container.addSubview(self.usernameLabel)
+        self.container.addSubview(self.descriptionLabel)
         
         NSLayoutConstraint.activate([
             self.container.topAnchor.constraint(equalTo: self.contentView.topAnchor),
@@ -76,9 +87,12 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             self.profilePictureContainer.topAnchor.constraint(equalTo: self.container.topAnchor, constant: 40),
             self.profilePictureContainer.leftAnchor.constraint(equalTo: self.container.leftAnchor, constant: 20),
-            self.profilePictureContainer.heightAnchor.constraint(equalToConstant: 120),
             self.profilePictureContainer.widthAnchor.constraint(equalToConstant: 120),
         ])
+        let imageHeightConstraint = self.profilePictureContainer.heightAnchor.constraint(equalToConstant: 120)
+        imageHeightConstraint.priority = UILayoutPriority(999)
+        imageHeightConstraint.isActive = true
+
         
         NSLayoutConstraint.activate([
             self.profilePicture.topAnchor.constraint(equalTo: self.profilePictureContainer.topAnchor),
@@ -100,22 +114,15 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.descriptionLabel.topAnchor.constraint(equalTo: self.profilePictureContainer.bottomAnchor, constant: 10),
             self.descriptionLabel.leftAnchor.constraint(equalTo: self.profilePictureContainer.leftAnchor),
             self.descriptionLabel.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -20),
             self.descriptionLabel.bottomAnchor.constraint(equalTo: self.container.bottomAnchor, constant: -10),
         ])
+        let descriptionTopConstraint = self.descriptionLabel.topAnchor.constraint(equalTo: self.profilePictureContainer.bottomAnchor, constant: 10)
+        descriptionTopConstraint.priority = UILayoutPriority(999)
+        descriptionTopConstraint.isActive = true
 
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.contentView.addSubview(self.container)
-        self.container.addSubview(self.profilePictureContainer)
-        self.profilePictureContainer.addSubview(self.profilePicture)
-        self.container.addSubview(self.nameLabel)
-        self.container.addSubview(self.usernameLabel)
-        self.container.addSubview(self.descriptionLabel)
+
     }
     
     required init?(coder: NSCoder) {

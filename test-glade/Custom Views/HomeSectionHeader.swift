@@ -31,14 +31,13 @@ class HomeSectionHeader: UICollectionReusableView {
         self.addSubview(self.headerLabel)
 
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 70)
-        ])
-        
-        NSLayoutConstraint.activate([
-            self.headerLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.headerLabel.topAnchor.constraint(equalTo: self.topAnchor),
             self.headerLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0.0),
             self.headerLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0.0),
         ])
+        let headerBottomConstraint = self.headerLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        headerBottomConstraint.priority = UILayoutPriority(999)
+        headerBottomConstraint.isActive = true
     }
     
     func configure(text: String) {

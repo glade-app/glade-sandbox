@@ -32,10 +32,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.loadSocials()
+        self.loadUserTopArtists()
+        self.loadUserTopSongs()
         self.setup()
+        self.refreshCollectionView()
     }
     
     func loadSocials() {
+        if user!.socials == nil {
+            return
+        }
         let socialNames = ["facebook", "instagram", "snapchat"]
         for name in socialNames {
             let tag = user!.socials![name]
@@ -43,16 +50,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.socials.append(Social(name: name, tag: tag))
             }
         }
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
     }
     
     func loadUserTopArtists() {
         DataStorage.getUserTopArtists(count: 50, user: user!) { (result, artists) in
             self.topArtists = artists
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.refreshCollectionView()
             }
         }
     }
@@ -61,9 +65,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         DataStorage.getUserTopSongs(count: 50, user: user!) { (result, songs) in
             self.topSongs = songs
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.refreshCollectionView()
             }
         }
+    }
+    
+    func refreshCollectionView() {
+        collectionView.reloadData()
+        collectionView.setNeedsLayout()
+        collectionView.layoutIfNeeded()
+        collectionView.reloadData()
     }
     
     func setup() {

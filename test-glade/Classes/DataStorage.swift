@@ -125,11 +125,16 @@ class DataStorage {
             if let document = document {
                 // If user does not already exist in the database
                 if document.exists {
-                    let artistIDsResponse: [String] = document.get("artists") as! [String]
-                    let artistIDs: [String] = Array(artistIDsResponse.prefix(min(count, artistIDsResponse.count)))
+                    let response = document.get("artists")
+                    if response == nil {
+                        print("User has no artists")
+                        return
+                    }
+                    let artistIDs: [String] = response as! [String]
+                    let selectedArtistIDs: [String] = Array(artistIDs.prefix(min(count, artistIDs.count)))
                     var artists: [Artist] = []
                     let group = DispatchGroup()
-                    for id in artistIDs {
+                    for id in selectedArtistIDs {
                         group.enter()
                         let artistReference = db.collection("artists").document(id)
                         artistReference.getDocument() { (artistDocument, error) in
@@ -142,7 +147,7 @@ class DataStorage {
                                 group.leave()
                             }
                             else {
-                                print("Failed to get artist document - \(id) -", error)
+                                print("Failed to get artist document - \(id) -", error!)
                                 group.leave()
                             }
                         }
@@ -282,11 +287,16 @@ class DataStorage {
             if let document = document {
                 // If user does not already exist in the database
                 if document.exists {
-                    let songIDsResponse: [String] = document.get("songs") as! [String]
-                    let songIDs: [String] = Array(songIDsResponse.prefix(min(count, songIDsResponse.count)))
+                    let response = document.get("songs")
+                    if response == nil {
+                        print("User has no songs")
+                        return
+                    }
+                    let songIDs: [String] = response as! [String]
+                    let selectedSongIDs: [String] = Array(songIDs.prefix(min(count, songIDs.count)))
                     var songs: [Song] = []
                     let group = DispatchGroup()
-                    for id in songIDs {
+                    for id in selectedSongIDs {
                         group.enter()
                         let songReference = db.collection("songs").document(id)
                         songReference.getDocument() { (songDocument, error) in
@@ -299,7 +309,7 @@ class DataStorage {
                                 group.leave()
                             }
                             else {
-                                print("Failed to get artist document - \(id) -", error)
+                                print("Failed to get artist document - \(id) -", error!)
                                 group.leave()
                             }
                         }
@@ -431,7 +441,7 @@ class DataStorage {
     }
     
     /// School Data
-    static func getSchoolData(completion: @escaping (_ result: Bool, _ data: Dictionary<String, Any>) -> ()) {
+    static func getSchoolUsersData(completion: @escaping (_ result: Bool, _ data: Dictionary<String, Any>) -> ()) {
         let db = Firestore.firestore()
         let school = UserDefaults.standard.string(forKey: "school")
         let schoolReference = db.collection("schools").document(school!)
@@ -444,7 +454,8 @@ class DataStorage {
             else {
                 if let document = document, document.exists {
                     let userCount = document.get("user_count")
-                    completion(true, ["userCount": userCount!])
+                    let users = document.get("users")
+                    completion(true, ["userCount": userCount!, "users": users!])
                 }
             }
         }
@@ -481,7 +492,7 @@ class DataStorage {
                             group.leave()
                         }
                         else {
-                            print("Failed to get artist document - \(id) -", error)
+                            print("Failed to get artist document - \(id) -", error!)
                             group.leave()
                         }
                     }
@@ -524,7 +535,7 @@ class DataStorage {
                             group.leave()
                         }
                         else {
-                            print("Failed to get song document - \(id) -", error)
+                            print("Failed to get song document - \(id) -", error!)
                             group.leave()
                         }
                     }

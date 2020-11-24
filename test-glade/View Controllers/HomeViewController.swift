@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(HomeSchoolCollectionViewCell.self, forCellWithReuseIdentifier: "school")
+        collectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: "user")
         collectionView.register(SongCollectionViewCell.self, forCellWithReuseIdentifier: "song")
         collectionView.register(ArtistCollectionViewCell.self, forCellWithReuseIdentifier: "artist")
         collectionView.register(HomeSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
@@ -27,16 +28,36 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }()
     
     var schoolData: [String: Any] = ["userCount": 0]
+    var currentUser: User?
+    var users: [User?] = []
     var topArtists: [Artist?] = []
     var topSongs: [Song?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setup()
         self.getSchoolData()
+        self.getCurrentUser()
         self.getArtistsData()
         self.getSongsData()
+        self.setup()
+        self.refreshCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+    
+    func refreshCollectionView() {
+        collectionView.reloadData()
+        collectionView.setNeedsLayout()
+        collectionView.layoutIfNeeded()
+        collectionView.reloadData()
     }
     
     func setup() {
@@ -49,39 +70,46 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.collectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             self.collectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
+        
+        collectionView.reloadData()
+        collectionView.setNeedsLayout()
+        collectionView.layoutIfNeeded()
+        collectionView.reloadData()
     }
     
     @objc func profileButtonTapped(sender: UIBarButtonItem) {
         print("Profile button tapped")
-        
-        // Safe Present
-        if let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
-        {
-            let username = UserDefaults.standard.string(forKey: "username")
-            DataStorage.getUserData(username: username!) { (result, user) in
-                profileVC.user = user
-                self.present(profileVC, animated: true, completion: nil)
-                profileVC.loadSocials()
-                profileVC.loadUserTopArtists()
-                profileVC.loadUserTopSongs()
+        self.displayProfile(user: self.currentUser!)
+    }
+    
+    func getCurrentUser() {
+        let username = UserDefaults.standard.string(forKey: "username")
+        DataStorage.getUserData(username: username!) { (result, user) in
+            self.currentUser = user
+            DispatchQueue.main.async {
+                self.refreshCollectionView()
             }
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-    }
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-    
     func getSchoolData() {
-        DataStorage.getSchoolData { (result, data) in
+        DataStorage.getSchoolUsersData { (result, data) in
             self.schoolData = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            let userIDs: [String] = data["users"]! as! [String]
+            let group = DispatchGroup()
+            for userID in userIDs {
+                if userID != self.currentUser!.id! {
+                    group.enter()
+                    DataStorage.getUserData(username: userID) { (result, user) in
+                        self.users.append(user)
+                        group.leave()
+                    }
+                }
+            }
+            group.notify(queue: .main) {
+                DispatchQueue.main.async {
+                    self.refreshCollectionView()
+                }
             }
         }
     }
@@ -90,7 +118,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         DataStorage.getSchoolTopArtists(count: 10) { (result, artists) in
             self.topArtists = artists
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.refreshCollectionView()
             }
         }
     }
@@ -99,8 +127,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         DataStorage.getSchoolTopSongs(count: 20) { (result, songs) in
             self.topSongs = songs
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.refreshCollectionView()
             }
+        }
+    }
+    
+    func displayProfile(user: User) {
+        if let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
+        {
+            profileVC.user = user
+            self.present(profileVC, animated: true, completion: nil)
         }
     }
     
@@ -109,18 +145,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             if section == 0 {
                 return LayoutBuilder.buildSchoolSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300)))
             }
-//            else if section == 1 {
-//                return HomeLayoutBuilder.buildArtistSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(240)))
-//            }
-            
             else if section == 1 {
-                return LayoutBuilder.buildArtistsSectionLayout()
+                return LayoutBuilder.buildUsersSectionLayout()
             }
             
-//            else if section == 2 {
-//                return HomeLayoutBuilder.buildSongSectionLayout(size: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)))
-//            }
             else if section == 2 {
+                return LayoutBuilder.buildArtistsSectionLayout()
+            }
+            else if section == 3 {
                 return LayoutBuilder.buildSongsSectionLayout()
             }
             return LayoutBuilder.buildSongsSectionLayout()
@@ -129,7 +161,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -137,12 +169,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return 1
         }
         else if section == 1 {
+            return self.users.count
+        }
+        else if section == 2 {
             return self.topArtists.count
         }
-//        else if section == 2 {
-//            return self.topSongs.count
-//        }
-        else if section == 2 {
+        else if section == 3 {
             return self.topSongs.count
         }
         return 0
@@ -153,9 +185,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return CellBuilder.getSchoolCell(collectionView: collectionView, indexPath: indexPath, data: self.schoolData)
         }
         else if indexPath.section == 1 {
-            return CellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item]!)
+            return CellBuilder.getUserCell(collectionView: collectionView, indexPath: indexPath, data: self.users[indexPath.item]!)
         }
         else if indexPath.section == 2 {
+            return CellBuilder.getArtistCell(collectionView: collectionView, indexPath: indexPath, data: self.topArtists[indexPath.item]!)
+        }
+        else if indexPath.section == 3 {
             return CellBuilder.getSongCell(collectionView: collectionView, indexPath: indexPath, data: self.topSongs[indexPath.item]!)
         }
         return UICollectionViewCell()
@@ -165,19 +200,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as? HomeSectionHeader else {
             fatalError("Could not dequeue HomeSectionHeader")
         }
-        
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             headerView.configure(text: "Top Artists")
         }
-        
-        else if indexPath.section == 2 {
+        else if indexPath.section == 3 {
             headerView.configure(text: "Top Songs")
         }
-        
         return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Did select a cell here, \(indexPath)")
+        if indexPath.section == 1 {
+            let userTapped = self.users[indexPath.item]!
+            self.displayProfile(user: userTapped)
+        }
     }
 }

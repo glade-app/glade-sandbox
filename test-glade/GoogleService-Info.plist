@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>171247658754-pohes25ch95cm17mi8fhvvpegse2nkd5.apps.googleusercontent.com</string>
+	<string>578628032041-h6pnn0ne7akl707gii0akrr3i9ij3ob7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.171247658754-pohes25ch95cm17mi8fhvvpegse2nkd5</string>
+	<string>com.googleusercontent.apps.578628032041-h6pnn0ne7akl707gii0akrr3i9ij3ob7</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDiwUgzTYgQ9HBInWtcxKSBKsunc7PlE3Q</string>
+	<string>AIzaSyD5Bvw0AamObhlwsaTW1D4su_AzN0FPboM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>171247658754</string>
+	<string>578628032041</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>Allen-Gu.test-glade</string>
 	<key>PROJECT_ID</key>
-	<string>test-glade2-2545f</string>
+	<string>test-glade-157bf</string>
 	<key>STORAGE_BUCKET</key>
-	<string>test-glade2-2545f.appspot.com</string>
+	<string>test-glade-157bf.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:171247658754:ios:50ccf055f423dd2a43041b</string>
+	<string>1:578628032041:ios:9f43a15b33317f6d1f6e38</string>
 	<key>DATABASE_URL</key>
-	<string>https://test-glade2-2545f.firebaseio.com</string>
+	<string>https://test-glade-157bf.firebaseio.com</string>
 </dict>
 </plist>

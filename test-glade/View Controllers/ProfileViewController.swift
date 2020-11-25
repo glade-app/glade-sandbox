@@ -100,10 +100,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
                 return LayoutBuilder.buildSocialsSectionLayout()
             }
             else if section == 2 {
-                return LayoutBuilder.buildArtistsSectionLayout()
+                let groupCount: Int = max(self.topArtists.count, 1)
+                let groupSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),  heightDimension: .estimated(90.0*CGFloat(groupCount)))
+                return LayoutBuilder.buildArtistsSectionLayout(groupSize: groupSize, groupCount: groupCount)
             }
             else if section == 3 {
-                return LayoutBuilder.buildSongsSectionLayout()
+                let groupCount: Int = max(self.topSongs.count, 1)
+                let groupSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),  heightDimension: .estimated(90.0*CGFloat(groupCount)))
+                return LayoutBuilder.buildSongsSectionLayout(groupSize: groupSize, groupCount: groupCount)
             }
             return LayoutBuilder.buildProfileMainSectionLayout()
         }

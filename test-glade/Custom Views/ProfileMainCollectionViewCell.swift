@@ -40,17 +40,6 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    var usernameLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.numberOfLines = 1
-        label.font = UIFont.italicSystemFont(ofSize: 20)
-        label.textColor = UIColor.gray
-        label.textAlignment = .left
-        label.text = "Username"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     var descriptionLabel: UILabel = {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
@@ -74,7 +63,6 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
         self.container.addSubview(self.profilePictureContainer)
         self.profilePictureContainer.addSubview(self.profilePicture)
         self.container.addSubview(self.nameLabel)
-        self.container.addSubview(self.usernameLabel)
         self.container.addSubview(self.descriptionLabel)
         
         NSLayoutConstraint.activate([
@@ -102,15 +90,9 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.nameLabel.bottomAnchor.constraint(equalTo: self.profilePictureContainer.centerYAnchor),
+            self.nameLabel.centerYAnchor.constraint(equalTo: self.profilePictureContainer.centerYAnchor),
             self.nameLabel.leftAnchor.constraint(equalTo: self.profilePictureContainer.rightAnchor, constant: 20),
             self.nameLabel.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -20),
-        ])
-        
-        NSLayoutConstraint.activate([
-            self.usernameLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor),
-            self.usernameLabel.leftAnchor.constraint(equalTo: self.nameLabel.leftAnchor),
-            self.usernameLabel.rightAnchor.constraint(equalTo: self.container.rightAnchor, constant: -20),
         ])
         
         NSLayoutConstraint.activate([
@@ -136,7 +118,6 @@ class ProfileMainCollectionViewCell: UICollectionViewCell {
             profilePicture.kf.setImage(with: profilePictureUrlObj)
         }
         nameLabel.text = data.displayName
-        usernameLabel.text = data.id
         descriptionLabel.text = data.description
     }
 }

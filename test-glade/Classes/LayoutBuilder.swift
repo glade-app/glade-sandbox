@@ -59,11 +59,10 @@ public class LayoutBuilder {
         return section
     }
     
-    public static func buildSongsSectionLayout() -> NSCollectionLayoutSection {
+    public static func buildSongsSectionLayout(groupSize: NSCollectionLayoutSize, groupCount: Int) -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),  heightDimension: .estimated(480))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 5)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: groupCount)
 
         let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(40))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -75,11 +74,10 @@ public class LayoutBuilder {
         return section
     }
     
-    public static func buildArtistsSectionLayout() -> NSCollectionLayoutSection {
+    public static func buildArtistsSectionLayout(groupSize: NSCollectionLayoutSize, groupCount: Int) -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),  heightDimension: .estimated(480))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 5)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: groupCount)
 
         let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(70))
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)

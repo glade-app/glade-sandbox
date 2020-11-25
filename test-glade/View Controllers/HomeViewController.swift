@@ -12,9 +12,15 @@ import UIKit
 import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
+    lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.makeLayout())
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor.clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(HomeSchoolCollectionViewCell.self, forCellWithReuseIdentifier: "school")
@@ -63,13 +69,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func setup() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(profileButtonTapped(sender:)))
-        
+        self.view.addSubview(self.backgroundView)
         self.view.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             self.collectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             self.collectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            self.backgroundView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
+            self.backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.backgroundView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.backgroundView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
         
         collectionView.reloadData()
@@ -127,7 +139,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func getSongsData() {
-        DataStorage.getSchoolTopSongs(count: 20) { (result, songs) in
+        DataStorage.getSchoolTopSongs(count: 10) { (result, songs) in
             self.topSongs = songs
             DispatchQueue.main.async {
                 self.refreshCollectionView()
@@ -151,14 +163,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             else if section == 1 {
                 return LayoutBuilder.buildUsersSectionLayout()
             }
-            
             else if section == 2 {
-                return LayoutBuilder.buildArtistsSectionLayout()
+                let groupCount: Int = max(self.topArtists.count, 1)
+                let groupSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),  heightDimension: .estimated(90.0*CGFloat(groupCount)))
+                return LayoutBuilder.buildArtistsSectionLayout(groupSize: groupSize, groupCount: groupCount)
             }
             else if section == 3 {
-                return LayoutBuilder.buildSongsSectionLayout()
+                let groupCount: Int = max(self.topSongs.count, 1)
+                let groupSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),  heightDimension: .estimated(90.0*CGFloat(groupCount)))
+                return LayoutBuilder.buildSongsSectionLayout(groupSize: groupSize, groupCount: groupCount)
             }
-            return LayoutBuilder.buildSongsSectionLayout()
+            return LayoutBuilder.buildUsersSectionLayout()
         }
         return layout
     }
